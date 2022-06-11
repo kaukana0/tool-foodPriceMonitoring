@@ -1,0 +1,15 @@
+html {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.5;
+    background-color: #ffffff;
+}
+
+html, body {
+    height: 100%;
+}

@@ -1,0 +1,16 @@
+{
+    "title.main": "Food price monitoring tool",
+    "title.sub": "Explore price developments",
+    "twitter": "Eurostat visualization",
+    "hashtags": "#Eurostat",
+    "footnoteText1": "Source: Eurostat - ",
+    "footnoteText2": "access to dataset",
+    "footnoteText3": "Note to users: Data for certain dimensions are not available as they are submitted by EU Member\nStates to Eurostat on a voluntary basis.",
+    "info": "The Food Price Monitoring Tool intends to analyse the available data on price developments through\n    the supply chain. The supply chain is a series of economic activities that are performed by different\n    economic actors that contribute to the production and distribution of one consumer product or a\n    group of consumer products.\n    For more information, please read the metadata.",
+    "totalFail": "Ups, something went wrong!\nTry again later or contact our user",
+    "totalFail2": "support",
+    "tt_twitter": "Share on Twitter",
+    "tt_fb": "Share on Facebook",
+    "tt_embed": "Embed Chart",
+    "tt_info": "Information"
+}

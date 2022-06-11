@@ -1,0 +1,11 @@
+
+#logo {
+    width: 10em;
+    padding: 6px 6px;
+    margin-top: 10px;
+}
+
+@media screen and (min-width: 62em) {
+#logo {
+    width: 12.5em;
+}
