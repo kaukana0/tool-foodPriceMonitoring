@@ -44,19 +44,19 @@ function run() {
     pipeline.run(
         processingCfg,
         (data) => {
-          document.getElementById("selectCountry").data = data.countries
+          document.getElementById("selectCountry").data = [data.countries, data.groupChanges]
           document.getElementById("selectCountry").callback = (k,v) => updateChart(k,v,data)
 
-          document.getElementById("selectUnit").data = data.codes.unit
+          document.getElementById("selectUnit").data = [data.codes.unit, null]
           document.getElementById("selectUnit").callback = (k,v) => updateChart(k,v,data)
 
-          document.getElementById("selectIndex").data = data.codes.index
+          document.getElementById("selectIndex").data = [data.codes.index, null]
           document.getElementById("selectIndex").callback = (k,v) => updateChart(k,v,data)
 
           // trick: setting data after callback only here lastly 
           // makes the chart update initially only 1 time w/ all 4 initial selections correctly set
           document.getElementById("selectCoicop").callback = (k,v) => updateChart(k,v,data)
-          document.getElementById("selectCoicop").data = data.codes.coicop
+          document.getElementById("selectCoicop").data = [data.codes.coicop, null]
       },
       replaceEuInRawData)
 }
