@@ -1,6 +1,17 @@
 {
-    "title.main": "Monéy de monge",
-    "title.sub": "a la Europe",
-    "footnote": "c est un prevision",
-    "footer": "Örostat"
+    "title.main": "title fr",
+    "title.sub": "sub fr",
+    "twitter": "twitter fr",
+    "hashtags": "#Eurostat",
+    "footnoteText1": "footnote1 fr",
+    "footnoteText2": "footnote2 fr",
+    "footnoteText3": "footnote3 fr",
+    "info": "info fr",
+    "totalFail": "fail fr",
+    "totalFail2": "support fr",
+    "tt_twitter": "Share on Twitter fr",
+    "tt_fb": "Share on Facebook fr",
+    "tt_embed": "Embed Chart fr",
+    "tt_info": "Information fr",
+    "countries selected": "countries selected fr"
 }
