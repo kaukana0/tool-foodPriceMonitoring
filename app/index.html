@@ -22,6 +22,7 @@
 
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/logo.css">
+	<link rel="stylesheet" href="css/chart.css">
 	<link rel="stylesheet" href="components/footerLines/footerLines.css">
 
 	<script src="./components/titleLines/titleLines.mjs" type="module"></script>
@@ -73,7 +74,7 @@
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:300px;">
 				<label for="selectCountry">Country</label>
-				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect selectedText="countries selected" translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countries selected" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:300px;">
 				<label for="selectUnit">Unit</label>
@@ -92,9 +93,9 @@
 			</div>
 		</div>
 
-		<div class="row mt-2" style="min-height:60%;">
-			<div id="chart" class="col-11" style="min-height: 95%;"></div>
-			<div id="legend" class="col-sm-1 overflow-hidden"></div>
+		<div class="row mt-2 h-50 align-items-center" style="min-height:60%;">
+			<div id="chart" class="col-11" style=""></div>
+			<div id="legend" class="col-sm-1 overflow-hidden text-center" style="background-color: aliceblue;"></div>
 		</div>
 		
 		<div class="d-flex justify-content-center" style="max-height:2%;">
@@ -108,7 +109,8 @@
 			<a id="footnoteText3" translate>footnoteText3</a>
 		</div>
 	</div>
-
+	<!-- git rev-parse --short HEAD -->
+	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;"></div>
 </body>
 
 </html>

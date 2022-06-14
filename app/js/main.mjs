@@ -55,6 +55,7 @@ function run() {
 
           // trick: setting data after callback only here lastly 
           // makes the chart update initially only 1 time w/ all 4 initial selections correctly set
+          // drawback: chart complains 3 times about unset callbacks...
           document.getElementById("selectCoicop").callback = (k,v) => updateChart(k,v,data)
           document.getElementById("selectCoicop").data = [data.codes.coicop, null]
       },
@@ -87,5 +88,5 @@ function updateChart(key, val, data) {
 
     const unitDisplay = " " + document.getElementById("selectUnit").currentText
     chart.init("line", "#chart", "#legend", cols, data.countries, data.codes.time, unitDisplay)
-    chart.chart.axis.labels({ y: unitDisplay })
+    chart.setYLabel(unitDisplay)
 }
