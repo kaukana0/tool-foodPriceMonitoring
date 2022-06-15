@@ -43,6 +43,7 @@
 
 <body>
 
+	
 	<div class="container-fluid" style="height:100%;">
 
 		<div class="row" style="max-height:10%;">
@@ -50,7 +51,6 @@
 				<nav-bar class="float-left">
 					<nav-bar-item-modal symbol="fa-solid fa-info" headerText="Info" closeButton title="tt_info" translate="title">
 						<p translate>info</p>
-						<p>For more information, please read the <a href="https://ec.europa.eu/eurostat/cache/metadata/en/prc_fsc_idx_esms.htm" target="_blank">metadata</a>.</p>
 					</nav-bar-item-modal>
 					<nav-bar-item-modal symbol="fa-solid fa-code" headerText="Copy this code and paste it in your website:" title="tt_embed" translate="title">
 						<nav-bar-root-url></nav-bar-root-url>
@@ -74,7 +74,7 @@
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:300px;">
 				<label for="selectCountry">Country</label>
-				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countries selected" translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:300px;">
 				<label for="selectUnit">Unit</label>
@@ -108,7 +108,19 @@
 		<div class="d-flex justify-content-center" style="max-height:2%; text-align: center;">
 			<a id="footnoteText3" translate>footnoteText3</a>
 		</div>
+	
 	</div>
+
+	<div id="loadingIndicator" class="justify-content-center align-items-center fa-3x" style="position: fixed; left: 50%; top: 50%;">
+		<i class="fas fa-spinner fa-spin"></i>
+	</div>
+
+	<div id="errorMessage" class="alert alert-danger text-center" style="position: fixed; top: 50%; width: 100%; font-size: 20px; display: none;">
+		Ups, something went wrong!<br>
+		Try again later or contact our
+		<a href="https://ec.europa.eu/eurostat/web/main/help/support">user support</a>
+	</div>
+
 	<!-- git rev-parse --short HEAD -->
 	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;"></div>
 </body>
