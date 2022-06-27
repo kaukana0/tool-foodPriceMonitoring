@@ -73,32 +73,28 @@
 			<title-lines mainText="title.main" subText="title.sub" translate="mainText,subText"></title-lines>
 		</div>
 
-		<!-- row 3: 2 selectboxes -->
-		<div class="row justify-content-center" style="min-height:5%;">
-			<div class="col-sm-3 mt-1" style="width:300px;">
+		<!-- row 3: 2 selectboxes justify-content-center -->
+		<div class="row " style="min-height:5%;">
+			<div class="col col-12 col-sm-6 col-lg-3 mt-1 pl-1 pr-1" style="">
 				<label for="selectCountry">Country</label>
 				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" translate="selectedText"></dropdown-box>
 			</div>
-			<div class="col-sm-3 mt-1" style="width:300px;">
+			<div class="col col-12 col-sm-6 col-lg-3 mt-1 pl-1 pr-1" style="">
 				<label for="selectUnit">Unit</label>
 				<dropdown-box id="selectUnit"></dropdown-box>
 			</div>
-		</div>
-
-		<!-- row 4: another 2 selectboxes -->
-		<div class="row justify-content-center" style="min-height:5%;">
-			<div class="col-sm-3 mt-1" style="width:300px;">
+			<div class="col col-12 col-sm-6 col-lg-3 mt-1 pl-1 pr-1" style="">
 				<label for="selectIndex">Index</label>
 				<dropdown-box id="selectIndex" ></dropdown-box>
 			</div>
-			<div class="col-sm-3 mt-1" style="width:300px;">
+			<div class="col col-12 col-sm-6 col-lg-3 mt-1 pl-1 pr-1" style="">
 				<label for="selectCoicop">COICOP</label>
 				<dropdown-box id="selectCoicop"></dropdown-box>
 			</div>
 		</div>
 
 		<!-- row 5: chart and legend -->
-		<div class="row mt-2 h-50 align-items-center" style="min-height:60%;">
+		<div class="row mt-2 h-50 align-items-center" style="min-height:70%;">
 			<div id="chart" class="col-11"></div>
 			<div id="legend" class="col-sm-1 overflow-hidden text-center"></div>
 		</div>
@@ -130,7 +126,7 @@
 
 	<!-- tiny overlay in bottom right corner showing commitId -->
 	<!-- git rev-parse --short HEAD -->
-	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;"></div>
+	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;">21.6.22</div>
 
 </body>
 

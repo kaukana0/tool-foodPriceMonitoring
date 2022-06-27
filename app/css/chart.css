@@ -1,13 +1,23 @@
 /*project specific adaptations*/
 
+/* <sm */
 @media screen and (min-width: 576px) {
     #chart {
         min-height: 100%;
     }
 }
 
-  @media (max-width: 576px) {
-    #chart {
-        min-height: 85%;
-    }
+/* >sm */
+@media (max-width: 576px) {
+  #chart {
+      min-height: 85%;
   }
+}
+
+/*
+@media (max-width: 992px) {
+  #chart {
+      min-height: 80%;
+  }
+}
+*/
