@@ -1,0 +1,13 @@
+/*
+(only) when hamburger menu is shown, make the expanded navbar an opaque box
+*/
+@media (max-width: 576px) {
+.navbar-collapse.collapse.show {
+    background-color:white; 
+    border-left:1px solid; 
+    border-right:1px solid; 
+    border-bottom:1px solid; 
+    border-radius: 5px;
+}
+}
+  

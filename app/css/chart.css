@@ -1,13 +1,18 @@
 /*project specific adaptations*/
 
-@media screen and (min-width: 576px) {
-    #chart {
-        min-height: 100%;
-    }
+/*
+decrease height on small width to give room to the legend below.
+*/
+
+@media (max-width: 576px) {
+  #chart {
+    min-height: 90%;
+  }
 }
 
-  @media (max-width: 576px) {
-    #chart {
-        min-height: 85%;
-    }
+@media (min-width: 576px) {
+  #chart {
+    min-height: 100%;
   }
+}
+

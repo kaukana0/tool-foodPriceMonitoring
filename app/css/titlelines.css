@@ -1,0 +1,22 @@
+/* project specific adaptations */
+
+/* 
+    anything <10% makes the titleline go up - so, overlap with the first row.
+    basically only mobiles in portrait have a non-overlapping titleline.
+    for any other screen (even mobile in landscape) there's overlap.
+    this is to save space because the boxes arrangement is 2x2, taking up a lot of height.
+*/
+
+/* smaller then */
+@media all and (max-width: 768px) {
+    #firstRow {
+        max-height:10%;
+    }
+}
+
+/* bigger or equal then */
+@media all and (min-width: 768px) {
+    #firstRow {
+        max-height:4%;
+    }
+}

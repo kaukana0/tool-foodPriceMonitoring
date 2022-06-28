@@ -22,7 +22,9 @@
 
 	<link rel="stylesheet" href="css/index.css">
 	<link rel="stylesheet" href="css/logo.css">
+	<link rel="stylesheet" href="css/titlelines.css">
 	<link rel="stylesheet" href="css/chart.css">
+	<link rel="stylesheet" href="css/navbar.css">
 	<link rel="stylesheet" href="components/footerLines/footerLines.css">
 
 	<script src="./components/titleLines/titleLines.mjs" type="module"></script>
@@ -42,12 +44,11 @@
 </head>
 
 <body>
-
 	
 	<div class="container-fluid" style="height:100%;">
 
 		<!-- row 1: navbar and logo -->
-		<div class="row" style="max-height:10%;">
+		<div id="firstRow" class="row">
 			<div class="col-2">
 				<nav-bar class="float-left">
 					<nav-bar-item-modal symbol="fa-solid fa-info" headerText="Info" closeButton title="tt_info" translate="title">
@@ -98,7 +99,7 @@
 		</div>
 
 		<!-- row 5: chart and legend -->
-		<div class="row mt-2 h-50 align-items-center" style="min-height:60%;">
+		<div class="row mt-2 h-50 align-items-center" style="min-height:65%;">
 			<div id="chart" class="col-11"></div>
 			<div id="legend" class="col-sm-1 overflow-hidden text-center"></div>
 		</div>
