@@ -10,3 +10,9 @@
 - then, each component is being downloaded as a submodule 
     - for each a certain commit, specified by this repo
 - the app can now be served w/ a http server
+
+# how to deploy
+
+1. ./make-deployment.sh
+2. copy dist/ to webserver
+3. profit
