@@ -19,8 +19,8 @@ function init(callback) {
 	console.log("pixel ratio: ", window.devicePixelRatio)
 	
 	l10n.init("en", {
-		'en': './l10n/en.json',
-		'fr': './l10n/fr.json'
+		'en': './translations/en.json',
+		'fr': './translations/fr.json'
 	},
 	() => {
 		meta.init(l10n._('title.main'), l10n._('title.main'), "some.jpg", 100, 100)
