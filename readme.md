@@ -16,3 +16,7 @@
 1. ./make-deployment.sh
 2. copy dist/ to webserver
 3. profit
+
+# what it looks like
+
+![Screenshot](./app/img/screenshot.png)
