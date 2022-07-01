@@ -106,8 +106,10 @@ function updateChart(key, val, data) {
 	})
 
 	const unitDisplay = " " + document.getElementById("selectUnit").currentText
-	chart.init("line", "#chart", "#legend", cols, data.countries, data.codes.time, unitDisplay)
-	chart.setYLabel(unitDisplay)
+	for(let i=0;i<20;i++) {
+		chart.init("line", "chart"+i, "legend"+i, cols, data.countries, data.codes.time, unitDisplay)
+		chart.setYLabel("chart"+i, unitDisplay)
+	}
 }
 
 
