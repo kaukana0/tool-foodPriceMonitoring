@@ -106,7 +106,7 @@ function updateChart(key, val, data) {
 	})
 
 	const unitDisplay = " " + document.getElementById("selectUnit").currentText
-	for(let i=0;i<20;i++) {
+	for(let i=0;i<4;i++) {
 		chart.init("line", "chart"+i, "legend"+i, cols, data.countries, data.codes.time, unitDisplay)
 		chart.setYLabel("chart"+i, unitDisplay)
 	}
