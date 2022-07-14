@@ -90,11 +90,11 @@
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectIndex">Index</label>
-				<dropdown-box id="selectIndex" ></dropdown-box>
+				<dropdown-box id="selectIndex" multiselect selectedText="indexSelected" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectCoicop">COICOP</label>
-				<dropdown-box id="selectCoicop"></dropdown-box>
+				<dropdown-box id="selectCoicop" multiselect maxSelections=7 selectedText="coicopSelected" translate="selectedText"></dropdown-box>
 			</div>
 		</div>
 
@@ -104,7 +104,12 @@
 			<div id="legend" class="col-sm-1 overflow-hidden text-center"></div>
 		</div>
 
-		<!-- row 6 and 7: footer -->
+		<!-- row 6: time slider -->
+		<div class="row mt-2 h-50 align-items-center" style="max-height:2%;">
+			<input type="range" min="1" max="100" value="50" class="slider" id="timeRange" style="width: 70%;">
+		</div>
+
+		<!-- row 7 and 8: footer -->
 		<div class="d-flex justify-content-center" style="max-height:2%;">
 			<div id="footnoteText1" translate style="display: inline-block;">footnoteText1</div>
 			&nbsp;

@@ -1,8 +1,7 @@
+import * as chart from "./chart.mjs"
 import "../components/dropdownBox/dropdownBox.mjs"
-import * as chart from "../components/chart/chart.mjs"
 import * as l10n from "../components/l10n/lang.mjs"
 import * as meta from "../components/metaTags/metaTags.mjs"
-
 import * as pipeline from "../components/pipeline/pipeline.mjs"
 import { process as extractOriginalRawData } from "./pipelineProcessors/originalRawData.mjs"
 import { process as extractIndicators } from "./pipelineProcessors/indicators.mjs"
@@ -16,8 +15,6 @@ init(run)
 
 
 function init(callback) {
-	console.log("pixel ratio: ", window.devicePixelRatio)
-	
 	l10n.init("en", {
 		'en': './translations/en.json',
 		'fr': './translations/fr.json'
@@ -44,21 +41,27 @@ function run() {
 			if(data	&& Object.keys(data).length > 0 && Object.getPrototypeOf(data) === Object.prototype) {
 				try {
 					document.getElementById("selectCountry").data = [data.countries, data.groupChanges]
-					document.getElementById("selectCountry").callback = (k, v) => updateChart(k, v, data)
+					document.getElementById("selectCountry").callback = (k, v) => chart.blrgh(k, v, data, chart.ModeEnum.Country)
 		
 					document.getElementById("selectUnit").data = [data.codes.unit, null]
-					document.getElementById("selectUnit").callback = (k, v) => updateChart(k, v, data)
+					document.getElementById("selectUnit").callback = (k, v) => chart.blrgh(k, v, data, chart.ModeEnum.Unit)
 		
 					document.getElementById("selectIndex").data = [data.codes.index, null]
-					document.getElementById("selectIndex").callback = (k, v) => updateChart(k, v, data)
+					document.getElementById("selectIndex").callback = (k, v) => chart.blrgh(k, v, data, chart.ModeEnum.Index)
 		
 					// trick: setting data after callback only here lastly 
 					// makes the chart update initially only 1 time w/ all 4 initial selections correctly set
 					// drawback: chart complains 3 times about unset callbacks...
-					document.getElementById("selectCoicop").callback = (k, v) => updateChart(k, v, data)
+					document.getElementById("selectCoicop").callback = (k, v) => chart.blrgh(k, v, data, chart.ModeEnum.Coicop)
 					document.getElementById("selectCoicop").data = [data.codes.coicop, null]
 		
 					document.getElementById("loadingIndicator").style.display = "none"
+
+					// TODO: make component
+					document.getElementById("timeRange").setAttribute("max", data.codes.time.length)
+					document.getElementById("timeRange").addEventListener('change', (event) => {
+						chart.update(null, null, data)
+					});
 				} catch(e) {
 					displayFailure(e)
 				}
@@ -80,36 +83,6 @@ function run() {
 	}
 
 }
-
-
-function updateChart(key, val, data) {
-	const countryKeys = document.getElementById("selectCountry").selectedKeys
-	const unit = document.getElementById("selectUnit").selectedKeys
-	const index = document.getElementById("selectIndex").selectedKeys
-	const coicop = document.getElementById("selectCoicop").selectedKeys
-
-	let cols = []
-	countryKeys.forEach(country => {
-		var subset = data.source.Dice(
-			{
-				unit: unit,
-				indx: index,
-				coicop: coicop,
-				geo: country
-			},
-			{
-				clone: true
-			}
-		);
-		subset.value.unshift(country)
-		cols.push(subset.value)
-	})
-
-	const unitDisplay = " " + document.getElementById("selectUnit").currentText
-	chart.init("line", "chart", "legend", cols, data.countries, data.codes.time, unitDisplay)
-	chart.setYLabel("chart", unitDisplay)
-}
-
 
 function replaceEuInRawData(arrayBuffer) {
 	var dataView = new DataView(arrayBuffer);
