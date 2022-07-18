@@ -9,6 +9,7 @@ import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.
 import { process as defineCountryOrder } from "./pipelineProcessors/countryOrder.mjs"
 import { process as extractCountries } from "../components/processorCountries/processor.mjs"
 import { process as renameCountries } from "./pipelineProcessors/countryNames.mjs"
+import { process as extractCoicop } from "./pipelineProcessors/coicop.mjs"
 
 
 init(run)
@@ -31,7 +32,7 @@ function run() {
 		{
 			input : "./persistedData/data.json",
 			//input: "https://ec.europa.eu/eurostat/databrowser-backend/api/extraction/1.0/LIVE/false/json/en/PRC_FSC_IDX$DEFAULTVIEW?cacheId=1649754000000-2.6.5%2520-%25202022-03-30%252013%253A02",
-			processors: [defineCountryOrder, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, extractOriginalRawData]
+			processors: [defineCountryOrder, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, extractOriginalRawData, extractCoicop]
 		}
 	]
 

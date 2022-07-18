@@ -40,7 +40,15 @@ function _update(data, mode) {
 
 	const retVal = tryModeSwitch()
 	const unitDisplay = " " + document.getElementById("selectUnit").currentText
-	chart.init("line", "chart", "legend", extract(data, mode), data.countries, getRangeFromSlider(data.codes.time), unitDisplay)
+
+	let modeToLegendElements = {}
+	modeToLegendElements[Mode.Undecided] = data.countries
+	modeToLegendElements[Mode.Country] = data.countries
+	modeToLegendElements[Mode.Unit] = data.countries
+	modeToLegendElements[Mode.Index] = data.countries
+	modeToLegendElements[Mode.Coicop] = data.coicops
+
+	chart.init("line", "chart", "legend", extract(data, mode), modeToLegendElements[mode], getRangeFromSlider(data.codes.time), unitDisplay)
 	chart.setYLabel("chart", unitDisplay)
 
 
