@@ -1,19 +1,25 @@
+/*
+Short description of the "dynamic multiselect" behaviour:
+- the user can select multiple countries or indices or coicops
+- multiselect in one box is only possible if there isn't already another box w/ multiple selections
+- the legend and tooltip change depending on which box is currently multiselect
+*/
+
 import * as chart from "../components/chart/chart.mjs"
 
 
 // this determines which of the boxes is currently multiselect
 export class ModeEnum {
-    static Undecided = -1
 	static Country = 0
-	static Unit = 1
+	static Unit = 1		// there'll never be a mode set to Unit, it's only there because it's also used as index for selectboxes
 	static Index = 2
 	static Coicop = 3
 }
 
 class Mode extends ModeEnum {
-	static currentMode = Mode.Undecided
-	static isCurrently(mode) {return this.currentMode === mode}
-	static set(mode) {this.currentMode = mode; return mode}
+	static current = Mode.Country
+	static isCurrently(mode) {return this.current === mode}
+	static set(mode) {this.current = mode; return mode}
 	// note that the array el's line up w/ the values from superclass
 	static getDOMElements() {
 		return [
@@ -27,44 +33,54 @@ class Mode extends ModeEnum {
 }
 
 
-// param: mode; expected type: ModeEnum
+let range
+export function setRange(_range) {range = _range}
+
+
+// expected type for param "mode": ModeEnum
+// returns true if a mode switch happened
+// mode is an optional parameter
 export function update(data, mode) {
-	if(typeof mode===undefined) {
-		_update(data, Mode.currentMode)
+	if(mode===undefined) {
+		_update(data, Mode.current)
 	} else {
 		_update(data, mode)
 	}
 }
 
+
 function _update(data, mode) {
-
+	
 	const retVal = tryModeSwitch()
-	const unitDisplay = " " + document.getElementById("selectUnit").currentText
-
+	
 	let modeToLegendElements = {}
-	modeToLegendElements[Mode.Undecided] = data.countries
 	modeToLegendElements[Mode.Country] = data.countries
-	modeToLegendElements[Mode.Unit] = data.countries
-	modeToLegendElements[Mode.Index] = data.countries
+	// Mode.Unit omitted on purpose
+	modeToLegendElements[Mode.Index] = data.indices
 	modeToLegendElements[Mode.Coicop] = data.coicops
 
-	chart.init("line", "chart", "legend", extract(data, mode), modeToLegendElements[mode], getRangeFromSlider(data.codes.time), unitDisplay)
+	const unitDisplay = " " + document.getElementById("selectUnit").currentText
+	chart.init("line", "chart", "legend", 
+		extract(data, Mode.current), 
+		modeToLegendElements[Mode.current], 
+		data.codes.time.slice(range-1), 		// cut off elements in front, similar to the data
+		unitDisplay)
 	chart.setYLabel("chart", unitDisplay)
 
 
+	// this logic is the "nucleus" of the multiselect behaviour
 	function tryModeSwitch() {
-		if(Mode.isCurrently(mode) || Mode.isCurrently(Mode.Undecided)) {
-			if( Mode.getDOMElementByMode(mode).selectedKeys.length>1) {
-				Mode.set(mode)
-				switchSingleSelect(true, mode)
-			} else {
-				Mode.set(Mode.Undecided)
-				switchSingleSelect(false, Mode.Undecided)
-			}
-			return true
+		const modeStored = Mode.current
+		if( Mode.getDOMElementByMode(mode).selectedKeys.length>1 ) {
+			Mode.set(mode)
+			switchAllToSingleSelect(mode)
 		} else {
-			return false
+			if( Mode.getDOMElementByMode(Mode.current).selectedKeys.length<=1 ) {
+				Mode.set(Mode.Country)
+				switchAllToMultiSelect()
+			}
 		}
+		return modeStored == Mode.current
 	}
 
 	function extract(data, mode) {
@@ -92,32 +108,30 @@ function _update(data, mode) {
 				{ clone: true }
 			)
 
-			subset.value.unshift(selection)	// cut off the head (a string), we only want the rest (numerical values)
+			subset.value = subset.value.slice(range-1)	// cut off elements in front
+
+			// put "column header" (a string) in front of the numerical values,
+			// because that's the expected format for "columns" in billboard.js
+			// the "col-header" is displayed in the legend.
+			subset.value.unshift(selection)
+
 			retVal.push(subset.value)
 		})
 
 		return retVal
 	}
 
-	function switchSingleSelect(singleSelect, exceptThisOne) {
-		if(singleSelect) {
-			Mode.getDOMElements().forEach((el,idx) => {
-				if(idx!==exceptThisOne) {el.removeAttribute("multiselect")}
-			})
-		} else {
-			Mode.getDOMElements().forEach((el,idx) => {
-				if(idx!==exceptThisOne) {el.setAttribute("multiselect", null)}
-			})
-		}
+	function switchAllToSingleSelect(exceptThisOne) {
+		Mode.getDOMElements().forEach((el,idx) => {
+			if(idx!==exceptThisOne) {el.removeAttribute("multiselect")}
+		})
 	}
 
+	function switchAllToMultiSelect() {
+		Mode.getDOMElements().forEach((el,idx) => {
+			if(idx!==Mode.Unit) {el.setAttribute("multiselect", null)}		// unit stays always single
+		})
+	}
+	
 	return retVal
-}
-
-
-// TODO: get this out of here
-function getRangeFromSlider(values) {
-	const sliderVal = document.getElementById("timeRange").value
-	const achdulieba = values.slice(sliderVal)  //values.length - (values.length*sliderVal/100))
-	return achdulieba
 }
