@@ -13,5 +13,7 @@
     "tt_fb": "Share on Facebook",
     "tt_embed": "Embed Chart",
     "tt_info": "Information",
-    "countriesSelected": "countries selected"
+    "countriesSelected": "countries selected",
+    "indexSelected": "indices selected",
+    "coicopSelected": "COICOPs selected"
 }

@@ -34,8 +34,13 @@ mv ./js/pipelineProcessors/originalRawData.mjs ./js/pipelineProcessors/originalR
 mv ./js/pipelineProcessors/timeMonthly.mjs ./js/pipelineProcessors/timeMonthly.js
 mv ./redist/jsonStat/import.mjs ./redist/jsonStat/import.js
 
+mv ./js/dynamicMultiselect.mjs ./js/dynamicMultiselect.js
+mv ./js/pipelineProcessors/coicop.mjs ./js/pipelineProcessors/coicop.js
+mv ./js/pipelineProcessors/index.mjs ./js/pipelineProcessors/index.js 
+
 sed -i 's/\.mjs/\.js/' index.html
 sed -i 's/\.mjs/\.js/' js/main.js
+sed -i 's/\.mjs/\.js/' js/dynamicMultiselect.js
 sed -i 's/\.mjs/\.js/' js/pipelineProcessors/originalRawData.js
 sed -i 's/\.mjs/\.js/' js/pipelineProcessors/timeMonthly.js
 sed -i 's/\.mjs/\.js/' components/chart/chart.js
