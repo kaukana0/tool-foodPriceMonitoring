@@ -78,7 +78,7 @@
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectCountry">Country</label>
-				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" displayKeys translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectUnit">Unit</label>
@@ -90,11 +90,11 @@
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectIndex">Index</label>
-				<dropdown-box id="selectIndex" multiselect selectedText="indexSelected" translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectIndex" multiselect selectedText="indexSelected" displayKeys translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectCoicop">COICOP</label>
-				<dropdown-box id="selectCoicop" multiselect maxSelections=7 selectedText="coicopSelected" translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectCoicop" multiselect maxSelections=7 selectedText="coicopSelected" displayKeys translate="selectedText"></dropdown-box>
 			</div>
 		</div>
 
@@ -106,8 +106,13 @@
 
 		<!-- row 6: time slider -->
 		<div class="row mt-2 h-50 align-items-center" style="max-height:2%;">
-			<input type="range" class="slider" id="timeRange" style="width: 80%;">
+			<input type="range"  id="timeRange" style="width: 80%;">
 		</div>
+		<style>
+input[type="Xrange"]::-webkit-slider-runnable-track {
+ background: tomato;
+ 
+}		</style>
 
 		<!-- row 7 and 8: footer -->
 		<div class="d-flex justify-content-center" style="max-height:2%;">
@@ -136,7 +141,7 @@
 
 	<!-- tiny overlay in bottom right corner showing commitId -->
 	<!-- git rev-parse --short HEAD -->
-	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;">7b5736c</div>
+	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;">222f98e</div>
 
 </body>
 
