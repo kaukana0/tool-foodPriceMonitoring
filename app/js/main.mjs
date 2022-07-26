@@ -31,7 +31,7 @@ function init(callback) {
 function run() {
 	const processingCfg = [
 		{
-			input : "./persistedData/data.json",
+			input : "./persistedData/data0722.json",
 			//input: "https://ec.europa.eu/eurostat/databrowser-backend/api/extraction/1.0/LIVE/false/json/en/PRC_FSC_IDX$DEFAULTVIEW?cacheId=1649754000000-2.6.5%2520-%25202022-03-30%252013%253A02",
 			processors: [defineCountryOrder, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, extractOriginalRawData, extractCoicop, extractIndex]
 		}
@@ -96,21 +96,18 @@ function initSelectBoxes(data) {
 	document.getElementById("selectCoicop").data = [data.codes.coicop, null]
 }
 
-// slider rightmost: show the last N time units
-// slider leftmost: show all timeunits
-// so, your'e actually sliding the left side (tail) of the snake
-// where the right side doesn't go all the way up to the rightmost datapoint
-// to leave a sensible minimal range to be displayed.
 function initRangeSlider(data) {
-
 	const max = data.codes.time.length
+	const el = document.getElementById("timeRange")
 
-	document.getElementById("timeRange").setAttribute("max", max-4)
-	document.getElementById("timeRange").setAttribute("min", 1)
-	document.getElementById("timeRange").setAttribute("value", 1)
+	el.setAttribute("max", max-4)
+	el.setAttribute("min", 0)
+	el.setAttribute("valueL", max-6)
+	el.setAttribute("valueR", max-4)
 	dm.setRange(1)
-	document.getElementById("timeRange").addEventListener('change', (event) => {
-		dm.setRange(document.getElementById("timeRange").value)
+	el.addEventListener('change', (e) => {
+		//el.setAttribute("textl", "UGH")
+		dm.setRange(e.detail.left)
 		dm.update(data)
 	});
 }

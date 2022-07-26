@@ -28,3 +28,6 @@
 [submodule "app/components/l10n"]
 	path = app/components/l10n
 	url = https://github.com/kaukana0/l10n.git
+[submodule "app/components/range"]
+	path = app/components/range
+	url = https://github.com/kaukana0/range.git
