@@ -68,10 +68,10 @@ function run() {
 }
 
 function replaceEuInRawData(arrayBuffer) {
-	var dataView = new DataView(arrayBuffer);
-	var decoder = new TextDecoder('utf8');
+	var dataView = new DataView(arrayBuffer)
+	var decoder = new TextDecoder('utf8')
 	try {
-		var obj = JSON.parse(decoder.decode(dataView).replaceAll('EU27_2020', 'EU'));
+		var obj = JSON.parse(decoder.decode(dataView).replaceAll('EU27_2020', 'EU'))
 		return obj
 	} catch(e) {
 		console.error("main: invalid (json) or no data. native error follows.\n\n", e)
@@ -98,16 +98,22 @@ function initSelectBoxes(data) {
 
 function initRangeSlider(data) {
 	const max = data.codes.time.length
+	const left = max>50 ? Math.round(Number(max*0.5)) : 0
 	const el = document.getElementById("timeRange")
 
-	el.setAttribute("max", max-4)
+	el.setAttribute("max", max)
 	el.setAttribute("min", 0)
-	el.setAttribute("valueL", max-6)
-	el.setAttribute("valueR", max-4)
-	dm.setRange(1)
+	el.setAttribute("mingap", Math.min(0.1*max,1))
+	el.setAttribute("valueL", left)
+	el.setAttribute("valueR", max)
+	el.setAttribute("textl", data.codes.time[left])
+	el.setAttribute("textr", data.codes.time[max-1])
+	dm.setRange({begin: left, end: max})
+
 	el.addEventListener('change', (e) => {
-		//el.setAttribute("textl", "UGH")
-		dm.setRange(e.detail.left)
+		el.setAttribute("textl", data.codes.time[e.detail.left])
+		el.setAttribute("textr", data.codes.time[e.detail.right-1])
+		dm.setRange({begin: e.detail.left, end: e.detail.right})
 		dm.update(data)
-	});
+	})
 }

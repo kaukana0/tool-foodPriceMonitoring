@@ -32,9 +32,14 @@ class Mode extends ModeEnum {
 	static getDOMElementByMode(mode) { return this.getDOMElements()[mode] }
 }
 
+let range = {
+	begin: 0,
+	end: 0
+}
 
-let range
-export function setRange(_range) {range = _range}
+export function setRange(_range) {
+	range = {...range, ..._range}
+}
 
 
 // expected type for param "mode": ModeEnum
@@ -63,7 +68,7 @@ function _update(data, mode) {
 	chart.init("line", "chart", "legend", 
 		extract(data, Mode.current), 
 		modeToLegendElements[Mode.current], 
-		data.codes.time.slice(range-1), 		// cut off elements in front, similar to the data
+		data.codes.time.slice(range.begin, range.end), 		// cut off elements in front, similar to the data
 		unitDisplay)
 	chart.setYLabel("chart", unitDisplay)
 
@@ -108,7 +113,7 @@ function _update(data, mode) {
 				{ clone: true }
 			)
 
-			subset.value = subset.value.slice(range-1)	// cut off elements in front
+			subset.value = subset.value.slice(range.begin, range.end)	// cut off elements in front
 
 			// put "column header" (a string) in front of the numerical values,
 			// because that's the expected format for "columns" in billboard.js
