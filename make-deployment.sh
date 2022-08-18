@@ -27,10 +27,8 @@ mv ./components/navBar/rootUrl.mjs  ./components/navBar/rootUrl.js
 mv ./components/pipeline/pipeline.mjs  ./components/pipeline/pipeline.js
 mv ./components/processorCountries/processor.mjs  ./components/processorCountries/processor.js
 mv ./components/titleLines/titleLines.mjs  ./components/titleLines/titleLines.js
+mv ./components/util/util.mjs  ./components/util/util.js
 mv ./components/range/range.mjs  ./components/range/range.js
-mv ./components/_processorCountryNames/countryNames.mjs  ./components/_processorCountryNames/countryNames.js
-mv ./components/_processorCountryOrder/countryOrder.mjs  ./components/_processorCountryOrder/countryOrder.js
-mv ./components/_processorOriginalRawData/originalRawData.mjs  ./components/_processorOriginalRawData/originalRawData.js
 mv ./components/processorCountryNames/countryNames.mjs  ./components/processorCountryNames/countryNames.js
 mv ./components/processorOriginalRawData/originalRawData.mjs  ./components/processorOriginalRawData/originalRawData.js
 mv ./components/processorCountryOrder/countryOrder.mjs  ./components/processorCountryOrder/countryOrder.js
@@ -46,8 +44,8 @@ mv ./redist/jsonStat/import.mjs  ./redist/jsonStat/import.js
 # replace mjs with js in all the files containing mjs
 
 sed -i 's/\.mjs/\.js/' index.html
-sed -i 's/\.mjs/\.js/' components/_processorOriginalRawData/originalRawData.js
 sed -i 's/\.mjs/\.js/' components/chart/chart.js
+sed -i 's/\.mjs/\.js/' components/l10n/lang.js
 sed -i 's/\.mjs/\.js/' components/processorOriginalRawData/originalRawData.js
 sed -i 's/\.mjs/\.js/' js/dynamicMultiselect.js
 sed -i 's/\.mjs/\.js/' js/main.js
