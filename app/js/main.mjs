@@ -4,6 +4,7 @@ import * as l10n from "../components/l10n/lang.mjs"
 import * as meta from "../components/metaTags/metaTags.mjs"
 
 import * as pipeline from "../components/pipeline/pipeline.mjs"
+import {replaceEuInRawData} from '../components/util/util.mjs'
 import { process as extractOriginalRawData } from "../components/processorOriginalRawData/originalRawData.mjs"
 import { process as renameCountries } from "../components/processorCountryNames/countryNames.mjs"
 import { process as defineCountryOrder } from "../components/processorCountryOrder/countryOrder.mjs"
@@ -67,18 +68,6 @@ function run() {
 		document.getElementById("errorMessage").style.display = "block"
 	}
 
-}
-
-function replaceEuInRawData(arrayBuffer) {
-	var dataView = new DataView(arrayBuffer)
-	var decoder = new TextDecoder('utf8')
-	try {
-		var obj = JSON.parse(decoder.decode(dataView).replaceAll('EU27_2020', 'EU'))
-		return obj
-	} catch(e) {
-		console.error("main: invalid (json) or no data. native error follows.\n\n", e)
-		return {}
-	}
 }
 
 function initSelectBoxes(data) {
