@@ -13,9 +13,6 @@
 [submodule "app/components/processorCountries"]
 	path = app/components/processorCountries
 	url = https://github.com/kaukana0/processorCountries.git
-[submodule "app/components/processorCountryValues"]
-	path = app/components/processorCountryValues
-	url = https://github.com/kaukana0/processorCountryValues.git
 [submodule "app/components/navBar"]
 	path = app/components/navBar
 	url = https://github.com/kaukana0/navBar.git
@@ -31,3 +28,12 @@
 [submodule "app/components/range"]
 	path = app/components/range
 	url = https://github.com/kaukana0/range.git
+[submodule "app/components/processorCountryNames"]
+	path = app/components/processorCountryNames
+	url = https://github.com/kaukana0/processorCountryNames.git
+[submodule "app/components/processorOriginalRawData"]
+	path = app/components/processorOriginalRawData
+	url = https://github.com/kaukana0/processorOriginalRawData.git
+[submodule "app/components/processorCountryOrder"]
+	path = app/components/processorCountryOrder
+	url = https://github.com/kaukana0/processorCountryOrder.git
