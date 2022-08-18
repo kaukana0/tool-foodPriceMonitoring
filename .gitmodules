@@ -37,6 +37,6 @@
 [submodule "app/components/processorCountryOrder"]
 	path = app/components/processorCountryOrder
 	url = https://github.com/kaukana0/processorCountryOrder.git
-[submodule "app/components/app/components/util"]
-	path = app/components/app/components/util
+[submodule "app/components/util"]
+	path = app/components/util
 	url = https://github.com/kaukana0/util.git
