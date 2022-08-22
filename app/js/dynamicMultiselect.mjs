@@ -11,7 +11,7 @@ import * as chart from "../components/chart/chart.mjs"
 // this determines which of the boxes is currently multiselect
 export class ModeEnum {
 	static Country = 0
-	static Unit = 1		// there'll never be a mode set to Unit, it's only there because it's also used as index for selectboxes
+	static Unit = 1		// the mode will never be set to Unit; it's only there because it's also used as index for selectboxes
 	static Index = 2
 	static Coicop = 3
 }
@@ -34,7 +34,7 @@ class Mode extends ModeEnum {
 
 let range = {
 	begin: 0,
-	end: 0
+	end: -0
 }
 
 export function setRange(_range) {
@@ -58,18 +58,26 @@ function _update(data, mode) {
 	
 	const retVal = tryModeSwitch()
 	
-	let modeToLegendElements = {}
-	modeToLegendElements[Mode.Country] = data.countries
+	let modeToTooltipTexts = {}
+	modeToTooltipTexts[Mode.Country] = data.countries
 	// Mode.Unit omitted on purpose
-	modeToLegendElements[Mode.Index] = data.indices
-	modeToLegendElements[Mode.Coicop] = data.coicops
+	modeToTooltipTexts[Mode.Index] = data.indices
+	modeToTooltipTexts[Mode.Coicop] = data.coicops
 
 	const unitDisplay = " " + document.getElementById("selectUnit").currentText
-	chart.init("line", "chart", "legend", 
-		extract(data, Mode.current), 
-		modeToLegendElements[Mode.current], 
-		data.codes.time.slice(range.begin, range.end), 		// cut off elements in front, similar to the data
-		unitDisplay)
+	
+	const cols = extract(data, Mode.current)
+	cols.unshift(data.codes.time.slice(range.begin, range.end))	// put categories (time) as first array
+
+	chart.init({
+		type: "line",
+		chartDOMElementId: "chart",
+		legendDOMElementId: "legend",
+		cols: cols,
+		tooltipTexts: modeToTooltipTexts[Mode.current],
+		suffixText: unitDisplay,
+		isRotated: false
+	})
 	chart.setYLabel("chart", unitDisplay)
 
 
@@ -113,11 +121,13 @@ function _update(data, mode) {
 				{ clone: true }
 			)
 
-			subset.value = subset.value.slice(range.begin, range.end)	// cut off elements in front
+			// cut off elements in front and at the end, according to a range (ie timerange)
+			subset.value = subset.value.slice(range.begin, range.end)
 
 			// put "column header" (a string) in front of the numerical values,
 			// because that's the expected format for "columns" in billboard.js
 			// the "col-header" is displayed in the legend.
+			// col-header is actually the series' key.
 			subset.value.unshift(selection)
 
 			retVal.push(subset.value)
