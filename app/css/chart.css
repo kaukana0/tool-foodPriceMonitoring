@@ -2,28 +2,44 @@
 
 /*
 decrease height on small width to give room to the legend below.
-everything determined empirically :-/
+mostly determined empirically :-/
 */
+
+
+
+/* rows 2+3+4+6+7+8 = 44% height */
 
 /* for narrow, until 576 */
 @media (max-width: 576px) {
   #chartcontainer {
-    height:37%;
-    /*background-color: aquamarine;*/
+    height:64%; /* row 5*/
   }
   #chart {
     min-height: 90%;
   }
+  span.bb-legend-item {
+    margin-top: 0px;
+  }
 }
+
+
+/* rows 2+3+4+6+7+8 = 40%   (row 2 goes smaller below 768px) */
 
 /* from 576 onwards */
 @media (min-width: 576px) {
   #chartcontainer {
-    height:57%;
-    /*background-color: antiquewhite;*/
+    height:80%;
   }
   #chart {
     height: 100%;
-    /*background-color: green;*/
+  }
+}
+
+@media (min-width: 1200px) {
+  #chartcontainer {
+    max-height:60%;
+  }
+  #chart {
+    height: 100%;
   }
 }

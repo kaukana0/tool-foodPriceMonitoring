@@ -24,6 +24,7 @@
 	<link rel="stylesheet" href="css/logo.css">
 	<link rel="stylesheet" href="css/titlelines.css">
 	<link rel="stylesheet" href="css/chart.css">
+	<link rel="stylesheet" href="css/range.css">
 	<link rel="stylesheet" href="components/footerLines/footerLines.css">
 
 	<script src="./components/titleLines/titleLines.mjs" type="module"></script>
@@ -94,23 +95,22 @@
 		<!-- row 5: chart and legend -->
 		<div id="chartcontainer" class="row mt-2 align-items-center">
 			<div id="chart" class="col-11"></div>
-			<div id="legend" class="col-sm-1 overflow-hidden text-center"></div>
+			<div id="legend" class="col-sm-1 text-center"></div>
 		</div>
 
 		<!-- row 6: time slider -->
-		<div class="row align-items-center" style="min-height:4%;">
+		<div id="range" class="row align-items-center">
 			<range-slider id="timeRange" thumbWidthInPixel="105" style="width: 100%;"></range-slider>
 		</div>
 
 		<!-- row 7 footer -->
-		<div class="d-flex justify-content-center" style="max-height:2%;">
+		<div class="d-flex justify-content-center" style="max-height:8%;">
 			<div id="footnoteText1" translate style="display: inline-block;">footnoteText1</div>
-			&nbsp;
 			<a id="footnoteText2" target="_blank" rel="noopener" href="https://ec.europa.eu/eurostat/databrowser/bookmark/03a2bb70-40a8-4798-8682-d82d9c6701a0?lang=en" translate>footnoteText2</a>
 		</div>
 
 		<!-- row 8: notes -->
-		<div class="d-flex justify-content-center" style="max-height:2%; text-align: center;">
+		<div class="d-flex justify-content-center" style="max-height:25%; text-align: center; overflow: hidden;">
 			<a id="footnoteText3" translate>footnoteText3</a>
 		</div>
 	

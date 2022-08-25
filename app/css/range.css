@@ -1,0 +1,17 @@
+/* for narrow, until 576 */
+@media (max-width: 576px) {
+	#range {
+		min-height:7%;
+	}
+}
+/* from 576 onwards */
+@media (min-width: 576px) {
+	#range {
+		min-height:14%;
+	}
+}
+@media (min-width: 1200px) {
+	#range {
+		min-height:4%;
+	}
+}
