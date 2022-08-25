@@ -2,17 +2,28 @@
 
 /*
 decrease height on small width to give room to the legend below.
+everything determined empirically :-/
 */
 
+/* for narrow, until 576 */
 @media (max-width: 576px) {
+  #chartcontainer {
+    height:37%;
+    /*background-color: aquamarine;*/
+  }
   #chart {
     min-height: 90%;
   }
 }
 
+/* from 576 onwards */
 @media (min-width: 576px) {
+  #chartcontainer {
+    height:57%;
+    /*background-color: antiquewhite;*/
+  }
   #chart {
-    min-height: 100%;
+    height: 100%;
+    /*background-color: green;*/
   }
 }
-
