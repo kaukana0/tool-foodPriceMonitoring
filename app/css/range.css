@@ -7,7 +7,7 @@
 /* from 576 onwards */
 @media (min-width: 576px) {
 	#range {
-		min-height:14%;
+		min-height:7%;
 	}
 }
 @media (min-width: 1200px) {

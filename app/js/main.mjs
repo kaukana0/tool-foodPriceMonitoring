@@ -45,7 +45,11 @@ function run() {
 		(data) => {
 			if(data	&& Object.keys(data).length > 0 && Object.getPrototypeOf(data) === Object.prototype) {
 				try {
-					initRangeSlider(data)
+					const max = data.codes.time.length
+					const left = max>50 ? Math.round(Number(max*0.5)) : 0
+					dm.setRange({begin: left, end: max})
+					initRangeSlider(data, max, left)
+
 					initSelectBoxes(data)
 					document.getElementById("loadingIndicator").style.display = "none"
 				} catch(e) {
@@ -87,9 +91,7 @@ function initSelectBoxes(data) {
 	document.getElementById("selectCoicop").data = [data.codes.coicop, null]
 }
 
-function initRangeSlider(data) {
-	const max = data.codes.time.length
-	const left = max>50 ? Math.round(Number(max*0.5)) : 0
+function initRangeSlider(data, max, left) {
 	const el = document.getElementById("timeRange")
 
 	el.setAttribute("max", max)
@@ -99,7 +101,6 @@ function initRangeSlider(data) {
 	el.setAttribute("valueR", max)
 	el.setAttribute("textl", data.codes.time[left])
 	el.setAttribute("textr", data.codes.time[max-1])
-	dm.setRange({begin: left, end: max})
 
 	el.addEventListener('change', (e) => {
 		el.setAttribute("textl", data.codes.time[e.detail.left])
