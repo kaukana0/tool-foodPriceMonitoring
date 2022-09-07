@@ -45,16 +45,16 @@ export function setRange(_range) {
 // expected type for param "mode": ModeEnum
 // returns true if a mode switch happened
 // mode is an optional parameter
-export function update(data, mode) {
+export function update(data, mode, onFinished) {
 	if(mode===undefined) {
-		_update(data, Mode.current)
+		_update(data, Mode.current, onFinished)
 	} else {
-		_update(data, mode)
+		_update(data, mode, onFinished)
 	}
 }
 
 
-function _update(data, mode) {
+function _update(data, mode, onFinished) {
 	
 	const retVal = tryModeSwitch()
 	
@@ -76,7 +76,8 @@ function _update(data, mode) {
 		cols: cols,
 		tooltipTexts: modeToTooltipTexts[Mode.current],
 		suffixText: unitDisplay,
-		isRotated: false
+		isRotated: false,
+		onFinished: onFinished
 	})
 	chart.setYLabel("chart", unitDisplay)
 

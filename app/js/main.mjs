@@ -75,19 +75,27 @@ function run() {
 }
 
 function initSelectBoxes(data) {
+	const pat = lockBoxes.bind(this, true)		// "partial application true"
+	const paf = lockBoxes.bind(this, false)
+
+	function update(boxId) {
+		pat()
+		dm.update(data, boxId, paf)
+	}
+
 	document.getElementById("selectCountry").data = [data.countries, data.groupChanges]
-	document.getElementById("selectCountry").callback = (k, v) => dm.update(data, dm.ModeEnum.Country)
+	document.getElementById("selectCountry").callback = () => update(dm.ModeEnum.Country)
 
 	document.getElementById("selectUnit").data = [data.codes.unit, null]
-	document.getElementById("selectUnit").callback = (k, v) => dm.update(data, dm.ModeEnum.Unit)
+	document.getElementById("selectUnit").callback = () => update(dm.ModeEnum.Unit)
 
 	document.getElementById("selectIndex").data = [data.codes.index, null]
-	document.getElementById("selectIndex").callback = (k, v) => dm.update(data, dm.ModeEnum.Index)
+	document.getElementById("selectIndex").callback = () => update(dm.ModeEnum.Index)
 
 	// trick: setting data after callback only here lastly 
 	// makes the chart update initially only 1 time w/ all 4 initial selections correctly set
 	// drawback: 3 selectboxes complain about unset callbacks (because callback is set after data)...
-	document.getElementById("selectCoicop").callback = (k, v) => dm.update(data, dm.ModeEnum.Coicop)
+	document.getElementById("selectCoicop").callback = () => update(dm.ModeEnum.Coicop)
 	document.getElementById("selectCoicop").data = [data.codes.coicop, null]
 }
 
@@ -108,4 +116,11 @@ function initRangeSlider(data, max, left) {
 		dm.setRange({begin: e.detail.left, end: e.detail.right})
 		dm.update(data)
 	})
+}
+
+function lockBoxes(isLocked) {
+	document.getElementById("selectCountry").setLocked(isLocked)
+	document.getElementById("selectUnit").setLocked(isLocked)
+	document.getElementById("selectIndex").setLocked(isLocked)
+	document.getElementById("selectCoicop").setLocked(isLocked)
 }
