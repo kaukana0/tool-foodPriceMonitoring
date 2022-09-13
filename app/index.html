@@ -45,7 +45,7 @@
 		<div id="firstRow" class="row">
 			<div class="col-2">
 				<nav-bar class="float-left">
-					<nav-bar-item-modal symbol="fa-solid fa-info" headerText="Info" closeButton title="tt_info" translate="title">
+					<nav-bar-item-modal symbol="fa-solid fa-info" headerText="Information" closeButton title="tt_info" translate="title">
 						<p translate>info</p>
 					</nav-bar-item-modal>
 					<nav-bar-item-modal symbol="fa-solid fa-code" headerText="Copy this code and paste it in your website:" title="tt_embed" translate="title">
@@ -72,7 +72,7 @@
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectCountry">Country</label>
-				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" displayKeys translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" displayKeys fractions="5" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectUnit">Unit</label>
@@ -84,11 +84,11 @@
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectIndex">Index</label>
-				<dropdown-box id="selectIndex" multiselect maxSelections=7 selectedText="indexSelected" displayKeys translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectIndex" multiselect maxSelections=7 selectedText="indexSelected" displayKeys fractions="4" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:360px;">
 				<label for="selectCoicop">COICOP</label>
-				<dropdown-box id="selectCoicop" multiselect maxSelections=7 selectedText="coicopSelected" displayKeys translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectCoicop" multiselect maxSelections=7 selectedText="coicopSelected" displayKeys fractions="2" translate="selectedText"></dropdown-box>
 			</div>
 		</div>
 
@@ -133,7 +133,7 @@
 
 	<!-- tiny overlay in bottom right corner showing commitId -->
 	<!-- git rev-parse --short HEAD -->
-	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;"></div>
+	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;">49e2004</div>
 
 </body>
 
