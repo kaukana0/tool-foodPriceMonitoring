@@ -5,7 +5,7 @@
     "hashtags": "#Eurostat",
     "footnoteText1": "Source: Eurostat - ",
     "footnoteText2": "access to dataset",
-    "footnoteText3": "Note to users: Data for certain dimensions are not available as they are submitted by EU Member States to Eurostat on a voluntary basis.",
+    "footnoteText3": "Data for certain dimensions are not available as they are submitted by EU Member States to Eurostat on a voluntary basis.",
     "info": "The Food Price Monitoring Tool analyses the available data on price developments through the supply chain.<br>The supply chain is a series of economic activities that are performed by different economic actors that contribute to the production and distribution of one consumer product or a group of consumer products.<br><br>For more information, please read the <a href='https://ec.europa.eu/eurostat/cache/metadata/en/prc_fsc_idx_esms.htm' target='_self'>metadata</a>.",
     "totalFail": "Ups, something went wrong!<br>Try again later or contact our user",
     "totalFail2": "support",

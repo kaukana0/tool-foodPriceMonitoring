@@ -58,11 +58,11 @@ function _update(data, mode, onFinished) {
 	
 	const retVal = tryModeSwitch()
 	
-	let modeToTooltipTexts = {}
-	modeToTooltipTexts[Mode.Country] = data.countries
+	let modeToSeriesLabels = {}
+	modeToSeriesLabels[Mode.Country] = data.countries
 	// Mode.Unit omitted on purpose
-	modeToTooltipTexts[Mode.Index] = data.indices
-	modeToTooltipTexts[Mode.Coicop] = data.coicops
+	modeToSeriesLabels[Mode.Index] = data.indices
+	modeToSeriesLabels[Mode.Coicop] = data.coicops
 
 	const unitDisplay = " " + document.getElementById("selectUnit").currentText
 	
@@ -74,7 +74,9 @@ function _update(data, mode, onFinished) {
 		chartDOMElementId: "chart",
 		legendDOMElementId: "legend",
 		cols: cols,
-		tooltipTexts: modeToTooltipTexts[Mode.current],
+		fixColors: data.countryColors,
+		palette: data.colorPalette,
+		seriesLabels: modeToSeriesLabels[Mode.current],
 		suffixText: unitDisplay,
 		isRotated: false,
 		onFinished: onFinished

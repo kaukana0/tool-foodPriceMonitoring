@@ -7,6 +7,7 @@ import * as pipeline from "../components/pipeline/pipeline.mjs"
 import {replaceEuInRawData} from '../components/util/util.mjs'
 import { process as extractOriginalRawData } from "../components/processorOriginalRawData/originalRawData.mjs"
 import { process as renameCountries } from "../components/processorCountryNames/countryNames.mjs"
+import { process as defineCountryColors } from "../components/processorCountryColors/countryColors.mjs"
 import { process as defineCountryOrder } from "../components/processorCountryOrder/countryOrder.mjs"
 import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.mjs"
 
@@ -36,7 +37,7 @@ function run() {
 		{
 			input : "./persistedData/data0722.json",
 			//input: "https://ec.europa.eu/eurostat/databrowser-backend/api/extraction/1.0/LIVE/false/json/en/PRC_FSC_IDX$DEFAULTVIEW?cacheId=1649754000000-2.6.5%2520-%25202022-03-30%252013%253A02",
-			processors: [defineCountryOrder, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, extractOriginalRawData, extractCoicop, extractIndex]
+			processors: [defineCountryOrder, defineCountryColors, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, extractOriginalRawData, extractCoicop, extractIndex]
 		}
 	]
 

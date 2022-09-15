@@ -40,3 +40,6 @@
 [submodule "app/components/util"]
 	path = app/components/util
 	url = https://github.com/kaukana0/util.git
+[submodule "app/components/processorCountryColors"]
+	path = app/components/processorCountryColors
+	url = https://github.com/kaukana0/processorCountryColors.git
