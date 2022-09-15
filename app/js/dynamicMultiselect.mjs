@@ -64,7 +64,6 @@ function _update(data, mode, onFinished) {
 	modeToSeriesLabels[Mode.Index] = data.indices
 	modeToSeriesLabels[Mode.Coicop] = data.coicops
 
-	const unitDisplay = " " + document.getElementById("selectUnit").currentText
 	
 	const cols = extract(data, Mode.current)
 	cols.unshift(data.codes.time.slice(range.begin, range.end))	// put categories (time) as first array
@@ -77,11 +76,11 @@ function _update(data, mode, onFinished) {
 		fixColors: data.countryColors,
 		palette: data.colorPalette,
 		seriesLabels: modeToSeriesLabels[Mode.current],
-		suffixText: unitDisplay,
+		suffixText: getTooltipSuffix(),
 		isRotated: false,
 		onFinished: onFinished
 	})
-	chart.setYLabel("chart", unitDisplay)
+	chart.setYLabel("chart", getYLabel())
 
 
 	// this logic is the "nucleus" of the multiselect behaviour
@@ -152,4 +151,19 @@ function _update(data, mode, onFinished) {
 	}
 	
 	return retVal
+}
+
+
+function getTooltipSuffix() {
+	let retVal = document.getElementById("selectUnit").currentText
+	if(retVal.startsWith("Index")) {
+		retVal = ""
+	} else if(retVal.startsWith("Percentage")) {
+		retVal = "%"
+	}
+	return retVal
+}
+
+function getYLabel() {
+	return document.getElementById("selectUnit").currentText
 }
