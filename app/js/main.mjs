@@ -1,35 +1,31 @@
+import * as l10n from "../components/l10n/lang.mjs"
 import * as dm from "./dynamicMultiselect.mjs"
 import "../components/dropdownBox/dropdownBox.mjs"
-import * as l10n from "../components/l10n/lang.mjs"
-import * as meta from "../components/metaTags/metaTags.mjs"
 
 import * as pipeline from "../components/pipeline/pipeline.mjs"
 import {replaceEuInRawData} from '../components/util/util.mjs'
 import { process as extractOriginalRawData } from "../components/processorOriginalRawData/originalRawData.mjs"
+
 import { process as renameCountries } from "../components/processorCountryNames/countryNames.mjs"
 import { process as defineCountryColors } from "../components/processorCountryColors/countryColors.mjs"
 import { process as defineCountryOrder } from "../components/processorCountryOrder/countryOrder.mjs"
-import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.mjs"
-
 import { process as extractCountries } from "../components/processorCountries/processor.mjs"
+
 import { process as extractCoicop } from "./pipelineProcessors/coicop.mjs"
 import { process as extractIndex } from "./pipelineProcessors/index.mjs"
 import { process as extractIndicators } from "./pipelineProcessors/indicators.mjs"
 
+import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.mjs"
 
-init(run)
 
-
-function init(callback) {
-	l10n.init("en", {
-		'en': './translations/en.json',
-		'fr': './translations/fr.json'
+l10n.init(
+	"en",
+	{
+		en: './translations/en.json',
+		fr: './translations/fr.json'
 	},
-	() => {
-		meta.init(l10n._('title.main'), l10n._('title.main'), "some.jpg", 100, 100)
-		callback()
-	})
-}
+	() => {	run() }
+)
 
 
 function run() {
