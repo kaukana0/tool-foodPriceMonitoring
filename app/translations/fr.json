@@ -11,7 +11,10 @@
     "totalFail2": "support fr",
     "tt_twitter": "Share on Twitter fr",
     "tt_fb": "Share on Facebook fr",
+    "tt_in": "Share on LinkedIn fr",
     "tt_embed": "Embed Chart fr",
     "tt_info": "Information fr",
-    "countriesSelected": "countries selected fr"
+    "countriesSelected": "countries selected fr",
+    "indexSelected": "indices selected fr",
+    "coicopSelected": "COICOPs selected fr"
 }
