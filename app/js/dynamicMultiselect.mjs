@@ -8,16 +8,17 @@ Short description of the "dynamic multiselect" behaviour:
 import * as chart from "../components/chart/chart.mjs"
 
 
-// this determines which of the boxes is currently multiselect
+// this says which of the boxes can potentially be multiselect
 export class ModeEnum {
 	static Country = 0
-	static Unit = 1		// the mode will never be set to Unit; it's only there because it's also used as index for selectboxes
+	static Unit = 1		// the current mode will never be set to Unit; it's only there because it's also used as index for selectboxes
 	static Index = 2
 	static Coicop = 3
 }
 
+// a mode maps to a selectBox in the DOM.
 class Mode extends ModeEnum {
-	static current = Mode.Country
+	static current = Mode.Country	// this box is currently multiselect - in here, we're in that mode.
 	static isCurrently(mode) {return this.current === mode}
 	static set(mode) {this.current = mode; return mode}
 	// note that the array el's line up w/ the values from superclass
@@ -56,7 +57,7 @@ export function update(data, mode, onFinished) {
 
 function _update(data, mode, onFinished) {
 	
-	const retVal = tryModeSwitch()
+	const retVal = tryModeSwitch(mode)
 	
 	let modeToSeriesLabels = {}
 	modeToSeriesLabels[Mode.Country] = data.countries
@@ -84,7 +85,7 @@ function _update(data, mode, onFinished) {
 
 
 	// this logic is the "nucleus" of the multiselect behaviour
-	function tryModeSwitch() {
+	function tryModeSwitch(mode) {
 		const modeStored = Mode.current
 		if( Mode.getDOMElementByMode(mode).selectedKeys.length>1 ) {
 			Mode.set(mode)

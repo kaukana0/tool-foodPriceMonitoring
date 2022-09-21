@@ -23,6 +23,7 @@ mv ./components/navBar/itemModal.mjs  ./components/navBar/itemModal.js
 mv ./components/navBar/itemTwitter.mjs  ./components/navBar/itemTwitter.js
 mv ./components/navBar/navBar.mjs  ./components/navBar/navBar.js
 mv ./components/navBar/rootUrl.mjs  ./components/navBar/rootUrl.js
+mv ./components/navBar/itemLinkedin.mjs  ./components/navBar/itemLinkedin.js
 mv ./components/pipeline/pipeline.mjs  ./components/pipeline/pipeline.js
 mv ./components/processorCountries/processor.mjs  ./components/processorCountries/processor.js
 mv ./components/titleLines/titleLines.mjs  ./components/titleLines/titleLines.js
