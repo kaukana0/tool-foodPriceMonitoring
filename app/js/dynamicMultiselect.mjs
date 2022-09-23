@@ -6,6 +6,7 @@ Short description of the "dynamic multiselect" behaviour:
 */
 
 import * as chart from "../components/chart/chart.mjs"
+//import JSONstat from "../redist/jsonStat/import.mjs"
 
 
 // this says which of the boxes can potentially be multiselect
@@ -39,35 +40,42 @@ let range = {
 }
 
 export function setRange(_range) {
-	range = {...range, ..._range}
+	//range = {...range, ..._range}
+	range.begin = Number(_range.begin)
+	range.end = Number(_range.end)
 }
 
 
-// expected type for param "mode": ModeEnum
-// returns true if a mode switch happened
-// mode is an optional parameter
-export function update(data, mode, onFinished) {
-	if(mode===undefined) {
-		_update(data, Mode.current, onFinished)
-	} else {
-		_update(data, mode, onFinished)
-	}
+/*
+expected parameter:
+
+{
+	data:...,   			// mandatory
+	onFinished: function,	// callback; optional
+	mode: ModeEnum			// optional
 }
+
+returns true if a mode switch happened
+*/
+export function update(params) {
+	const mode = params["mode"] ? params["mode"] : Mode.current
+	const onFinished = params["onFinished"] ? params["onFinished"] : null
+	_update(params.data, mode, onFinished)
+}
+
 
 
 function _update(data, mode, onFinished) {
 	
 	const retVal = tryModeSwitch(mode)
-	
 	let modeToSeriesLabels = {}
-	modeToSeriesLabels[Mode.Country] = data.countries
+	modeToSeriesLabels[Mode.Country] = data.categories.countries
 	// Mode.Unit omitted on purpose
-	modeToSeriesLabels[Mode.Index] = data.indices
-	modeToSeriesLabels[Mode.Coicop] = data.coicops
-
+	modeToSeriesLabels[Mode.Index] = data.categories.index
+	modeToSeriesLabels[Mode.Coicop] = data.categories.coicop
 	
 	const cols = extract(data, Mode.current)
-	cols.unshift(data.codes.time.slice(range.begin, range.end))	// put categories (time) as first array
+	cols.unshift(data.categories.time.slice(range.begin, range.end))	// put categories (time) as first array
 
 	chart.init({
 		type: "line",
@@ -108,6 +116,7 @@ function _update(data, mode, onFinished) {
 		mapModeToDim[Mode.Index] = "indx"
 		mapModeToDim[Mode.Coicop] = "coicop"
 
+		// getting data of all (user) selected series one by one
 		selectBoxes[mode].selectedKeys.forEach(selection => {
 			// first assume all are singleselect
             const diceDims = {
@@ -117,23 +126,21 @@ function _update(data, mode, onFinished) {
                 geo: selectBoxes[ModeEnum.Country].selectedKeys
             }
 			// but actually one can be multiselect - according to a mode - so overwrite accordingly
-            diceDims[mapModeToDim[mode]] = selection
+            diceDims[mapModeToDim[mode]] = [selection]
 
-			var subset = data.source.Dice(
-                diceDims,
-				{ clone: true }
-			)
+			//let seriesData = extractWithJsonStat(data, diceDims)
+			// cut off elements in front and at the end, according to a range (ie timerange), because it extracted too much
+			//seriesData = seriesData.slice(range.begin, range.end)
 
-			// cut off elements in front and at the end, according to a range (ie timerange)
-			subset.value = subset.value.slice(range.begin, range.end)
+			let seriesData = extractWithSpeedOptimizedAlgo(data.originalRawInputData, diceDims)
 
 			// put "column header" (a string) in front of the numerical values,
 			// because that's the expected format for "columns" in billboard.js
 			// the "col-header" is displayed in the legend.
 			// col-header is actually the series' key.
-			subset.value.unshift(selection)
+			seriesData.unshift(selection)
 
-			retVal.push(subset.value)
+			retVal.push(seriesData)
 		})
 
 		return retVal
@@ -165,6 +172,56 @@ function getTooltipSuffix() {
 	return retVal
 }
 
+
 function getYLabel() {
 	return document.getElementById("selectUnit").currentText
+}
+
+
+// https://github.com/jsonstat/toolkit/issues/1  	LOL. see also adr04.md
+function extractWithJsonStat(data, diceDims) {
+	var subset = JSONstat(data.originalRawInputData).Dice(
+		diceDims,
+		{ clone: true }
+	)
+	return subset.value
+}
+
+
+// Note: data.value might be an array or an object (see https://json-stat.org/format/#value).
+function extractWithSpeedOptimizedAlgo(data, diceDims) {
+	let retVal = []
+
+	function arr2num(arr, size) {
+		const ndims=size.length
+		let num=0
+		let mult=1
+		for(let i=0; i<ndims; i++) {
+			mult = (i>0) ? size[ndims-i] : 1
+			num += mult*arr[ndims-i-1]
+		}
+		return num;
+	}
+
+	for(let iu=0; iu<diceDims["unit"].length; iu++) {	// index for unit
+		const aiu = data.dimension.unit.category.index[diceDims["unit"][iu]]		// (result-)array index for unit
+		for(let ii=0; ii<diceDims["indx"].length; ii++) {
+			const aii = data.dimension.indx.category.index[diceDims["indx"][ii]]
+			for(let ic=0; ic<diceDims["coicop"].length; ic++) {
+				const aic = data.dimension.coicop.category.index[diceDims["coicop"][ic]]
+				for(let ig=0; ig<diceDims["geo"].length; ig++) {
+					const aig = data.dimension.geo.category.index[diceDims["geo"][ig]]
+					for(let it=range.begin; it<range.end; it++) {
+						const i = arr2num([0,aiu,aii,aic,aig,it], data.size)
+						if(data.value[i]) {
+							retVal.push(data.value[i])
+						} else {
+							retVal.push(null)
+						}
+					}
+				}
+			}
+		}
+	}
+	return retVal
 }

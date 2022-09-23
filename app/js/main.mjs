@@ -1,5 +1,6 @@
 import * as l10n from "../components/l10n/lang.mjs"
 import * as dm from "./dynamicMultiselect.mjs"
+import * as state from "./stateMgmnt.mjs"
 import "../components/dropdownBox/dropdownBox.mjs"
 
 import * as pipeline from "../components/pipeline/pipeline.mjs"
@@ -11,8 +12,6 @@ import { process as defineCountryColors } from "../components/processorCountryCo
 import { process as defineCountryOrder } from "../components/processorCountryOrder/countryOrder.mjs"
 import { process as extractCountries } from "../components/processorCountries/processor.mjs"
 
-import { process as extractCoicop } from "./pipelineProcessors/coicop.mjs"
-import { process as extractIndex } from "./pipelineProcessors/index.mjs"
 import { process as extractIndicators } from "./pipelineProcessors/indicators.mjs"
 
 import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.mjs"
@@ -31,9 +30,16 @@ l10n.init(
 function run() {
 	const processingCfg = [
 		{
-			input : "./persistedData/data0722.json",
 			//input: "https://ec.europa.eu/eurostat/databrowser-backend/api/extraction/1.0/LIVE/false/json/en/PRC_FSC_IDX$DEFAULTVIEW?cacheId=1649754000000-2.6.5%2520-%25202022-03-30%252013%253A02",
-			processors: [defineCountryOrder, defineCountryColors, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, extractOriginalRawData, extractCoicop, extractIndex]
+			//input : "./persistedData/data0722.json",
+
+			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&sinceTimePeriod=2015-01"
+			//input : "./persistedData/data2015-01.json",
+
+			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&freq=M&unit=I15&unit=PCH_M12&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop=CP011&coicop=CP0111&coicop=CP01113&coicop=CP0112&coicop=CP01121&coicop=CP01122&coicop=CP01123&coicop=CP01124&coicop=CP0113&coicop=CP0114&coicop=CP01141&coicop=CP01144&coicop=CP01145&coicop=CP01147&coicop=CP0115&coicop=CP01151&coicop=CP01153&coicop=CP01154&coicop=CP0116&coicop=CP0117&coicop=CP01174&coicop=CP01181&coicop=CP0121&coicop=CP01223&coicop=CP02121&coicop=CP0213&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&sinceTimePeriod=2014-01",
+			input : "./persistedData/data2014-01.json",
+
+			processors: [defineCountryOrder, defineCountryColors, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, extractOriginalRawData]
 		}
 	]
 
@@ -42,13 +48,12 @@ function run() {
 		(data) => {
 			if(data	&& Object.keys(data).length > 0 && Object.getPrototypeOf(data) === Object.prototype) {
 				try {
-					const max = data.codes.time.length
-					const left = max>50 ? Math.round(Number(max*0.5)) : 0
+					const max = data.categories.time.length
+					const left = max-13
 					dm.setRange({begin: left, end: max})
 					initRangeSlider(data, max, left)
 
 					initSelectBoxes(data)
-					document.getElementById("loadingIndicator").style.display = "none"
 				} catch(e) {
 					displayFailure(e)
 				}
@@ -72,28 +77,29 @@ function run() {
 }
 
 function initSelectBoxes(data) {
-	const pat = lockBoxes.bind(this, true)		// "partial application true"
-	const paf = lockBoxes.bind(this, false)
 
 	function update(boxId) {
-		pat()
-		dm.update(data, boxId, paf)
+		suppressInput()
+		// the operation stresses the render-tread so much it can't even draw the loading indicator in time...  :-o
+		setTimeout(() => dm.update({data:data, mode:boxId, onFinished:allowInput}), 40)
+		//state.store()
 	}
 
-	document.getElementById("selectCountry").data = [data.countries, data.groupChanges]
+	document.getElementById("selectCountry").data = [data.categories.countries, data.groupChanges]
 	document.getElementById("selectCountry").callback = () => update(dm.ModeEnum.Country)
 
-	document.getElementById("selectUnit").data = [data.codes.unit, null]
+	document.getElementById("selectUnit").data = [data.categories.unit, null]
 	document.getElementById("selectUnit").callback = () => update(dm.ModeEnum.Unit)
 
-	document.getElementById("selectIndex").data = [data.codes.index, null]
+	document.getElementById("selectIndex").data = [data.categories.index, null]
 	document.getElementById("selectIndex").callback = () => update(dm.ModeEnum.Index)
 
 	// trick: setting data after callback only here lastly 
 	// makes the chart update initially only 1 time w/ all 4 initial selections correctly set
 	// drawback: 3 selectboxes complain about unset callbacks (because callback is set after data)...
 	document.getElementById("selectCoicop").callback = () => update(dm.ModeEnum.Coicop)
-	document.getElementById("selectCoicop").data = [data.codes.coicop, null]
+	state.restore()
+	document.getElementById("selectCoicop").data = [data.categories.coicop, null]
 }
 
 function initRangeSlider(data, max, left) {
@@ -104,20 +110,30 @@ function initRangeSlider(data, max, left) {
 	el.setAttribute("mingap", Math.min(0.1*max,1))
 	el.setAttribute("valueL", left)
 	el.setAttribute("valueR", max)
-	el.setAttribute("textl", data.codes.time[left])
-	el.setAttribute("textr", data.codes.time[max-1])
+	el.setAttribute("textl", data.categories.time[left])
+	el.setAttribute("textr", data.categories.time[max-1])
 
-	el.addEventListener('change', (e) => {
-		el.setAttribute("textl", data.codes.time[e.detail.left])
-		el.setAttribute("textr", data.codes.time[e.detail.right-1])
+	el.addEventListener('dragging', (e) => {
+		el.setAttribute("textl", data.categories.time[e.detail.left])
+		el.setAttribute("textr", data.categories.time[e.detail.right-1])
+	})
+	el.addEventListener('selected', (e) => {
+		suppressInput()
 		dm.setRange({begin: e.detail.left, end: e.detail.right})
-		dm.update(data)
+		// the operation stresses the render-tread so much it can't even draw the loading indicator in time...  m-(
+		setTimeout(() => dm.update({data:data, onFinished:allowInput}), 40)
 	})
 }
 
-function lockBoxes(isLocked) {
-	document.getElementById("selectCountry").setLocked(isLocked)
-	document.getElementById("selectUnit").setLocked(isLocked)
-	document.getElementById("selectIndex").setLocked(isLocked)
-	document.getElementById("selectCoicop").setLocked(isLocked)
+const allowInput = _allowInput.bind(this, true)
+const suppressInput	= _allowInput.bind(this, false)
+function _allowInput(isAllowed) {
+	document.getElementById("loadingIndicator").style.display = isAllowed ? "none" : "block"
+	//document.body.style.cursor = isAllowed ? "" : "wait";
+
+	document.getElementById("selectCountry").setLocked(!isAllowed)
+	document.getElementById("selectUnit").setLocked(!isAllowed)
+	document.getElementById("selectIndex").setLocked(!isAllowed)
+	document.getElementById("selectCoicop").setLocked(!isAllowed)
+	document.getElementById("timeRange").setLocked(!isAllowed)
 }

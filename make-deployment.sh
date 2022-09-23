@@ -40,6 +40,7 @@ mv ./js/pipelineProcessors/index.mjs  ./js/pipelineProcessors/index.js
 mv ./js/pipelineProcessors/countryValues.mjs  ./js/pipelineProcessors/countryValues.js
 mv ./js/main.mjs  ./js/main.js
 mv ./js/dynamicMultiselect.mjs  ./js/dynamicMultiselect.js
+mv ./js/stateMgmnt.mjs  ./js/stateMgmnt.js
 mv ./redist/jsonStat/import.mjs  ./redist/jsonStat/import.js
 
 # replace mjs with js in all the files containing mjs
@@ -50,6 +51,7 @@ sed -i 's/\.mjs/\.js/' components/l10n/lang.js
 sed -i 's/\.mjs/\.js/' components/processorOriginalRawData/originalRawData.js
 sed -i 's/\.mjs/\.js/' js/dynamicMultiselect.js
 sed -i 's/\.mjs/\.js/' js/main.js
+sed -i 's/\.mjs/\.js/' js/stateMgmnt.js
 sed -i 's/\.mjs/\.js/' js/pipelineProcessors/timeMonthly.js
 sed -i 's/\.mjs/\.js/' components/dropdownBox/dropdownBox.js
 
