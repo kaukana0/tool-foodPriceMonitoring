@@ -197,7 +197,7 @@ function extractWithSpeedOptimizedAlgo(data, diceDims) {
 		let num=0
 		let mult=1
 		for(let i=0; i<ndims; i++) {
-			mult = (i>0) ? size[ndims-i] : 1
+			mult *= (i>0) ? size[ndims-i] : 1
 			num += mult*arr[ndims-i-1]
 		}
 		return num;
