@@ -10,9 +10,18 @@ export function process(input,output) {
         input.dimension.coicop && input.dimension.coicop.category && input.dimension.coicop.category.label
     ) {
         output.categories.unit = new Map(Object.entries(input.dimension.unit.category.label))
-        output.categories.index = new Map(Object.entries(input.dimension.indx.category.label))
+        output.categories.index = getIndices(input.dimension.indx.category.label)
         output.categories.coicop = new Map(Object.entries(input.dimension.coicop.category.label))
     } else {
         console.error("processor indicators: invalid input")
     }
+}
+
+// this whole ugly thing just to get HICP topmost...
+function getIndices(bla) {
+    let retVal = new Map()
+    const o = bla
+    if(o["HICP"]) {retVal.set("HICP", o["HICP"])}
+    for (const e in o) { retVal.set(e, o[e]) }
+    return retVal
 }

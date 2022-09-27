@@ -82,7 +82,7 @@ function _update(data, mode, onFinished) {
 		chartDOMElementId: "chart",
 		legendDOMElementId: "legend",
 		cols: cols,
-		fixColors: data.countryColors,
+		fixColors: {...data.countryColors, ...data.indexColors},
 		palette: data.colorPalette,
 		seriesLabels: modeToSeriesLabels[Mode.current],
 		suffixText: getTooltipSuffix(),
