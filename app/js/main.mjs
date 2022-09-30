@@ -107,15 +107,14 @@ function initSelectBoxes(data) {
 
 function initRangeSlider(data, max, left) {
 	const el = document.getElementById("timeRange")
-
-	el.setAttribute("max", max)
+	
+	el.setAttribute("mingap", Math.max(0.1*max,8))
 	el.setAttribute("min", 0)
-	el.setAttribute("mingap", Math.min(0.1*max,1))
-	el.setAttribute("valueL", left)
-	el.setAttribute("valueR", max)
+	el.setAttribute("max", max)
+	el.setAttribute("valuel", left)
+	el.setAttribute("valuer", max)
 	el.setAttribute("textl", data.categories.time[left])
 	el.setAttribute("textr", data.categories.time[max-1])
-
 	el.addEventListener('dragging', (e) => {
 		el.setAttribute("textl", data.categories.time[e.detail.left])
 		el.setAttribute("textr", data.categories.time[e.detail.right-1])
