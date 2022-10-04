@@ -54,9 +54,13 @@ function run() {
 					const max = data.categories.time.length
 					const left = max-13
 					dm.setRange({begin: left, end: max})
-					initRangeSlider(data, max, left)
 
+					suppressInput()
+					initRangeSlider(data, left, max)
+					updateSlider(data.categories.time[left], data.categories.time[max-1])
 					initSelectBoxes(data)
+					updateSelectboxes(dm.ModeEnum.Country, data)	// implicit allowInput
+
 				} catch(e) {
 					displayFailure(e)
 				}
@@ -80,44 +84,43 @@ function run() {
 }
 
 function initSelectBoxes(data) {
-
-	function update(boxId) {
-		suppressInput()
-		// the operation stresses the render-tread so much it can't even draw the loading indicator in time...  :-o
-		setTimeout(() => dm.update({data:data, mode:boxId, onFinished:allowInput}), 40)
-		//state.store()
-	}
-
 	document.getElementById("selectCountry").data = [data.categories.countries, data.groupChanges]
-	document.getElementById("selectCountry").callback = () => update(dm.ModeEnum.Country)
+	document.getElementById("selectCountry").callback = () => updateSelectboxes(dm.ModeEnum.Country, data)
 
 	document.getElementById("selectUnit").data = [data.categories.unit, null]
-	document.getElementById("selectUnit").callback = () => update(dm.ModeEnum.Unit)
+	document.getElementById("selectUnit").callback = () => updateSelectboxes(dm.ModeEnum.Unit, data)
 
 	document.getElementById("selectIndex").data = [data.categories.index, null]
-	document.getElementById("selectIndex").callback = () => update(dm.ModeEnum.Index)
+	document.getElementById("selectIndex").callback = () => updateSelectboxes(dm.ModeEnum.Index, data)
 
-	// trick: setting data after callback only here lastly 
-	// makes the chart update initially only 1 time w/ all 4 initial selections correctly set
-	// drawback: 3 selectboxes complain about unset callbacks (because callback is set after data)...
-	document.getElementById("selectCoicop").callback = () => update(dm.ModeEnum.Coicop)
-	state.restore()
 	document.getElementById("selectCoicop").data = [data.categories.coicop, null]
+	document.getElementById("selectCoicop").callback = () => updateSelectboxes(dm.ModeEnum.Coicop, data)
+
+	state.restore()
 }
 
-function initRangeSlider(data, max, left) {
+function updateSelectboxes(boxId, data) {
+	suppressInput()
+	// the operation stresses the render-tread so much it can't even draw the loading indicator in time...  :-o
+	setTimeout(() => dm.update({data:data, mode:boxId, onFinished:allowInput}), 40)
+	//state.store()
+}
+
+
+function initRangeSlider(data, left, max) {
 	const el = document.getElementById("timeRange")
-	
 	el.setAttribute("mingap", Math.max(0.1*max,8))
 	el.setAttribute("min", 0)
 	el.setAttribute("max", max)
+	el.setAttribute("valuer", max)	// first right, because it's bigger and they depend on each other
 	el.setAttribute("valuel", left)
-	el.setAttribute("valuer", max)
-	el.setAttribute("textl", data.categories.time[left])
-	el.setAttribute("textr", data.categories.time[max-1])
+	//el.setAttribute("textl", data.categories.time[left])
+	//el.setAttribute("textr", data.categories.time[max-1])
+	updateSlider(data.categories.time[left], data.categories.time[max-1])
 	el.addEventListener('dragging', (e) => {
-		el.setAttribute("textl", data.categories.time[e.detail.left])
-		el.setAttribute("textr", data.categories.time[e.detail.right-1])
+		//el.setAttribute("textl", data.categories.time[e.detail.left])
+		//el.setAttribute("textr", data.categories.time[e.detail.right-1])
+		
 	})
 	el.addEventListener('selected', (e) => {
 		suppressInput()
@@ -125,6 +128,11 @@ function initRangeSlider(data, max, left) {
 		// the operation stresses the render-tread so much it can't even draw the loading indicator in time...  m-(
 		setTimeout(() => dm.update({data:data, onFinished:allowInput}), 40)
 	})
+}
+
+function updateSlider(leftText, rightText) {
+	document.getElementById("timeRange").setAttribute("textl", leftText)
+	document.getElementById("timeRange").setAttribute("textr", rightText)
 }
 
 const allowInput = _allowInput.bind(this, true)

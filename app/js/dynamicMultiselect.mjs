@@ -157,7 +157,6 @@ function _update(data, mode, onFinished) {
 			if(idx!==Mode.Unit) {el.setAttribute("multiselect", null)}		// unit stays always single
 		})
 	}
-	
 	return retVal
 }
 
@@ -223,5 +222,6 @@ function extractWithSpeedOptimizedAlgo(data, diceDims) {
 			}
 		}
 	}
+
 	return retVal
 }

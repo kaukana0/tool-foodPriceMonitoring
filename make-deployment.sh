@@ -5,7 +5,7 @@ read -p "Don't forget to put that into index.html - press enter to continue"
 
 mkdir -p dist/
 cd app
-rsync -av ./ ../dist/ --exclude=.git/
+rsync -av ./ ../dist/ --exclude=./.git/ --exclude=./persistedData/
 
 
 # the following is only neccessary if server isn't configured to know what .mjs is
@@ -17,6 +17,8 @@ mv ./components/chart/legend.mjs  ./components/chart/legend.js
 mv ./components/chart/axis.mjs  ./components/chart/axis.js
 mv ./components/chart/grid.mjs  ./components/chart/grid.js
 mv ./components/chart/tooltip.mjs  ./components/chart/tooltip.js
+mv ./components/chart/ticks/ticksAlt1.mjs  ./components/chart/ticks/ticksAlt1.js
+mv ./components/chart/ticks/ticksAlt2.mjs  ./components/chart/ticks/ticksAlt2.js
 mv ./components/dropdownBox/dropdownBox.mjs  ./components/dropdownBox/dropdownBox.js
 mv ./components/dropdownBox/markUpCode.mjs  ./components/dropdownBox/markUpCode.js
 mv ./components/l10n/lang.mjs  ./components/l10n/lang.js
@@ -57,6 +59,7 @@ sed -i 's/\.mjs/\.js/' js/main.js
 sed -i 's/\.mjs/\.js/' js/stateMgmnt.js
 sed -i 's/\.mjs/\.js/' js/pipelineProcessors/timeMonthly.js
 sed -i 's/\.mjs/\.js/' components/dropdownBox/dropdownBox.js
+sed -i 's/\.mjs/\.js/' components/chart/axis.js
 
 cd ..
 
