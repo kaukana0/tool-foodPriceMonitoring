@@ -43,3 +43,6 @@
 [submodule "app/components/processorCountryColors"]
 	path = app/components/processorCountryColors
 	url = https://github.com/kaukana0/processorCountryColors.git
+[submodule "app/components/dataGenerator"]
+	path = app/components/dataGenerator
+	url = https://github.com/kaukana0/dataGenerator.git
