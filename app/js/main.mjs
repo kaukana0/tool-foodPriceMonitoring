@@ -16,8 +16,9 @@ import { process as extractIndicators } from "./pipelineProcessors/indicators.mj
 
 import { process as defineIndexColors } from "./pipelineProcessors/indexColors.mjs"
 
-
 import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.mjs"
+
+import { get as getFakeData } from "../components/dataGenerator/fpmToolFakeData.mjs"
 
 
 l10n.init(
@@ -32,16 +33,10 @@ l10n.init(
 
 function run() {
 	const processingCfg = [
-		{
-			//input: "https://ec.europa.eu/eurostat/databrowser-backend/api/extraction/1.0/LIVE/false/json/en/PRC_FSC_IDX$DEFAULTVIEW?cacheId=1649754000000-2.6.5%2520-%25202022-03-30%252013%253A02",
-			//input : "./persistedData/data0722.json",
-
-			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&sinceTimePeriod=2015-01"
-			//input : "./persistedData/data2015-01.json",
-
-			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&freq=M&unit=I15&unit=PCH_M12&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop=CP011&coicop=CP0111&coicop=CP01113&coicop=CP0112&coicop=CP01121&coicop=CP01122&coicop=CP01123&coicop=CP01124&coicop=CP0113&coicop=CP0114&coicop=CP01141&coicop=CP01144&coicop=CP01145&coicop=CP01147&coicop=CP0115&coicop=CP01151&coicop=CP01153&coicop=CP01154&coicop=CP0116&coicop=CP0117&coicop=CP01174&coicop=CP01181&coicop=CP0121&coicop=CP01223&coicop=CP02121&coicop=CP0213&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&sinceTimePeriod=2014-01",
-			input : "./persistedData/data2014-01.json",
-
+		{	// src: https://ec.europa.eu/eurostat/databrowser/view/PRC_FSC_IDX__custom_3513786/bookmark/table?lang=en&bookmarkId=002935d0-f1d1-4419-9699-db9e2c48ced6
+			input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&freq=M&unit=I15&unit=PCH_M12&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop=CP011&coicop=CP0111&coicop=CP01113&coicop=CP0112&coicop=CP01121&coicop=CP01122&coicop=CP01123&coicop=CP01124&coicop=CP0113&coicop=CP0114&coicop=CP01141&coicop=CP01144&coicop=CP01145&coicop=CP01147&coicop=CP0115&coicop=CP01151&coicop=CP01153&coicop=CP01154&coicop=CP0116&coicop=CP0117&coicop=CP01174&coicop=CP01181&coicop=CP0121&coicop=CP01223&coicop=CP02121&coicop=CP0213&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&time=2013-09&time=2013-10&time=2013-11&time=2013-12&time=2014-01&time=2014-02&time=2014-03&time=2014-04&time=2014-05&time=2014-06&time=2014-07&time=2014-08&time=2014-09&time=2014-10&time=2014-11&time=2014-12&time=2015-01&time=2015-02&time=2015-03&time=2015-04&time=2015-05&time=2015-06&time=2015-07&time=2015-08&time=2015-09&time=2015-10&time=2015-11&time=2015-12&time=2016-01&time=2016-02&time=2016-03&time=2016-04&time=2016-05&time=2016-06&time=2016-07&time=2016-08&time=2016-09&time=2016-10&time=2016-11&time=2016-12&time=2017-01&time=2017-02&time=2017-03&time=2017-04&time=2017-05&time=2017-06&time=2017-07&time=2017-08&time=2017-09&time=2017-10&time=2017-11&time=2017-12&time=2018-01&time=2018-02&time=2018-03&time=2018-04&time=2018-05&time=2018-06&time=2018-07&time=2018-08&time=2018-09&time=2018-10&time=2018-11&time=2018-12&time=2019-01&time=2019-02&time=2019-03&time=2019-04&time=2019-05&time=2019-06&time=2019-07&time=2019-08&time=2019-09&time=2019-10&time=2019-11&time=2019-12&time=2020-01&time=2020-02&time=2020-03&time=2020-04&time=2020-05&time=2020-06&time=2020-07&time=2020-08&time=2020-09&time=2020-10&time=2020-11&time=2020-12&time=2021-01&time=2021-02&time=2021-03&time=2021-04&time=2021-05&time=2021-06&time=2021-07&time=2021-08&time=2021-09&time=2021-10&time=2021-11&time=2021-12&time=2022-01&time=2022-02&time=2022-03&time=2022-04&time=2022-05&time=2022-06&time=2022-07&time=2022-08",
+			//input:"./persistedData/data2014-01.json",
+			//inputFromMemory: getFakeData(),
 			processors: [defineCountryOrder, defineCountryColors, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, extractOriginalRawData, defineIndexColors]
 		}
 	]
@@ -101,31 +96,38 @@ function initSelectBoxes(data) {
 
 function updateSelectboxes(boxId, data) {
 	suppressInput()
-	// the operation stresses the render-tread so much it can't even draw the loading indicator in time...  :-o
 	setTimeout(() => dm.update({data:data, mode:boxId, onFinished:allowInput}), 40)
 	//state.store()
 }
 
+// to avoid overlapping of slider handles (resulting in inaccessible handle)
+// make the smallest user selectable range dependent of draw area width.
+function getRangeSliderMingap(width) {
+    return [
+        [576, 12*5],
+		[768, 12*3],
+		[992, 12*2],
+		[1200, 6*3],
+		[1400, 12],
+		[Number.MAX_VALUE, 9]
+	].filter(([w, _]) => {return width<w})[0][1]
+}
 
 function initRangeSlider(data, left, max) {
 	const el = document.getElementById("timeRange")
-	el.setAttribute("mingap", Math.max(0.1*max,8))
 	el.setAttribute("min", 0)
 	el.setAttribute("max", max)
-	el.setAttribute("valuer", max)	// first right, because it's bigger and they depend on each other
+	el.setAttribute("valuer", max)	// first right, because it's bigger and they depend on one another (via mingap)
 	el.setAttribute("valuel", left)
-	//el.setAttribute("textl", data.categories.time[left])
-	//el.setAttribute("textr", data.categories.time[max-1])
+	// this last because left might want to be too far to the right, overstepping mingap. left eventually gets overruled by mingap.
+	el.setAttribute("mingap", getRangeSliderMingap(document.getElementById("chart").clientWidth))
 	updateSlider(data.categories.time[left], data.categories.time[max-1])
 	el.addEventListener('dragging', (e) => {
-		//el.setAttribute("textl", data.categories.time[e.detail.left])
-		//el.setAttribute("textr", data.categories.time[e.detail.right-1])
-		
+		updateSlider(data.categories.time[e.detail.left], data.categories.time[e.detail.right-1])
 	})
 	el.addEventListener('selected', (e) => {
 		suppressInput()
 		dm.setRange({begin: e.detail.left, end: e.detail.right})
-		// the operation stresses the render-tread so much it can't even draw the loading indicator in time...  m-(
 		setTimeout(() => dm.update({data:data, onFinished:allowInput}), 40)
 	})
 }

@@ -21,6 +21,7 @@ mv ./components/chart/ticks/ticksAlt1.mjs  ./components/chart/ticks/ticksAlt1.js
 mv ./components/chart/ticks/ticksAlt2.mjs  ./components/chart/ticks/ticksAlt2.js
 mv ./components/dropdownBox/dropdownBox.mjs  ./components/dropdownBox/dropdownBox.js
 mv ./components/dropdownBox/markUpCode.mjs  ./components/dropdownBox/markUpCode.js
+mv ./components/dataGenerator/fpmToolFakeData.mjs  ./components/dataGenerator/fpmToolFakeData.js
 mv ./components/l10n/lang.mjs  ./components/l10n/lang.js
 mv ./components/navBar/itemFb.mjs  ./components/navBar/itemFb.js
 mv ./components/navBar/itemModal.mjs  ./components/navBar/itemModal.js

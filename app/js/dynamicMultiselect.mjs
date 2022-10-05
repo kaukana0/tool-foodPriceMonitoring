@@ -6,7 +6,10 @@ Short description of the "dynamic multiselect" behaviour:
 */
 
 import * as chart from "../components/chart/chart.mjs"
+
+const USE_JSONSTAT=false
 //import JSONstat from "../redist/jsonStat/import.mjs"
+
 
 
 // this says which of the boxes can potentially be multiselect
@@ -128,11 +131,15 @@ function _update(data, mode, onFinished) {
 			// but actually one can be multiselect - according to a mode - so overwrite accordingly
             diceDims[mapModeToDim[mode]] = [selection]
 
-			//let seriesData = extractWithJsonStat(data, diceDims)
-			// cut off elements in front and at the end, according to a range (ie timerange), because it extracted too much
-			//seriesData = seriesData.slice(range.begin, range.end)
+			let seriesData
+			if(USE_JSONSTAT) {
+				seriesData = extractWithJsonStat(data, diceDims)
+				// cut off elements in front and at the end, according to a range (ie timerange), because it extracted too much
+				seriesData = seriesData.slice(range.begin, range.end)
+			} else {
+				seriesData = extractWithSpeedOptimizedAlgo(data.originalRawInputData, diceDims)
+			}
 
-			let seriesData = extractWithSpeedOptimizedAlgo(data.originalRawInputData, diceDims)
 
 			// put "column header" (a string) in front of the numerical values,
 			// because that's the expected format for "columns" in billboard.js
