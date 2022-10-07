@@ -31,9 +31,6 @@
 [submodule "app/components/processorCountryNames"]
 	path = app/components/processorCountryNames
 	url = https://github.com/kaukana0/processorCountryNames.git
-[submodule "app/components/processorOriginalRawData"]
-	path = app/components/processorOriginalRawData
-	url = https://github.com/kaukana0/processorOriginalRawData.git
 [submodule "app/components/processorCountryOrder"]
 	path = app/components/processorCountryOrder
 	url = https://github.com/kaukana0/processorCountryOrder.git

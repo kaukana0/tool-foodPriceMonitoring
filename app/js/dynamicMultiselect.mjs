@@ -137,7 +137,7 @@ function _update(data, mode, onFinished) {
 				// cut off elements in front and at the end, according to a range (ie timerange), because it extracted too much
 				seriesData = seriesData.slice(range.begin, range.end)
 			} else {
-				seriesData = extractWithSpeedOptimizedAlgo(data.originalRawInputData, diceDims)
+				seriesData = extractWithSpeedOptimizedAlgo(data.sourceData, diceDims)
 			}
 
 
@@ -186,7 +186,7 @@ function getYLabel() {
 
 // https://github.com/jsonstat/toolkit/issues/1  	LOL. see also adr04.md
 function extractWithJsonStat(data, diceDims) {
-	var subset = JSONstat(data.originalRawInputData).Dice(
+	var subset = JSONstat(data.sourceData).Dice(
 		diceDims,
 		{ clone: true }
 	)

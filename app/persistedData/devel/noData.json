@@ -1,0 +1,319 @@
+{
+    "version": "2.0",
+    "class": "dataset",
+    "label": "Food price monitoring tool",
+    "source": "ESTAT",
+    "updated": "2022-04-12T11:00:00+0200",
+    "value": {},
+    "status": {},
+    "id": [
+        "freq",
+        "unit",
+        "indx",
+        "coicop",
+        "geo",
+        "time"
+    ],
+    "size": [
+        1,
+        2,
+        4,
+        26,
+        33,
+        10
+    ],
+    "dimension": {
+        "freq": {
+            "label": "Time frequency",
+            "category": {
+                "index": {
+                    "M": 0
+                },
+                "label": {
+                    "M": "Monthly"
+                }
+            }
+        },
+        "unit": {
+            "label": "Unit of measure",
+            "category": {
+                "index": {
+                    "I15": 0,
+                    "PCH_M12": 1
+                },
+                "label": {
+                    "I15": "Index, 2015=100",
+                    "PCH_M12": "Percentage change m/m-12"
+                }
+            }
+        },
+        "indx": {
+            "label": "Index",
+            "category": {
+                "index": {
+                    "PPI": 0,
+                    "HICP": 1,
+                    "ACPI": 2,
+                    "IPI": 3
+                },
+                "label": {
+                    "PPI": "Producer price index",
+                    "HICP": "Harmonised index of consumer prices",
+                    "ACPI": "Agricultural commodity price index",
+                    "IPI": "Import price index"
+                }
+            }
+        },
+        "coicop": {
+            "label": "Classification of individual consumption by purpose (COICOP)",
+            "category": {
+                "index": {
+                    "CP011": 0,
+                    "CP0111": 1,
+                    "CP01113": 2,
+                    "CP0112": 3,
+                    "CP01121": 4,
+                    "CP01122": 5,
+                    "CP01123": 6,
+                    "CP01124": 7,
+                    "CP0113": 8,
+                    "CP0114": 9,
+                    "CP01141": 10,
+                    "CP01144": 11,
+                    "CP01145": 12,
+                    "CP01147": 13,
+                    "CP0115": 14,
+                    "CP01151": 15,
+                    "CP01153": 16,
+                    "CP01154": 17,
+                    "CP0116": 18,
+                    "CP0117": 19,
+                    "CP01174": 20,
+                    "CP01181": 21,
+                    "CP0121": 22,
+                    "CP01223": 23,
+                    "CP02121": 24,
+                    "CP0213": 25
+                },
+                "label": {
+                    "CP011": "Food",
+                    "CP0111": "Bread and cereals",
+                    "CP01113": "Bread",
+                    "CP0112": "Meat",
+                    "CP01121": "Beef and veal",
+                    "CP01122": "Pork",
+                    "CP01123": "Lamb and goat",
+                    "CP01124": "Poultry",
+                    "CP0113": "Fish and seafood",
+                    "CP0114": "Milk, cheese and eggs",
+                    "CP01141": "Fresh whole milk",
+                    "CP01144": "Yoghurt",
+                    "CP01145": "Cheese and curd",
+                    "CP01147": "Eggs",
+                    "CP0115": "Oils and fats",
+                    "CP01151": "Butter",
+                    "CP01153": "Olive oil",
+                    "CP01154": "Other edible oils",
+                    "CP0116": "Fruit",
+                    "CP0117": "Vegetables",
+                    "CP01174": "Potatoes",
+                    "CP01181": "Sugar",
+                    "CP0121": "Coffee, tea and cocoa",
+                    "CP01223": "Fruit and vegetables juices",
+                    "CP02121": "Wine from grapes",
+                    "CP0213": "Beer"
+                }
+            }
+        },
+        "geo": {
+            "label": "Geopolitical entity (reporting)",
+            "category": {
+                "index": {
+                    "EU27_2020": 0,
+                    "EA19": 1,
+                    "BE": 2,
+                    "BG": 3,
+                    "CZ": 4,
+                    "DK": 5,
+                    "DE": 6,
+                    "EE": 7,
+                    "IE": 8,
+                    "EL": 9,
+                    "ES": 10,
+                    "FR": 11,
+                    "HR": 12,
+                    "IT": 13,
+                    "CY": 14,
+                    "LV": 15,
+                    "LT": 16,
+                    "LU": 17,
+                    "HU": 18,
+                    "MT": 19,
+                    "NL": 20,
+                    "AT": 21,
+                    "PL": 22,
+                    "PT": 23,
+                    "RO": 24,
+                    "SI": 25,
+                    "SK": 26,
+                    "FI": 27,
+                    "SE": 28,
+                    "IS": 29,
+                    "NO": 30,
+                    "CH": 31,
+                    "TR": 32
+                },
+                "label": {
+                    "EU27_2020": "European Union - 27 countries (from 2020)",
+                    "EA19": "Euro area - 19 countries  (from 2015)",
+                    "BE": "Belgium",
+                    "BG": "Bulgaria",
+                    "CZ": "Czechia",
+                    "DK": "Denmark",
+                    "DE": "Germany (until 1990 former territory of the FRG)",
+                    "EE": "Estonia",
+                    "IE": "Ireland",
+                    "EL": "Greece",
+                    "ES": "Spain",
+                    "FR": "France",
+                    "HR": "Croatia",
+                    "IT": "Italy",
+                    "CY": "Cyprus",
+                    "LV": "Latvia",
+                    "LT": "Lithuania",
+                    "LU": "Luxembourg",
+                    "HU": "Hungary",
+                    "MT": "Malta",
+                    "NL": "Netherlands",
+                    "AT": "Austria",
+                    "PL": "Poland",
+                    "PT": "Portugal",
+                    "RO": "Romania",
+                    "SI": "Slovenia",
+                    "SK": "Slovakia",
+                    "FI": "Finland",
+                    "SE": "Sweden",
+                    "IS": "Iceland",
+                    "NO": "Norway",
+                    "CH": "Switzerland",
+                    "TR": "Turkey"
+                }
+            }
+        },
+        "time": {
+            "label": "Time",
+            "category": {
+                "index": {
+                    "2021-06": 0,
+                    "2021-07": 1,
+                    "2021-08": 2,
+                    "2021-09": 3,
+                    "2021-10": 4,
+                    "2021-11": 5,
+                    "2021-12": 6,
+                    "2022-01": 7,
+                    "2022-02": 8,
+                    "2022-03": 9
+                },
+                "label": {
+                    "2021-06": "2021-06",
+                    "2021-07": "2021-07",
+                    "2021-08": "2021-08",
+                    "2021-09": "2021-09",
+                    "2021-10": "2021-10",
+                    "2021-11": "2021-11",
+                    "2021-12": "2021-12",
+                    "2022-01": "2022-01",
+                    "2022-02": "2022-02",
+                    "2022-03": "2022-03"
+                }
+            }
+        }
+    },
+    "extension": {
+        "lang": "EN",
+        "id": "PRC_FSC_IDX$DEFAULTVIEW",
+        "agencyId": "ESTAT",
+        "version": "1.0",
+        "datastructure": {
+            "id": "PRC_FSC_IDX",
+            "agencyId": "ESTAT",
+            "version": "30.0"
+        },
+        "annotation": [
+            {
+                "type": "DISSEMINATION_OBJECT_TYPE",
+                "title": "EXTRACTION"
+            },
+            {
+                "type": "DISSEMINATION_EXTRACTION_TYPE",
+                "title": "DEFAULT_VIEW"
+            },
+            {
+                "type": "DISSEMINATION_SOURCE_DATASET",
+                "title": "PRC_HICP_MANR,PRC_HICP_MIDX,STS_INPPD_M"
+            },
+            {
+                "type": "UPDATE_STRUCTURE",
+                "date": "2022-04-12T11:00:00+0200"
+            },
+            {
+                "type": "UPDATE_DATA",
+                "date": "2022-04-12T11:00:00+0200"
+            },
+            {
+                "type": "ESMS_HTML",
+                "title": "Explanatory texts (metadata)",
+                "href": "https://ec.europa.eu/eurostat/cache/metadata/en/prc_fsc_idx_esms.htm"
+            },
+            {
+                "type": "ESMS_SDMX",
+                "title": "Explanatory texts (metadata)",
+                "href": "https://ec.europa.eu/eurostat/estat-navtree-portlet-prod/BulkDownloadListing?file=metadata/prc_fsc_idx_esms.sdmx.zip"
+            },
+            {
+                "type": "SOURCE_INSTITUTIONS",
+                "text": "Eurostat"
+            },
+            {
+                "type": "DISSEMINATION_PRESENTATIONS",
+                "title": "[{\"names\":{\"de\":{\"locale\":\"de\",\"value\":\"Standardpräsentation\",\"html\":false},\"en\":{\"locale\":\"en\",\"value\":\"Default presentation\",\"html\":false},\"fr\":{\"locale\":\"fr\",\"value\":\"Présentation par défaut\",\"html\":false}},\"descriptions\":{},\"code\":\"default\",\"useAsDefault\":true,\"order\":0,\"defaultView\":\"view.table\",\"jsonFormat\":null,\"preselection\":[{\"code\":\"freq\",\"multipleSelection\":null,\"singleSelection\":\"M\"},{\"code\":\"unit\",\"multipleSelection\":null,\"singleSelection\":\"I15\"},{\"code\":\"indx\",\"multipleSelection\":null,\"singleSelection\":\"HICP\"},{\"code\":\"coicop\",\"multipleSelection\":null,\"singleSelection\":\"CP011\"},{\"code\":\"geo\",\"multipleSelection\":null,\"singleSelection\":null}],\"preselectionTimeFilter\":{\"code\":\"time\",\"multipleSelection\":null,\"singleSelection\":\"2020-11\",\"mode\":\"ALL\",\"from\":null,\"to\":null,\"fixed\":null},\"layoutFormat\":{\"layoutAxes\":{\"y1\":\"time\",\"x1\":\"geo\"},\"fixedMinMax\":false,\"mapProjection\":null,\"mapShowAllGeo\":true,\"mapNumberOfColors\":0,\"rankingMode\":false,\"highlightMode\":false,\"labelOption\":null,\"businessRulesStrategy\":null,\"mapClassificartionMethode\":null}}]"
+            },
+            {
+                "type": "DISSEMINATION_PRESENTATIONS_VERSION",
+                "title": "v0_4_X"
+            },
+            {
+                "type": "DISSEMINATION_PARENT_ID",
+                "title": "PRC_FSC_IDX"
+            }
+        ],
+        "status": {
+            "label": {
+                "c": "confidential",
+                "d": "definition differs (see metadata)",
+                "e": "estimated",
+                "ep": "estimated, provisional",
+                "p": "provisional",
+                "r": "revised",
+                "s": "Eurostat estimate",
+                "u": "low reliability"
+            }
+        },
+        "positions-with-no-data": {
+            "freq": [],
+            "unit": [],
+            "indx": [],
+            "coicop": [],
+            "geo": [],
+            "time": []
+        },
+        "dataDetails": {
+            "longestValue": "108.68",
+            "decimalPrefixLength": 3,
+            "decimalPostfixLength": 2,
+            "hasNonNumeric": false,
+            "hasOnlyConvertibleValues": true
+        }
+    }
+}

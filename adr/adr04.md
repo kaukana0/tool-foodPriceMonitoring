@@ -32,4 +32,7 @@ Alternative would have been, at this point in development time (2022-09), to not
 ~~Obviously slow on some mobiles.  2022-09~~
 
 Slow (at least ~5s on decent network) on initial load of the page.
+
 Possible remedy: put raw data (compressed) in localstorage and check on page load metadata (SDMX API has it) if things have updated on the server.
+
+Another remedy approach: load chunks/segments on demand - one chunk could be 5 years worth of data. There'd have to be a merge functionality to be implemented.
