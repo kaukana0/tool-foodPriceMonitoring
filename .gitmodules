@@ -43,3 +43,6 @@
 [submodule "app/components/dataGenerator"]
 	path = app/components/dataGenerator
 	url = https://github.com/kaukana0/dataGenerator.git
+[submodule "app/components/multiDimAccess"]
+	path = app/components/multiDimAccess
+	url = https://github.com/kaukana0/multiDimAccess.git

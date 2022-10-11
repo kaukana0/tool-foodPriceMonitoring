@@ -6,9 +6,15 @@ Short description of the "dynamic multiselect" behaviour:
 */
 
 import * as chart from "../components/chart/chart.mjs"
+import * as multiDim from "../components/multiDimAccess/multiDimAccess.mjs"
 
-const USE_JSONSTAT=false
+// green=data present; black=missing data; red=currently selected data
+// expects <canvas id="someCanvas" width="1024" height="2048"></canvas>
+//import * as visualizer from "../../components/multiDimAccess/visualizer.mjs"
+//const VISUALIZE_DATA=true	// only works with non-jsonstat extraction
+
 //import JSONstat from "../redist/jsonStat/import.mjs"
+//const USE_JSONSTAT=true
 
 
 
@@ -119,27 +125,31 @@ function _update(data, mode, onFinished) {
 		mapModeToDim[Mode.Index] = "indx"
 		mapModeToDim[Mode.Coicop] = "coicop"
 
+		if(typeof VISUALIZE_DATA !== 'undefined') {
+			startImage(data.sourceData)
+		}
+	
 		// getting data of all (user) selected series one by one
 		selectBoxes[mode].selectedKeys.forEach(selection => {
 			// first assume all are singleselect
             const diceDims = {
-                unit: selectBoxes[ModeEnum.Unit].selectedKeys,
-                indx: selectBoxes[ModeEnum.Index].selectedKeys,
-                coicop: selectBoxes[ModeEnum.Coicop].selectedKeys,
-                geo: selectBoxes[ModeEnum.Country].selectedKeys
+                unit: selectBoxes[ModeEnum.Unit].selectedKeys[0],
+                indx: selectBoxes[ModeEnum.Index].selectedKeys[0],
+                coicop: selectBoxes[ModeEnum.Coicop].selectedKeys[0],
+                geo: selectBoxes[ModeEnum.Country].selectedKeys[0]
             }
 			// but actually one can be multiselect - according to a mode - so overwrite accordingly
-            diceDims[mapModeToDim[mode]] = [selection]
+            diceDims[mapModeToDim[mode]] = selection
 
 			let seriesData
-			if(USE_JSONSTAT) {
+			if(typeof USE_JSONSTAT === 'undefined') {
+				seriesData = extractWithSpeedOptimizedAlgo(data.sourceData, diceDims)
+			} else {
+				console.warn("dynamicMultiselect: using JsonStat")
 				seriesData = extractWithJsonStat(data, diceDims)
 				// cut off elements in front and at the end, according to a range (ie timerange), because it extracted too much
 				seriesData = seriesData.slice(range.begin, range.end)
-			} else {
-				seriesData = extractWithSpeedOptimizedAlgo(data.sourceData, diceDims)
 			}
-
 
 			// put "column header" (a string) in front of the numerical values,
 			// because that's the expected format for "columns" in billboard.js
@@ -149,6 +159,10 @@ function _update(data, mode, onFinished) {
 
 			retVal.push(seriesData)
 		})
+
+		if(typeof VISUALIZE_DATA !== 'undefined') {
+			visualizer.endImage()
+		}
 
 		return retVal
 	}
@@ -197,38 +211,36 @@ function extractWithJsonStat(data, diceDims) {
 // Note: data.value might be an array or an object (see https://json-stat.org/format/#value).
 function extractWithSpeedOptimizedAlgo(data, diceDims) {
 	let retVal = []
+	const valence = multiDim.calcOrdinalValence(data.size)
+	const aiu = data.dimension.unit.category.index[diceDims["unit"]]
+	const aii = data.dimension.indx.category.index[diceDims["indx"]]
+	const aic = data.dimension.coicop.category.index[diceDims["coicop"]]
+	const aig = data.dimension.geo.category.index[diceDims["geo"]]
 
-	function arr2num(arr, size) {
-		const ndims=size.length
-		let num=0
-		let mult=1
-		for(let i=0; i<ndims; i++) {
-			mult *= (i>0) ? size[ndims-i] : 1
-			num += mult*arr[ndims-i-1]
+	for(let it=range.begin; it<range.end; it++) {
+		const i = multiDim.getIndex(valence, [0,aiu,aii,aic,aig,it])
+		if(data.value[i]) {
+			retVal.push(data.value[i])
+		} else {
+			retVal.push(null)
 		}
-		return num;
-	}
-
-	for(let iu=0; iu<diceDims["unit"].length; iu++) {	// index for unit
-		const aiu = data.dimension.unit.category.index[diceDims["unit"][iu]]		// (result-)array index for unit
-		for(let ii=0; ii<diceDims["indx"].length; ii++) {
-			const aii = data.dimension.indx.category.index[diceDims["indx"][ii]]
-			for(let ic=0; ic<diceDims["coicop"].length; ic++) {
-				const aic = data.dimension.coicop.category.index[diceDims["coicop"][ic]]
-				for(let ig=0; ig<diceDims["geo"].length; ig++) {
-					const aig = data.dimension.geo.category.index[diceDims["geo"][ig]]
-					for(let it=range.begin; it<range.end; it++) {
-						const i = arr2num([0,aiu,aii,aic,aig,it], data.size)
-						if(data.value[i]) {
-							retVal.push(data.value[i])
-						} else {
-							retVal.push(null)
-						}
-					}
-				}
-			}
+		if(typeof VISUALIZE_DATA !== 'undefined') {
+			visualizer.drawPixelI(i, 255,0,0,255)
 		}
 	}
 
 	return retVal
+}
+
+
+function startImage(data) {
+	visualizer.startImage("someCanvas")
+	const len = multiDim.cartesianProduct(data.size)
+	for(let i=0; i<len; i++) {
+		if(data.value.hasOwnProperty(i)) {
+			visualizer.drawPixelI(i, 0,128,0,255)
+		} else {
+			visualizer.drawPixelI(i, 0,0,0,255)
+		}
+	}
 }

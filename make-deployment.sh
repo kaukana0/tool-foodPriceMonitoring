@@ -5,7 +5,7 @@ read -p "Don't forget to put that into index.html - press enter to continue"
 
 mkdir -p dist/
 cd app
-rsync -av ./ ../dist/ --exclude=./.git/ --exclude=./persistedData/
+rsync -av ./ ../dist/ --exclude=./.git/ --exclude=./persistedData/devel/ --exclude=*.md
 
 
 # the following is only neccessary if server isn't configured to know what .mjs is
@@ -23,6 +23,10 @@ mv ./components/dropdownBox/dropdownBox.mjs  ./components/dropdownBox/dropdownBo
 mv ./components/dropdownBox/markUpCode.mjs  ./components/dropdownBox/markUpCode.js
 mv ./components/dataGenerator/fpmToolFakeData.mjs  ./components/dataGenerator/fpmToolFakeData.js
 mv ./components/l10n/lang.mjs  ./components/l10n/lang.js
+
+mv ./components/multiDimAccess/multiDimAccess.mjs  ./components/multiDimAccess/multiDimAccess.js
+mv ./components/multiDimAccess/visualizer.mjs  ./components/multiDimAccess/visualizer.js
+
 mv ./components/navBar/itemFb.mjs  ./components/navBar/itemFb.js
 mv ./components/navBar/itemModal.mjs  ./components/navBar/itemModal.js
 mv ./components/navBar/itemTwitter.mjs  ./components/navBar/itemTwitter.js
@@ -44,6 +48,7 @@ mv ./js/pipelineProcessors/coicop.mjs  ./js/pipelineProcessors/coicop.js
 mv ./js/pipelineProcessors/index.mjs  ./js/pipelineProcessors/index.js
 mv ./js/pipelineProcessors/indexColors.mjs  ./js/pipelineProcessors/indexColors.js
 mv ./js/pipelineProcessors/countryValues.mjs  ./js/pipelineProcessors/countryValues.js
+mv ./js/pipelineProcessors/sourceData.mjs  ./js/pipelineProcessors/sourceData.js
 mv ./js/main.mjs  ./js/main.js
 mv ./js/dynamicMultiselect.mjs  ./js/dynamicMultiselect.js
 mv ./js/stateMgmnt.mjs  ./js/stateMgmnt.js
