@@ -4,14 +4,16 @@ git rev-parse --short HEAD
 read -p "Don't forget to put that into index.html - press enter to continue"
 
 mkdir -p dist/
-cd app
-rsync -av ./ ../dist/ --exclude=./.git/ --exclude=./persistedData/devel/ --exclude=*.md
+cd app/
+rsync -av ./ ../dist/ --exclude=./.git/ --exclude=devel/ --exclude=*.md --exclude=*.txt --exclude=jsonStat/
+cd ..
+dist/components/metaTags/insertMetaTags.py https://ec.europa.eu/eurostat/cache/foodPrices_WIP_pre/
 
 
 # the following is only neccessary if server isn't configured to know what .mjs is
 # find -name "*.mjs"
 
-cd ../dist
+cd dist/
 
 mv ./components/chart/toast.mjs   ./components/chart/toast.js
 mv ./components/chart/legend.mjs   ./components/chart/legend.js
@@ -72,9 +74,7 @@ sed -i 's/\.mjs/\.js/'  index.html
 
 cd ..
 
-dist/components/metaTags/insertMetaTags.py https://ec.europa.eu/eurostat/cache/foodPrices_WIP_pre/
-
 echo -e "\nDone.\n"
 echo "Next steps:"
-echo "smoketest the deployment by doing 'cd dist ; python3 -m http.server 8080'"
-echo -e "scp contents of the dist/ folder to their destination.\n"
+echo "- smoketest the deployment by doing 'cd dist ; python3 -m http.server 8080'"
+echo -e "- scp contents of the dist/ folder to their destination.\n"
