@@ -13,3 +13,11 @@ body {
 html, body {
     height: 100%;
 }
+
+.selectBoxMultiselect {
+    float: right;
+}
+
+.boxTitle {
+    font-weight: bold;
+}

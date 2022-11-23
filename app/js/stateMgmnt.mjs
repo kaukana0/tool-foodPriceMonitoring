@@ -1,4 +1,4 @@
-// WIP
+// unfinished feature (feature flag = false)
 // anything participating has to implement store() and restore()
 
 import {getURLParameterValue} from "../components/util/util.mjs"

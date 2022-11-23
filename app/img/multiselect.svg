@@ -1,0 +1,32 @@
+<svg id="Component_2_2" data-name="Component 2 – 2" xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 13 13">
+  <defs>
+    <style>
+      .cls-1, .cls-5 {
+        fill: none;
+      }
+
+      .cls-1 {
+        stroke: #0e47cb;
+        stroke-width: 0.7px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: #0e47cb;
+      }
+
+      .cls-4 {
+        stroke: none;
+      }
+    </style>
+  </defs>
+  <g id="Rectangle_16" data-name="Rectangle 16" class="cls-1" transform="translate(2)">
+    <rect class="cls-4" width="11" height="11" rx="1"/>
+    <rect class="cls-5" x="0.35" y="0.35" width="10.3" height="10.3" rx="0.65"/>
+  </g>
+  <rect id="Rectangle_17" data-name="Rectangle 17" class="cls-2" width="10" height="8" transform="translate(0 4)"/>
+  <path id="Icon_material-check-box" data-name="Icon material-check-box" class="cls-3" d="M13.875,4.5h-8.2A1.172,1.172,0,0,0,4.5,5.672v8.2a1.172,1.172,0,0,0,1.172,1.172h8.2a1.172,1.172,0,0,0,1.172-1.172v-8.2A1.172,1.172,0,0,0,13.875,4.5ZM8.6,12.7l-2.93-2.93L6.5,8.947l2.1,2.1L13.049,6.6l.826.832Z" transform="translate(-4.5 -2.047)"/>
+</svg>

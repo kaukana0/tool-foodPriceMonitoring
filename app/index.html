@@ -73,11 +73,23 @@
 		<!-- row 3: 2 selectboxes -->
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:370px;">
-				<label for="selectCountry">Country</label>
+				<div class="row mb-1 mt-1">
+					<div class="col">
+						<label for="selectCountry" class="boxTitle">Country</label>
+					</div>
+					<div class="col">
+						<div id="lCm">  <!-- "label country multiselect" -->
+							<label class="selectBoxMultiselect" for="selectCountry"><img src="./img/multiselect.svg" height="16px"> select multiple</label>
+						</div>
+						<div id="lCo" style="display:none;">   <!-- "label country one-select" -->
+							<label class="selectBoxMultiselect" for="selectCountry"><img src="./img/multiselect.svg" height="16px" style="filter: grayscale(1);"> select one</label>
+						</div>
+					</div>
+				</div>
 				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" displayKeys fractions="4" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:370px;">
-				<label for="selectUnit">Unit</label>
+				<label for="selectUnit" class="boxTitle mb-1 mt-1">Unit</label>
 				<dropdown-box id="selectUnit"></dropdown-box>
 			</div>
 		</div>
@@ -85,11 +97,35 @@
 		<!-- row 4: another 2 selectboxes -->
 		<div class="row justify-content-center" style="min-height:5%;">
 			<div class="col-sm-3 mt-1" style="width:370px;">
-				<label for="selectIndex">Index</label>
+				<div class="row mb-1 mt-1">
+					<div class="col">
+						<label for="selectIndex" class="boxTitle">Index</label>
+					</div>
+					<div class="col">
+						<div id="lIm">
+							<label id="selIndexLabel" class="selectBoxMultiselect" for="selectIndex"><img src="./img/multiselect.svg" height="16px"> select multiple</label>
+						</div>
+						<div id="lIo" style="display:none;">
+							<label id="selIndexLabel" class="selectBoxMultiselect" for="selectIndex"><img src="./img/multiselect.svg" height="16px" style="filter: grayscale(1);"> select one</label>
+						</div>
+					</div>
+				</div>
 				<dropdown-box id="selectIndex" multiselect maxSelections=7 selectedText="indexSelected" displayKeys fractions="4" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:370px;">
-				<label for="selectCoicop">COICOP</label>
+				<div class="row mb-1 mt-1">
+					<div class="col">
+						<label for="selectCountry" class="boxTitle">COICOP</label>
+					</div>
+					<div class="col">
+						<div id="lPm">
+							<label class="selectBoxMultiselect" for="selectCoicop"><img src="./img/multiselect.svg" height="16px"> select multiple</label>
+						</div>
+						<div id="lPo" style="display:none;">
+							<label class="selectBoxMultiselect" for="selectCoicop"><img src="./img/multiselect.svg" height="16px" style="filter: grayscale(1);"> select one</label>
+						</div>
+					</div>
+				</div>
 				<dropdown-box id="selectCoicop" multiselect maxSelections=7 selectedText="coicopSelected" displayKeys displayKeyInHeadbox fractions="3" translate="selectedText"></dropdown-box>
 			</div>
 		</div>
@@ -135,7 +171,7 @@
 
 	<!-- tiny overlay in bottom right corner showing commitId -->
 	<!-- git rev-parse --short HEAD -->
-	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;">0418686</div>
+	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;"></div>
 
 </body>
 
