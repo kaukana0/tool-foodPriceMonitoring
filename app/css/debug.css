@@ -1,5 +1,6 @@
 div.row {
-    border: dotted;
+    outline-style: dashed;
+    outline-width: 1px;
     overflow: hidden;
 }
 
