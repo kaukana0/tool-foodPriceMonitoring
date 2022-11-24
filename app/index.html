@@ -76,7 +76,7 @@ License: European Union Public Licence (EUPL v.1.1)
 			<title-lines mainText="title.main" subText="title.sub" translate="mainText,subText"></title-lines>
 		</div>
 
-		<!-- row 3: 2 selectboxes -->
+		<!-- row 3: 2 selectboxes (country, unit) -->
 		<div class="row justify-content-center" style="min-height:8%;">
 			<div class="col-sm-3 mt-1" style="width:375px;">
 				<div class="row mb-1 mt-1">
@@ -95,12 +95,20 @@ License: European Union Public Licence (EUPL v.1.1)
 				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" displayKeys fractions="4" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:375px;">
-				<label for="selectUnit" class="boxTitle mb-1 mt-1">Unit</label>
+				<!-- unit will always be single-select -->
+				<div class="row mb-1 mt-1">
+					<div class="col">
+						<label for="selectUnit" class="boxTitle">Unit</label>
+					</div>
+					<div class="col">
+						<label class="selectBoxMultiselect" for="selectUnit"><img src="./img/multiselect.svg" height=16 style="filter: grayscale(1);" alt="multiselect inactive indication"> select one</label>
+					</div>
+				</div>
 				<dropdown-box id="selectUnit"></dropdown-box>
 			</div>
 		</div>
 
-		<!-- row 4: another 2 selectboxes -->
+		<!-- row 4: another 2 selectboxes (index, coicop) -->
 		<div class="row justify-content-center" style="min-height:8%;">
 			<div class="col-sm-3 mt-1" style="width:375px;">
 				<div class="row mb-1 mt-1">
