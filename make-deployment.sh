@@ -49,6 +49,7 @@ mv ./js/pipelineProcessors/timeMonthly.mjs   ./js/pipelineProcessors/timeMonthly
 mv ./js/pipelineProcessors/indexColors.mjs   ./js/pipelineProcessors/indexColors.js
 mv ./js/pipelineProcessors/sourceData.mjs   ./js/pipelineProcessors/sourceData.js
 mv ./js/main.mjs   ./js/main.js
+mv ./js/cache.mjs   ./js/cache.js
 mv ./js/dynamicMultiselect.mjs   ./js/dynamicMultiselect.js
 mv ./js/stateMgmnt.mjs   ./js/stateMgmnt.js
 mv ./js/slider.mjs   ./js/slider.js
@@ -66,6 +67,7 @@ sed -i 's/\.mjs/\.js/'  components/dropdownBox/dropdownBox.js
 sed -i 's/\.mjs/\.js/'  components/l10n/lang.js
 sed -i 's/\.mjs/\.js/'  components/multiDimAccess/tests.js
 sed -i 's/\.mjs/\.js/'  js/main.js
+sed -i 's/\.mjs/\.js/'  js/cache.js
 sed -i 's/\.mjs/\.js/'  js/dynamicMultiselect.js
 sed -i 's/\.mjs/\.js/'  js/stateMgmnt.js
 sed -i 's/\.mjs/\.js/'  js/selectBoxes.js

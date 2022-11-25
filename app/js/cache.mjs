@@ -1,4 +1,4 @@
-import * as zip from "../../redist/lz-string.mjs"
+import * as zip from "../redist/lz-string.mjs"
 
 // returns true if at least one day has elapsed since data was last stored. false otherwise.
 export function init() {
