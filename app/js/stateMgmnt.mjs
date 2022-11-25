@@ -1,5 +1,6 @@
 // unfinished feature (feature flag = false)
 // anything participating has to implement store() and restore()
+// note: localstorage ca. 5242878 bytes (5MB)
 
 import {getURLParameterValue} from "../components/util/util.mjs"
 
