@@ -7,6 +7,7 @@ Short description of the "dynamic multiselect" behaviour:
 
 import * as Chart from "../components/chart/chart.mjs"
 import * as Extraction from "./extraction.mjs"
+import {switchAllToSingleSelect, switchAllToMultiSelect, updateLabels} from "./selectBoxes.mjs"
 
 
 // this says which of the boxes can potentially be multiselect
@@ -65,7 +66,8 @@ function _update(data, mode, onFinished, range) {
 	let modeToSeriesLabels = {}
 	modeToSeriesLabels[Mode.Monism] = data.categories.countries
 	modeToSeriesLabels[Mode.Country] = data.categories.countries
-	// Mode.Unit omitted on purpose
+	//Mode.Unit omitted on purpose. it can't be multiselect.
+	//modeToSeriesLabels[Mode.Unit] = data.categories.unit
 	modeToSeriesLabels[Mode.Index] = data.categories.index
 	modeToSeriesLabels[Mode.Coicop] = data.categories.coicop
 	
@@ -86,43 +88,40 @@ function _update(data, mode, onFinished, range) {
 	})
 	Chart.setYLabel("chart", getYLabel())
 
+	//if(retVal) {updateLabels(Mode.current)}
+	updateLabels(Mode.current)
+
 	return retVal
 }
 
 
 // this logic is the "nucleus" of the multiselect behaviour
+// it tries to switch the given box into multiselect.
 // returns true if a mode switch happened
-function tryModeSwitch(mode) {
+function tryModeSwitch(toMode) {
 	const modeStored = Mode.current
-	if(mode===Mode.Monism) {
-		Mode.set(mode)
-		switchAllToMultiSelect()
-	} else {
-		if( Mode.getDOMElementByMode(mode).selectedKeys.length>1 ) {
-			Mode.set(mode)
-			switchAllToSingleSelect(mode)
-		} else {
-			if( Mode.getDOMElementByMode(Mode.current).selectedKeys.length<=1 ) {
-				Mode.set(Mode.Monism)
-				switchAllToMultiSelect()
+
+	switch(toMode) {
+		case ModeEnum.Unit:
+			// do nothing
+		break
+		case ModeEnum.Monism:
+			Mode.set(toMode)
+			switchAllToMultiSelect()
+		break
+		default:
+			if( Mode.getDOMElementByMode(toMode).selectedKeys.length>1 ) {
+				Mode.set(toMode)
+				switchAllToSingleSelect(toMode)
+			} else {
+				if( Mode.getDOMElementByMode(Mode.current).selectedKeys.length<=1 ) {
+					Mode.set(Mode.Monism)
+					switchAllToMultiSelect()
+				}
 			}
-		}
 	}
+
 	return Mode.current !== modeStored
-}
-
-
-function switchAllToSingleSelect(exceptThisOne) {
-	getSelectboxDOMElements().forEach((el,idx) => {
-		if(idx!==exceptThisOne) {el.removeAttribute("multiselect")}
-	})
-}
-
-
-function switchAllToMultiSelect() {
-	getSelectboxDOMElements().forEach((el,idx) => {
-		if(idx!==Mode.Unit) {el.setAttribute("multiselect", null)}		// unit stays always single
-	})
 }
 
 

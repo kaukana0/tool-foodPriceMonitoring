@@ -25,6 +25,7 @@ import * as cache from "./cache.mjs"
 // relevant only for development
 //import { get as getFakeData } from "../components/dataGenerator/fpmToolFakeData.mjs"
 
+initAnalytics()
 
 l10n.init(
 	"en",
@@ -32,16 +33,13 @@ l10n.init(
 		en: './translations/en.json',
 		fr: './translations/fr.json'
 	},
-	() => {	run() }
+	() => run()
 )
 
 
 function run() {
 
-	if(cache.init()) {
-		console.debug("clearing 2020 data from localstorage")
-		cache.remove("2020data")
-	}
+	if(cache.init()) { cache.clear() }
 
 	const processingCfg = [
 		{
@@ -91,6 +89,7 @@ function run() {
 					const left = max-13
 					slider.init(data, left, max, onSliderSelected.bind(this, data))
 					selectBoxes.init(data, onBoxSelected.bind(this, data))
+					document.getElementById("timeRange").style.visibility="visible";
 				} catch(e) {
 					displayFailure(e)
 				}
@@ -121,9 +120,7 @@ function onBoxSelected(data, boxId) {
 	suppressInput()
 	setTimeout(() => {
 		const rangeIndices = document.getElementById("timeRange").getIndices()
-		if( dm.update({data:data, mode:boxId, range:rangeIndices, onFinished:allowInput}) ) {
-			selectBoxes.updateLabels(dm.getCurrentMode())
-		}
+		dm.update({data:data, mode:boxId, range:rangeIndices, onFinished:allowInput})
 	}, 40)
 }
 
@@ -137,4 +134,13 @@ function _allowInput(isAllowed) {
 	document.getElementById("selectIndex").setLocked(!isAllowed)
 	document.getElementById("selectCoicop").setLocked(!isAllowed)
 	document.getElementById("timeRange").setLocked(!isAllowed)
+}
+
+function initAnalytics() {
+    let analyticsOptions = {
+		instance: "ec.europa.eu",
+		siteID: 59,
+		siteSection:"Food Price Monitoring (WIP)"
+	  }
+   	  estatAnalytics_addAnalytics(analyticsOptions)
 }

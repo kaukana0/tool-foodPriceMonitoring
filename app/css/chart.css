@@ -43,3 +43,7 @@ mostly determined empirically :-/
     height: 100%;
   }
 }
+
+.modal-title {
+  font-size: 2rem;
+}

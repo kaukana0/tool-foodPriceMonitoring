@@ -13,6 +13,7 @@ License: European Union Public Licence (EUPL v.1.1)
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
+	<title translate>Food price monitoring tool</title>
 
 	<link rel="stylesheet" href="redist/bootstrap-5.1.3/bootstrap.min.css">
 	<script src="./redist/bootstrap-5.1.3/bootstrap.bundle.min.js"></script>
@@ -42,6 +43,10 @@ License: European Union Public Licence (EUPL v.1.1)
 	<script src="./components/range/range.mjs" type="module"></script>
 	<script src="./js/main.mjs" type="module"></script>
 
+	<script src="https://ec.europa.eu/eurostat/cache/cdn/estat-analytics/js/estat-analytics.js"></script>
+ 	<script type="application/javascript">estatAnalytics_addTools()</script>
+ 	<script type="application/json">{"utility": "cck", "url": "https://my.ec.europa.eu/cookie-policy_{lang}"}</script>
+
 </head>
 
 <body>
@@ -55,7 +60,7 @@ License: European Union Public Licence (EUPL v.1.1)
 					<nav-bar-item-modal symbol="fa-solid fa-info" headerText="Information" closeButton title="tt_info" translate="title">
 						<p translate>info</p>
 					</nav-bar-item-modal>
-					<nav-bar-item-modal symbol="fa-solid fa-code" headerText="Copy this code and paste it in your website:" title="tt_embed" translate="title">
+					<nav-bar-item-modal symbol="fa-solid fa-code" headerText="Copy this code and paste it in your website:" title="tt_embed" translate="title" headerStyle="font-size:1.5rem;">
 						<nav-bar-root-url></nav-bar-root-url>
 					</nav-bar-item-modal>
 					<nav-bar-item-twitter hashtags="hashtags" text="twitter" title="tt_twitter" translate="hashtags,text,title"></nav-bar-item-twitter>
@@ -92,7 +97,7 @@ License: European Union Public Licence (EUPL v.1.1)
 						</div>
 					</div>
 				</div>
-				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=7 selectedText="countriesSelected" displayKeys fractions="4" translate="selectedText"></dropdown-box>
+				<dropdown-box id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect maxSelections=70 selectedText="countriesSelected" displayKeys fractions="4" translate="selectedText"></dropdown-box>
 			</div>
 			<div class="col-sm-3 mt-1" style="width:375px;">
 				<!-- unit will always be single-select -->
@@ -154,7 +159,7 @@ License: European Union Public Licence (EUPL v.1.1)
 		<!-- row 6: time slider / range -->
 		<div id="range" class="row align-items-center" style="min-height: 30px;">
 			<div class="col" style="height:100%;">
-				<range-slider id="timeRange" thumbWidthInPixel="60" style="width: 100%;"></range-slider>
+				<range-slider id="timeRange" thumbWidthInPixel="60" style="width: 100%; visibility: hidden;"></range-slider>
 			</div>
 		</div>
 
