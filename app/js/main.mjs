@@ -25,7 +25,6 @@ import * as cache from "./cache.mjs"
 // relevant only for development
 //import { get as getFakeData } from "../components/dataGenerator/fpmToolFakeData.mjs"
 
-initAnalytics()
 
 l10n.init(
 	"en",
@@ -134,13 +133,4 @@ function _allowInput(isAllowed) {
 	document.getElementById("selectIndex").setLocked(!isAllowed)
 	document.getElementById("selectCoicop").setLocked(!isAllowed)
 	document.getElementById("timeRange").setLocked(!isAllowed)
-}
-
-function initAnalytics() {
-    let analyticsOptions = {
-		instance: "ec.europa.eu",
-		siteID: 59,
-		siteSection:"Food Price Monitoring (WIP)"
-	  }
-   	  estatAnalytics_addAnalytics(analyticsOptions)
 }

@@ -6,6 +6,7 @@ const updateId = "lastUpdate"
 export function init() {
     window.addEventListener('keydown', e => {
         if(e.ctrlKey && e.shiftKey && e.key==="F") {
+            console.debug("cache: ctrl+shift+F pressed")
             clear()
         }
     })
@@ -29,7 +30,7 @@ export function store(data, id) {
     if(!window.localStorage.getItem(id)) {
         const dataString = JSON.stringify(data)
         const dc = zip.LZString.compress(dataString)
-        console.log( `caching into localstore w/ id '${id}'. data [MB] original=${dataString.length/1024/1024}, compressed=${dc.length/1024/1024}` )
+        console.log( `cache: caching into localstore w/ id '${id}'. data [MB] original=${dataString.length/1024/1024}, compressed=${dc.length/1024/1024}` )
         window.localStorage.setItem(id, dc)
         window.localStorage.setItem(updateId, Date())
     }
@@ -39,7 +40,7 @@ export function restore(id) {
     let retVal
     const d = window.localStorage.getItem(id)
     if(d) {
-        console.debug(`using cached data. localstore id=${id}`)
+        console.debug(`cache: using cached data. localstore id=${id}`)
         retVal = zip.LZString.decompress(d)
     }
     return retVal
@@ -50,6 +51,6 @@ export function remove(id) {
 }
 
 export function clear() {
-    console.debug("clearing localstore")
+    console.debug("cache: clearing localstore")
     localStorage.clear()
 }

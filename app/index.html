@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 
-<!-- 
-http://ec.europa.eu/eurostat
-Author: robert.gebhardt@ext.ec.europa.eu
+<!--
+https://ec.europa.eu/eurostat
 License: European Union Public Licence (EUPL v.1.1)
+CommitId: 947fc3f
+Author: robert.gebhardt@ext.ec.europa.eu
 -->
 
 <html lang="en">
@@ -43,9 +44,9 @@ License: European Union Public Licence (EUPL v.1.1)
 	<script src="./components/range/range.mjs" type="module"></script>
 	<script src="./js/main.mjs" type="module"></script>
 
-	<script src="https://ec.europa.eu/eurostat/cache/cdn/estat-analytics/js/estat-analytics.js"></script>
- 	<script type="application/javascript">estatAnalytics_addTools()</script>
- 	<script type="application/json">{"utility": "cck", "url": "https://my.ec.europa.eu/cookie-policy_{lang}"}</script>
+	<script type="application/json">{"utility": "cck", "url": "https://my.ec.europa.eu/cookie-policy_{lang}"}</script>
+	<script src="./js/analytics.js"></script>
+	<script src="https://ec.europa.eu/eurostat/cache/cdn/estat-analytics/js/estat-analytics.js" onerror="analytics_onError()" onload="analytics_onLoad()"></script>
 
 </head>
 
@@ -179,7 +180,19 @@ License: European Union Public Licence (EUPL v.1.1)
 				</a>
 			</div>
 		</div>
-	
+
+		<!-- row 9 legal links -->
+		<!--div class="row" style="text-align: center; max-height: 2.0rem;">
+			<div class="col">
+				<div id="legalLinks" translate style="display: inline-block;">
+					BLA
+					<a id="ll1" style="display: inline-block;" target="_self" rel="noopener" href="startpage.com" translate>
+						Link1
+					</a>
+				</div>
+			</div>
+		</div-->
+		
 	</div>
 
 	<!-- Non-Grid Elements -->
@@ -196,7 +209,7 @@ License: European Union Public Licence (EUPL v.1.1)
 
 	<!-- tiny overlay in bottom right corner showing commitId -->
 	<!-- git rev-parse -short HEAD -->
-	<div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;"></div>
+	<!-- div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;"></div -->
 
 </body>
 
