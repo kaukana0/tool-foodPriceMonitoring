@@ -58,7 +58,7 @@ Author: robert.gebhardt@ext.ec.europa.eu
 		<div id="firstRow" class="row" style="min-height: 30px;">
 			<div class="col-2">
 				<nav-bar class="float-left">
-					<nav-bar-item-modal symbol="fa-solid fa-info" headerText="Information" closeButton title="tt_info" translate="title">
+					<nav-bar-item-modal symbol="fa-solid fa-info" headerText="Information" title="tt_info" translate="title">
 						<p translate>info</p>
 					</nav-bar-item-modal>
 					<nav-bar-item-modal symbol="fa-solid fa-code" headerText="Copy this code and paste it in your website:" title="tt_embed" translate="title" headerStyle="font-size:1.5rem;">
@@ -166,32 +166,25 @@ Author: robert.gebhardt@ext.ec.europa.eu
 
 		<!-- row 7: notes -->
 		<div class="row" style="text-align: center; max-height: 25%;">
-			<a id="footnoteText3" translate>footnoteText3</a>
+			<div class="footnoteTextMargin" translate>footnoteText3</div>
 		</div>
 
 		<!-- row 8 footer -->
 		<div class="row" style="text-align: center; max-height: 2.0rem;">
 			<div class="col">
-				<div id="footnoteText1" translate style="display: inline-block;">
+				<div class="footnoteText" translate style="display: inline-block;">
 					footnoteText1
 				</div>
-				<a id="footnoteText2" style="display: inline-block;" target="_self" rel="noopener" href="https://ec.europa.eu/eurostat/databrowser/bookmark/002935d0-f1d1-4419-9699-db9e2c48ced6?lang=en" translate>
+				<a class="footnoteTextBlue" style="display: inline-block;" target="_self" rel="noopener" href="https://ec.europa.eu/eurostat/databrowser/bookmark/002935d0-f1d1-4419-9699-db9e2c48ced6?lang=en" translate>
 					footnoteText2
 				</a>
 			</div>
 		</div>
 
 		<!-- row 9 legal links -->
-		<!--div class="row" style="text-align: center; max-height: 2.0rem;">
-			<div class="col">
-				<div id="legalLinks" translate style="display: inline-block;">
-					BLA
-					<a id="ll1" style="display: inline-block;" target="_self" rel="noopener" href="startpage.com" translate>
-						Link1
-					</a>
-				</div>
-			</div>
-		</div-->
+		<div class="row footnoteTextBlue" style="text-align: center; max-height: 2.0rem;">
+			<p><a href="https://ec.europa.eu/info/cookies_en?lang=en&amp;lang=en"><span id="footerCookies" tabindex="0">Cookies</span></a> | <a href="https://ec.europa.eu/info/privacy-policy_en?lang=en&amp;lang=en"><span id="footerPolicy" tabindex="0">Privacy policy</span></a> | <a href="https://ec.europa.eu/info/legal-notice_en?lang=en&amp;lang=en"><span id="footerLegal" tabindex="0">Legal notice</span></a> | <a href="sitemap.html?lang=en"><span id="footerSiteMap" tabindex="0">Sitemap</span></a></p>
+		</div>
 		
 	</div>
 
