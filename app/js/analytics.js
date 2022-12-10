@@ -7,7 +7,7 @@ function analytics_onLoad() {
         instance: "ec.europa.eu",
         siteID: 59,
         mode: "manual",
-		siteSection:"Food Price Monitoring (WIP)",
+		siteSection:"Economy",
         customVariables: [
           ['asset-type', 'visualisation'],
           ['asset-title', 'Food Price Monitoring'],
