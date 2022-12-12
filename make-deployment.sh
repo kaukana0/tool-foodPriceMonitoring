@@ -5,7 +5,7 @@ read -p "Don't forget to put that into index.html - press enter to continue"
 
 mkdir -p dist/
 cd app/
-rsync -av ./ ../dist/ --exclude=./.git/ --exclude=devel/ --exclude=*.md --exclude=*.txt --exclude=jsonStat/
+rsync -av ./ ../dist/ --exclude=.git --exclude=devel/ --exclude=*.md --exclude=*.txt --exclude=jsonStat/
 cd ..
 dist/components/metaTags/insertMetaTags.py https://ec.europa.eu/eurostat/cache/website/economy/food-price-monitoring/
 
