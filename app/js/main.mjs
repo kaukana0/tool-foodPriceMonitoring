@@ -85,7 +85,7 @@ function run() {
 			if(data	&& Object.keys(data).length > 0 && Object.getPrototypeOf(data) === Object.prototype) {
 				try {
 					const max = data.categories.time.length
-					const left = max-13
+					const left = 15*12		// 	jan/2020 (data starts 01/2005)
 					slider.init(data, left, max, onSliderSelected.bind(this, data))
 					selectBoxes.init(data, onBoxSelected.bind(this, data))
 					document.getElementById("timeRange").style.visibility="visible";
