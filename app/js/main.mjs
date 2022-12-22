@@ -1,3 +1,4 @@
+import { init as iFrameResize } from "./iframeResize.mjs"
 import * as slider from "./slider.mjs"
 import * as selectBoxes from "./selectBoxes.mjs"
 
@@ -6,7 +7,7 @@ import * as dm from "./dynamicMultiselect.mjs"
 import "../components/dropdownBox/dropdownBox.mjs"
 
 import * as pipeline from "../components/pipeline/pipeline.mjs"
-import {replaceEuInRawData} from '../components/util/util.mjs'
+import { replaceEuInRawData } from '../components/util/util.mjs'
 import { process as retrieveSourceData } from "./pipelineProcessors/sourceData.mjs"
 
 import { process as renameCountries } from "../components/processorCountryNames/countryNames.mjs"
@@ -26,6 +27,8 @@ import * as cache from "./cache.mjs"
 //import { get as getFakeData } from "../components/dataGenerator/fpmToolFakeData.mjs"
 
 
+iFrameResize()	// shrink chart when embedded; based on some assumptions about how it is embedded
+
 l10n.init(
 	"en",
 	{
@@ -34,7 +37,6 @@ l10n.init(
 	},
 	() => run()
 )
-
 
 function run() {
 

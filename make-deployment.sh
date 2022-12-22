@@ -50,6 +50,7 @@ mv ./js/pipelineProcessors/sourceData.mjs   ./js/pipelineProcessors/sourceData.j
 mv ./js/main.mjs   ./js/main.js
 mv ./js/cache.mjs   ./js/cache.js
 mv ./js/dynamicMultiselect.mjs   ./js/dynamicMultiselect.js
+mv ./js/iframeResize.mjs   ./js/iframeResize.js
 mv ./js/stateMgmnt.mjs   ./js/stateMgmnt.js
 mv ./js/slider.mjs   ./js/slider.js
 mv ./js/selectBoxes.mjs   ./js/selectBoxes.js
