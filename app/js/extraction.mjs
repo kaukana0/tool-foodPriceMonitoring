@@ -70,7 +70,7 @@ export function get(data, mode, range) {
     }
 
     if(typeof VISUALIZE_DATA !== 'undefined') {
-        visualizer.endImage()
+        Visualizer.endImage()
     }
 
     return retVal
@@ -102,11 +102,11 @@ function extractWithSpeedOptimizedAlgo(data, diceDims, range) {
 			retVal.push(null)
 		}
 		if(typeof VISUALIZE_DATA !== 'undefined') {
-			visualizer.drawPixelI(i, 255,0,0,255)
+			Visualizer.drawPixelI(i, 255,0,0,255)
 		}
 	}
 
-	return retVal
+    return retVal
 }
 
 function startImage(data) {

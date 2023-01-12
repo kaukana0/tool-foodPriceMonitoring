@@ -88,7 +88,6 @@ function _update(data, mode, onFinished, range) {
 	})
 	Chart.setYLabel("chart", getYLabel())
 
-	//if(retVal) {updateLabels(Mode.current)}
 	updateLabels(Mode.current)
 
 	return retVal
