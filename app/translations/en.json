@@ -5,7 +5,7 @@
     "hashtags": "#Eurostat",
     "footnoteText1": "Source: Eurostat - ",
     "footnoteText2": "access to dataset",
-    "footnoteText3": "Data for certain dimensions are not available as they are submitted by EU Member States to Eurostat on a voluntary basis.<br>You can select up to 7 items in one dimension at a time.",
+    "footnoteText3": "You can select up to 7 items in one dimension at a time.",
     "info": "The Food Price Monitoring Tool includes the available data on price developments through the food supply chain.<br>For 26 food products the tool shows agricultural commodity price indices, producer price indices, import price indices and consumer price indices.<br><br>For more information, please read the <a href='https://ec.europa.eu/eurostat/cache/metadata/en/prc_fsc_idx_esms.htm' target='_self'>metadata</a>.",
     "totalFail": "Ups, something went wrong!<br>Try again later or contact our user",
     "totalFail2": "support",
