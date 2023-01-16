@@ -96,10 +96,10 @@ function extractWithSpeedOptimizedAlgo(data, diceDims, range) {
 
 	for(let it=range.startIdx; it<range.endIdx; it++) {
 		const i = MultiDim.getIndex(valence, [0,aiu,aii,aic,aig,it])
-		if(data.value[i]) {
-			retVal.push(data.value[i])
-		} else {
+		if(typeof data.value[i] === 'undefined') {
 			retVal.push(null)
+		} else {
+			retVal.push(data.value[i])
 		}
 		if(typeof VISUALIZE_DATA !== 'undefined') {
 			Visualizer.drawPixelI(i, 255,0,0,255)
