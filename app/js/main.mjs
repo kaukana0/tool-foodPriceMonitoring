@@ -7,7 +7,7 @@ import * as dm from "./dynamicMultiselect.mjs"
 import "../components/dropdownBox/dropdownBox.mjs"
 
 import * as pipeline from "../components/pipeline/pipeline.mjs"
-import { replaceEuInRawData } from '../components/util/util.mjs'
+import { replaceEuInRawData,  getURLParameterValue } from '../components/util/util.mjs'
 import { process as retrieveSourceData } from "./pipelineProcessors/sourceData.mjs"
 
 import { process as renameCountries } from "../components/processorCountryNames/countryNames.mjs"
@@ -91,6 +91,7 @@ function run() {
 					slider.init(data, left, max, onSliderSelected.bind(this, data))
 					selectBoxes.init(data, onBoxSelected.bind(this, data))
 					document.getElementById("timeRange").style.visibility="visible";
+					selectBoxes.select(getURLParameterValue("country"), getURLParameterValue("unit"), getURLParameterValue("index"), getURLParameterValue("coicop"))
 				} catch(e) {
 					displayFailure(e)
 				}

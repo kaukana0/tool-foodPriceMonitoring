@@ -10,9 +10,8 @@ function analytics_onLoad() {
 		siteSection:"Economy",
         customVariables: [
           ['asset-type', 'visualisation'],
-          ['asset-title', 'Food Price Monitoring'],
-          ['reference-period', '2021'],
-          ['release', '2021']
+          ['asset-title', 'food-price-monitor'],
+          ['release', '2022']
         ]
     }
     try {

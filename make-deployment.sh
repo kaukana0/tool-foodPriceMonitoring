@@ -55,7 +55,7 @@ mv ./js/stateMgmnt.mjs   ./js/stateMgmnt.js
 mv ./js/slider.mjs   ./js/slider.js
 mv ./js/selectBoxes.mjs   ./js/selectBoxes.js
 mv ./js/extraction.mjs   ./js/extraction.js
-mv ./redist/jsonStat/import.mjs   ./redist/jsonStat/import.js
+#mv ./redist/jsonStat/import.mjs   ./redist/jsonStat/import.js
 mv ./redist/lz-string.mjs   ./redist/lz-string.js
 
 # replace "mjs" with "js" in all the files containing mjs
