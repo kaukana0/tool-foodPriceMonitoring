@@ -58,7 +58,6 @@ export function switchAllToMultiSelect() {
 // index: HICP, PPI, ACPI, or IPI
 // coicop: CP011 etc.
 export function select(country, unit, index, coicop) {
-	console.log(country, unit, index, coicop)
 	document.getElementById("selectCountry").setSelectedByKey(country)
 	const units = {percentage:"PCH_M12", index:"I15"}
 	document.getElementById("selectUnit").setSelectedByKey(units[unit])
