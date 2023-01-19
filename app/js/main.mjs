@@ -121,6 +121,7 @@ function onSliderSelected(data, e) {
 function onBoxSelected(data, boxId) {
 	suppressInput()
 	setTimeout(() => {
+		updateUrl()
 		const rangeIndices = document.getElementById("timeRange").getIndices()
 		dm.update({data:data, mode:boxId, range:rangeIndices, onFinished:allowInput})
 	}, 40)
@@ -136,4 +137,10 @@ function _allowInput(isAllowed) {
 	document.getElementById("selectIndex").setLocked(!isAllowed)
 	document.getElementById("selectCoicop").setLocked(!isAllowed)
 	document.getElementById("timeRange").setLocked(!isAllowed)
+}
+
+function updateUrl() {
+	const [c,u,i,o] = selectBoxes.getSelections()
+	const urlFrag = `?country=${c}&unit=${u}&index=${i}&coicop=${o}`
+	window.history.replaceState(null, document.title, window.location.origin+urlFrag)
 }

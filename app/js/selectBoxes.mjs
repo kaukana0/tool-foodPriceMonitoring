@@ -64,3 +64,12 @@ export function select(country, unit, index, coicop) {
 	document.getElementById("selectIndex").setSelectedByKey(index)
 	document.getElementById("selectCoicop").setSelectedByKey(coicop)
 }
+
+export function getSelections() {
+	const c = Object.keys(document.getElementById("selectCountry").selected[0])[0]
+	const u = Object.keys(document.getElementById("selectUnit").selected[0])[0]
+	const units = {PCH_M12:"percentage", I15:"index"}
+	const i = Object.keys(document.getElementById("selectIndex").selected[0])[0]
+	const o = Object.keys(document.getElementById("selectCoicop").selected[0])[0]
+	return [c,units[u],i,o]
+}
