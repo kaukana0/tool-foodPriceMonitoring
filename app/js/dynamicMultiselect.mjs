@@ -8,7 +8,9 @@ Short description of the "dynamic multiselect" behaviour:
 import * as Chart from "../components/chart/chart.mjs"
 import * as Extraction from "./extraction.mjs"
 import {switchAllToSingleSelect, switchAllToMultiSelect, updateLabels} from "./selectBoxes.mjs"
+import * as Toast from "./toast.mjs"
 
+const toast = Toast.createToast("090677")		// delicious but unhealthy (?)
 
 // this says which of the boxes can potentially be multiselect
 export class ModeEnum {
@@ -76,7 +78,7 @@ function _update(data, mode, onFinished, range) {
 
 	Chart.init({
 		type: "line",
-		chartDOMElementId: "chart",
+		chartDOMElementId: "chart", //document.getElementById("chart"),
 		legendDOMElementId: "legend",
 		cols: cols,
 		fixColors: {...data.countryColors, ...data.indexColors},
@@ -84,7 +86,8 @@ function _update(data, mode, onFinished, range) {
 		seriesLabels: modeToSeriesLabels[Mode.current],
 		suffixText: getTooltipSuffix(),
 		isRotated: false,
-		onFinished: onFinished
+		onFinished: onFinished,
+		alertMessage: toast
 	})
 	Chart.setYLabel("chart", getYLabel())
 
