@@ -2,9 +2,10 @@
 
     git clone https://github.com/kaukana0/tool-foodPriceMonitoring.git
     cd tool-foodPriceMonitoring/
+    git checkout multiselect
     git submodule init
     git submodule update
-    cd app ; python3 -m http.server 9000
+    cd app ; python3 -m http.server 9001
 
 - this gets the sources (dependencies are included as redistributables)
 - then, each component is being downloaded as a submodule 
