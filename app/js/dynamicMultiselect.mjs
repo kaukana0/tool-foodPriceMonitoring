@@ -78,8 +78,8 @@ function _update(data, mode, onFinished, range) {
 
 	Chart.init({
 		type: "line",
-		chartDOMElementId: "chart", //document.getElementById("chart"),
-		legendDOMElementId: "legend",
+		chartDOMElementId: document.getElementById("chart"),
+		legendDOMElementId: document.getElementById("legend"),
 		cols: cols,
 		fixColors: {...data.countryColors, ...data.indexColors},
 		palette: data.colorPalette,
@@ -102,7 +102,6 @@ function _update(data, mode, onFinished, range) {
 // returns true if a mode switch happened
 function tryModeSwitch(toMode) {
 	const modeStored = Mode.current
-
 	switch(toMode) {
 		case ModeEnum.Unit:
 			// do nothing
@@ -112,23 +111,24 @@ function tryModeSwitch(toMode) {
 			switchAllToMultiSelect()
 		break
 		default:
-			if( Mode.getDOMElementByMode(toMode).selectedKeys.length>1 ) {
+		{
+			if( Mode.getDOMElementByMode(toMode).box.selected.size>1 ) {
 				Mode.set(toMode)
 				switchAllToSingleSelect(toMode)
 			} else {
-				if( Mode.getDOMElementByMode(Mode.current).selectedKeys.length<=1 ) {
+				if( Mode.current!==Mode.Monism && Mode.getDOMElementByMode(Mode.current).box.selected.size<=1 ) {
 					Mode.set(Mode.Monism)
 					switchAllToMultiSelect()
 				}
 			}
+		}
 	}
-
 	return Mode.current !== modeStored
 }
 
 
 function getTooltipSuffix() {
-	let retVal = document.getElementById("selectUnit").currentText
+	let retVal = getYLabel()
 	if(retVal.startsWith("Index")) {
 		retVal = ""
 	} else if(retVal.startsWith("Percentage")) {
@@ -139,5 +139,5 @@ function getTooltipSuffix() {
 
 
 function getYLabel() {
-	return document.getElementById("selectUnit").currentText
+	return document.getElementById("selectUnit").box.selected.values().next().value
 }

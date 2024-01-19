@@ -4,7 +4,6 @@ import * as selectBoxes from "./selectBoxes.mjs"
 
 import * as l10n from "../components/l10n/lang.mjs"
 import * as dm from "./dynamicMultiselect.mjs"
-import "../components/dropdownBox/dropdownBox.mjs"
 
 import * as pipeline from "../components/pipeline/pipeline.mjs"
 import { replaceEuInRawData,  getURLParameterValue } from '../components/util/util.mjs'
@@ -115,13 +114,13 @@ function run() {
 
 function onSliderSelected(data, e) {
 	suppressInput()
-	setTimeout(() => dm.update({data:data, range:e.detail, onFinished:allowInput}), 40)
+	setTimeout(() => dm.update({data:data, range:e.detail, onFinished:allowInput}), 400)
 }
 
 function onBoxSelected(data, boxId) {
 	suppressInput()
 	setTimeout(() => {
-		updateUrl()
+		//updateUrl()	// TODO new feature
 		const rangeIndices = document.getElementById("timeRange").getIndices()
 		dm.update({data:data, mode:boxId, range:rangeIndices, onFinished:allowInput})
 	}, 40)
@@ -132,10 +131,10 @@ const suppressInput	= _allowInput.bind(this, false)	// block UI interaction for 
 
 function _allowInput(isAllowed) {
 	document.getElementById("loadingIndicator").style.display = isAllowed ? "none" : "block"
-	document.getElementById("selectCountry").setLocked(!isAllowed)
-	document.getElementById("selectUnit").setLocked(!isAllowed)
-	document.getElementById("selectIndex").setLocked(!isAllowed)
-	document.getElementById("selectCoicop").setLocked(!isAllowed)
+	document.getElementById("selectCountry").box.locked = !isAllowed
+	document.getElementById("selectUnit").box.locked = !isAllowed
+	document.getElementById("selectIndex").box.locked = !isAllowed
+	document.getElementById("selectCoicop").box.locked = !isAllowed
 	document.getElementById("timeRange").setLocked(!isAllowed)
 }
 

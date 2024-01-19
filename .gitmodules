@@ -46,3 +46,9 @@
 [submodule "app/components/multiDimAccess"]
 	path = app/components/multiDimAccess
 	url = https://github.com/kaukana0/multiDimAccess.git
+[submodule "app/components/select"]
+	path = app/components/select
+	url = https://github.com/kaukana0/select.git
+[submodule "app/components/titledSelect"]
+	path = app/components/titledSelect
+	url = https://github.com/kaukana0/titledSelect.git

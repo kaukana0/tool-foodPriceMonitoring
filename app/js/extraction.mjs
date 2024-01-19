@@ -18,10 +18,10 @@ function getDiceDims(mode, selectBoxes, selection) {
     mapModeToDim[ModeEnum.Coicop] = "coicop"
     // first assume all are singleselect
     const diceDims = {
-        unit: selectBoxes[ModeEnum.Unit].selectedKeys[0],
-        indx: selectBoxes[ModeEnum.Index].selectedKeys[0],
-        coicop: selectBoxes[ModeEnum.Coicop].selectedKeys[0],
-        geo: selectBoxes[ModeEnum.Country].selectedKeys[0]
+        unit: selectBoxes[ModeEnum.Unit].box.selected.entries().next().value[0],
+        indx: selectBoxes[ModeEnum.Index].box.selected.entries().next().value[0],
+        coicop: selectBoxes[ModeEnum.Coicop].box.selected.entries().next().value[0],
+        geo: selectBoxes[ModeEnum.Country].box.selected.entries().next().value[0]
     }
     // but actually one COULD be multiselect - according to a mode - so overwrite accordingly
     if(mode !== ModeEnum.Monism) {
@@ -58,12 +58,12 @@ export function get(data, mode, range) {
     }
 
     if(mode === ModeEnum.Monism) {
-        const selection = selectBoxes[ModeEnum.Country].selectedKeys[0]		// only one is selected
+        const selection = selectBoxes[ModeEnum.Country].box.selected.entries().next().value[0]		// only one is selected
         const diceDims = getDiceDims(mode, selectBoxes, selection)
         retVal.push(getSeriesData(data, diceDims, selection, range))
     } else {
         // getting data of all (user) selected series one by one
-        selectBoxes[mode].selectedKeys.forEach(selection => {
+        selectBoxes[mode].box.selected.forEach((_,selection) => {
             const diceDims = getDiceDims(mode, selectBoxes, selection)
             retVal.push(getSeriesData(data, diceDims, selection, range))
         })
