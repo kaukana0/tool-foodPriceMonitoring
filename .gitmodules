@@ -52,3 +52,6 @@
 [submodule "app/components/titledSelect"]
 	path = app/components/titledSelect
 	url = https://github.com/kaukana0/titledSelect.git
+[submodule "app/components/eclLikeHeroBanner"]
+	path = app/components/eclLikeHeroBanner
+	url = https://github.com/kaukana0/eclLikeHeroBanner.git

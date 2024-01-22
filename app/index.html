@@ -34,8 +34,7 @@ Author: robert.gebhardt@ext.ec.europa.eu
 	<link rel="stylesheet" href="components/footerLines/footerLines.css">
 	<!--link rel="stylesheet" href="css/debug.css"-->
 
-	<script src="./components/titleLines/titleLines.mjs" type="module"></script>
-	<script src="./components/navBar/navBar.mjs" type="module"></script>
+	<script src="./components/eclLikeHeroBanner/heroBanner.mjs" type="module"></script>
 	<script src="./components/navBar/itemModal.mjs" type="module"></script>
 	<script src="./components/navBar/rootUrl.mjs" type="module"></script>
 	<script src="./components/navBar/itemFb.mjs" type="module"></script>
@@ -56,7 +55,7 @@ Author: robert.gebhardt@ext.ec.europa.eu
 	
 	<div class="container-fluid" style="height:100%;">
 
-		<!-- row 1: navbar and logo -->
+		<!-- row 1: navbar and logo 
 		<div id="firstRow" class="row" style="min-height: 30px;">
 			<div class="col-2">
 				<nav-bar class="float-left">
@@ -79,11 +78,15 @@ Author: robert.gebhardt@ext.ec.europa.eu
 			</div>
 		</div>
 
-		<!-- row 2: titles -->
+		 row 2: titles
 		<div class="row" style="min-height:8%;">
 			<title-lines mainText="title.main" subText="title.sub" translate="mainText,subText"></title-lines>
-		</div>
+		</div-->
 
+		<header>
+			<ecl-like-hero-banner text="title.main" subtitle="title.sub" translate="text,subtitle"></ecl-like-hero-banner>
+		</header>
+	
 		<!-- row 3: 2 selectboxes (country, unit) -->
 		<div class="row justify-content-center" style="min-height:8%;">
 			<div class="col-sm-3 mt-1" style="width:375px;">
