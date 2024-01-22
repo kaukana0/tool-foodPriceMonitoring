@@ -13,8 +13,9 @@ export function init(data, left, max, onSelect) {
 	})
 	// this last because left might want to be too far to the right, 
 	// overstepping mingap. left eventually gets overruled by mingap.
-	// implcitly calls update (through events fired by slider)
 	el.setAttribute("mingap", getMingap(document.getElementById("chart").clientWidth))
+	
+	update(data.categories.time[left], data.categories.time[max-1])
 }
 
 export function update(leftText, rightText) {
