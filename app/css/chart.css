@@ -50,3 +50,9 @@ see also iframeResize.mjs
 .modal-title {
   font-size: 2rem;
 }
+
+.legendItemColor {
+	display: inline-block;
+	height: 26px;
+	width: 26px;
+}
