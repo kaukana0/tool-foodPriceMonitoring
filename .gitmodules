@@ -1,9 +1,6 @@
 [submodule "app/components/chart"]
 	path = app/components/chart
 	url = https://github.com/kaukana0/chart.git
-[submodule "app/components/dropdownBox"]
-	path = app/components/dropdownBox
-	url = https://github.com/kaukana0/dropdownBox.git
 [submodule "app/components/metaTags"]
 	path = app/components/metaTags
 	url = https://github.com/kaukana0/metaTags.git
@@ -16,9 +13,6 @@
 [submodule "app/components/navBar"]
 	path = app/components/navBar
 	url = https://github.com/kaukana0/navBar.git
-[submodule "app/components/titleLines"]
-	path = app/components/titleLines
-	url = https://github.com/kaukana0/titleLines.git
 [submodule "app/components/footerLines"]
 	path = app/components/footerLines
 	url = https://github.com/kaukana0/footerLines.git
