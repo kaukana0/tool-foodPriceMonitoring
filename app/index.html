@@ -62,40 +62,15 @@ Author: robert.gebhardt@ext.ec.europa.eu
 	
 	<div class="container-fluid" style="height:100%;">
 
-		<!-- row 1: navbar and logo 
-		<div id="firstRow" class="row" style="min-height: 30px;">
-			<div class="col-2">
-				<nav-bar class="float-left">
-					<nav-bar-item-modal symbol="fa-solid fa-info" headerText="Information" title="tt_info" translate="title">
-						<p translate>info</p>
-					</nav-bar-item-modal>
-					<nav-bar-item-modal symbol="fa-solid fa-code" headerText="Copy this code and paste it in your website:" title="tt_embed" translate="title" headerStyle="font-size:1.5rem;">
-						<nav-bar-root-url></nav-bar-root-url>
-					</nav-bar-item-modal>
-					<nav-bar-item-twitter hashtags="hashtags" text="twitter" title="tt_twitter" translate="hashtags,text,title"></nav-bar-item-twitter>
-					<nav-bar-item-fb text="title.main" title="tt_fb" translate="text,title"></nav-bar-item-fb>
-					<nav-bar-item-linkedin text="title.main" title="tt_in" translate="text,title"></nav-bar-item-linkedin>
-				</nav-bar>
-			</div>
-			<div class="col"></div>
-			<div class="col-2">
-				<a href = "https://ec.europa.eu/eurostat/" target = "_self"> 
-					<img id="logo" class="float-end" src="./img/logoEstat.png" alt="Logo Eurostat">
-				 </a>
-			</div>
+		<!-- row 1 -->
+		<div style="display:flex; gap:50px; margin: 10px 100px 10px 80%; height:36px;">
+			<symbol-button id="globalInfoButton" symbol="info" size="36"  aria-label="Information"></symbol-button>
+			<symbol-button id="sharingButton" symbol="sharingBlue" size="36" aria-label="Share with others"></symbol-button>
+			<ecl-like-social-share></ecl-like-social-share>
 		</div>
 
-		 row 2: titles
-		<div class="row" style="min-height:8%;">
-			<title-lines mainText="title.main" subText="title.sub" translate="mainText,subText"></title-lines>
-		</div-->
-
+		<!-- row 2 -->
 		<header>
-			<div style="display:flex; gap:50px; margin: 10px 100px 10px 80%; height:36px;">
-				<symbol-button id="globalInfoButton" symbol="info" size="36"  aria-label="Information"></symbol-button>
-				<symbol-button id="sharingButton" symbol="sharingBlue" size="36" aria-label="Share with others"></symbol-button>
-				<ecl-like-social-share></ecl-like-social-share>
-			</div>
 			<ecl-like-hero-banner text="title.main" subtitle="title.sub" translate="text,subtitle"></ecl-like-hero-banner>
 		</header>
 	
@@ -156,16 +131,16 @@ Author: robert.gebhardt@ext.ec.europa.eu
 		<!-- row 9 legal links -->
 		<div class="row" style="text-align: center; max-height: 2.0rem;">
 			<p>
-				<a href="https://ec.europa.eu/info/cookies_en?lang=en&amp;lang=en"><span tabindex="0">Cookies</span></a>
+				<a href="https://ec.europa.eu/info/cookies_en?lang=en&amp;lang=en"><span>Cookies</span></a>
 				|
-				<a href="https://ec.europa.eu/info/privacy-policy_en?lang=en&amp;lang=en"><span tabindex="0">Privacy policy</span></a>
+				<a href="https://ec.europa.eu/info/privacy-policy_en?lang=en&amp;lang=en"><span>Privacy policy</span></a>
 				|
-				<a href="https://ec.europa.eu/info/legal-notice_en?lang=en&amp;lang=en"><span tabindex="0">Legal notice</span></a>
+				<a href="https://ec.europa.eu/info/legal-notice_en?lang=en&amp;lang=en"><span>Legal notice</span></a>
 				|
-				<a href="sitemap.html?lang=en"><span tabindex="0">Sitemap</span></a>
+				<a href="sitemap.html?lang=en"><span>Sitemap</span></a>
 			</p>
 		</div>
-		
+
 	</div>
 
 	<!-- Non-Grid Elements -->
@@ -181,10 +156,6 @@ Author: robert.gebhardt@ext.ec.europa.eu
 	</div>
 
 	<ecl-like-modal id="globalModal"></ecl-like-modal>
-
-	<!-- tiny overlay in bottom right corner showing commitId -->
-	<!-- git rev-parse -short HEAD -->
-	<!-- div style="all: revert; font-size: 8px; position: fixed; bottom:0px; right:0px;"></div -->
 
 </body>
 
