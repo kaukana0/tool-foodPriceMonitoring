@@ -2,7 +2,7 @@
 
     git clone https://github.com/kaukana0/tool-foodPriceMonitoring.git
     cd tool-foodPriceMonitoring/
-    git checkout multiselect
+    git checkout multiselect            # note this!
     git submodule init
     git submodule update
     cd app ; python3 -m http.server 8080
