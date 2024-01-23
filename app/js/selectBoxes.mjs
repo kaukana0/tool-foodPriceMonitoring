@@ -1,25 +1,29 @@
 import {ModeEnum, getSelectboxDOMElements} from "./dynamicMultiselect.mjs"
 
-export function init(data, onSelect) {
+export function init(data, onSelected) {
 
-	// TODOqq
+	// a bit hacky...
 	var groups = new Map()
 	groups.set("EA", {})
 	groups.set("SE", {})
 
-	document.getElementById("selectCountry").box.data = [data.categories.countries, groups]
-	document.getElementById("selectCountry").box.onSelect = () => onSelect(ModeEnum.Country)
+	const sc = document.getElementById("selectCountry").box
+	sc.data = [data.categories.countries, groups]
+	sc.onSelect = (_0,_1,isDeselect) => isDeselect || sc.selected.size < 7
+	sc.onSelected = () => onSelected(ModeEnum.Country)
 
 	document.getElementById("selectUnit").box.data = [data.categories.unit, null]
-	document.getElementById("selectUnit").box.onSelect = () => onSelect(ModeEnum.Unit)
-
+	document.getElementById("selectUnit").box.onSelected = () => onSelected(ModeEnum.Unit)
+	
 	document.getElementById("selectIndex").box.data = [data.categories.index, null]
-	document.getElementById("selectIndex").box.onSelect = () => onSelect(ModeEnum.Index)
+	document.getElementById("selectIndex").box.onSelected = () => onSelected(ModeEnum.Index)
 
-	document.getElementById("selectCoicop").box.data = [data.categories.coicop, null]
-	document.getElementById("selectCoicop").box.onSelect = () => onSelect(ModeEnum.Coicop)
+	const so = document.getElementById("selectCoicop").box
+	so.data = [data.categories.coicop, null]
+	so.onSelect = (_0,_1,isDeselect) => isDeselect || so.selected.size < 7
+	so.onSelected = () => onSelected(ModeEnum.Coicop)
 
-	onSelect(ModeEnum.Monism)
+	onSelected(ModeEnum.Monism)
 }
 
 // makes label for given box say "I'm multiselect" and all others "I'm single select"
@@ -42,14 +46,14 @@ export function updateLabels(boxId) {
 	switch(boxId) {
 		case ModeEnum.Unit:
 		case ModeEnum.Monism:	// unit and monism look the same
-			a.setAttribute("labelNumber", "X")
-			c.setAttribute("labelNumber", "X")
-			d.setAttribute("labelNumber", "X")
+			a.setAttribute("labelNumber", "6")
+			c.setAttribute("labelNumber", "3")
+			d.setAttribute("labelNumber", "6")
 		break
 		default:
-			a.setAttribute("labelNumber", boxId===ModeEnum.Country ? "X":1)
-			c.setAttribute("labelNumber", boxId===ModeEnum.Index ? "X":1)
-			d.setAttribute("labelNumber", boxId===ModeEnum.Coicop ? "X":1)
+			a.setAttribute("labelNumber", boxId===ModeEnum.Country ? 7-a.box.selected.size:1)
+			c.setAttribute("labelNumber", boxId===ModeEnum.Index ? 4-c.box.selected.size:1)
+			d.setAttribute("labelNumber", boxId===ModeEnum.Coicop ? 7-d.box.selected.size:1)
 	}
 }
 

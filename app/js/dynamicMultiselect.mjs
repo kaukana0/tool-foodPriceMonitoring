@@ -89,7 +89,8 @@ function _update(data, mode, onFinished, range) {
 		onFinished: onFinished,
 		alertMessage: toast
 	})
-	Chart.setYLabel("chart", getYLabel())
+
+	Chart.setYLabel(document.getElementById("chart"), getYLabel())
 
 	updateLabels(Mode.current)
 

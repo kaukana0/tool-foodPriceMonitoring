@@ -22,6 +22,7 @@ import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.
 
 import * as cache from "./cache.mjs"
 
+
 // relevant only for development
 //import { get as getFakeData } from "../components/dataGenerator/fpmToolFakeData.mjs"
 
@@ -40,6 +41,14 @@ l10n.init(
 function run() {
 
 	if(cache.init()) { cache.clear() }
+	
+	setupGlobalInfoClick(l10n._("info"))
+	setupSharing({
+		text:l10n._("title.main"),
+		hashTags: l10n._("hashtags"),
+		mailSubject: l10n._("title.main"),
+		mailBody: l10n._("title.sub")
+	})
 
 	const processingCfg = [
 		{
@@ -143,3 +152,23 @@ function updateUrl() {
 	const urlFrag = `?country=${c}&unit=${u}&index=${i}&coicop=${o}`
 	window.history.replaceState(null, document.title, window.location.origin+urlFrag)
 }
+
+export function setupGlobalInfoClick(txt) {
+  document.getElementById("globalInfoButton").addEventListener("action", () => {
+    document.getElementById("globalModal").setHeader("Information")
+    document.getElementById("globalModal").setText(txt)
+    document.getElementById("globalModal").show()
+  })
+}
+
+export function setupSharing(cfg) {
+  const btn = document.getElementById("sharingButton")
+  btn.addEventListener("action", () => { menu.toggleVisibility() })
+
+  const menu = document.getElementsByTagName("ecl-like-social-share")[0]
+  menu.setAttribute("text", cfg.text)
+  menu.setAttribute("hashTags", cfg.hashTags)
+  menu.setAttribute("mailSubject", cfg.mailSubject)
+  menu.setAttribute("mailBody", cfg.mailBody)
+}
+
