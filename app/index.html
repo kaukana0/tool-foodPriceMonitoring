@@ -16,9 +16,6 @@ Author: robert.gebhardt@ext.ec.europa.eu
 
 	<title translate>title.main</title>
 
-	<link rel="stylesheet" href="redist/bootstrap-5.1.3/bootstrap.min.css">
-	<script src="./redist/bootstrap-5.1.3/bootstrap.bundle.min.js"></script>
-
 	<script src="./redist/d3.v6.min.js"></script>
 
 	<link rel="stylesheet" href="redist/billboard-3.4.1/billboard.min.css">
@@ -59,63 +56,67 @@ Author: robert.gebhardt@ext.ec.europa.eu
 
 <body>
 	
-	<div class="container-fluid" style="height:100%;">
-
 		<!-- row 1 -->
-		<div style="display:flex; gap:50px; margin: 10px 100px 10px 80%; height:36px;">
-			<symbol-button id="globalInfoButton" symbol="info" size="36"  aria-label="Information"></symbol-button>
-			<symbol-button id="sharingButton" symbol="sharingBlue" size="36" aria-label="Share with others"></symbol-button>
-			<ecl-like-social-share></ecl-like-social-share>
+		<div style="display:flex; align-items:center; justify-content:flex-start; width:99%; height:72px;">
+			<img src="./components/eclLikeHeroBanner/img/estat-logo-horizontal.svg" style="width:163.11px; height:22px; margin-left:35px; cursor:pointer; justify-self:first;" tabindex="0" alt="Home - Eurostat" aria-label="Home - Eurostat" />
+			<div style="display:flex; gap:20px; flex-grow: 1; justify-content: flex-end;">
+				<symbol-button id="globalInfoButton" symbol="info" size="32"  aria-label="Information" style="min-height:32px; max-height:32px; min-width:32px; max-width:32px;"></symbol-button>
+				<symbol-button id="sharingButton" symbol="sharingBlue" size="32" aria-label="Share with others" style="min-height:32px; max-height:32px; min-width:32px; max-width:32px;"></symbol-button>
+				<ecl-like-social-share></ecl-like-social-share>
+			</div>
+
 		</div>
+
 
 		<!-- row 2 -->
 		<header>
 			<ecl-like-hero-banner text="title.main" subtitle="title.sub" translate="text,subtitle"></ecl-like-hero-banner>
 		</header>
-	
-		<!-- row 3: 2 selectboxes (country, unit) -->
-		<div class="row justify-content-center" style="min-height:8%;">
-			<div class="col-sm-3 mt-1" style="width:375px;">
-				<titled-select id="selectCountry" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect="true" textformultiselect="countriesSelected" displayKeys="true" translate="textformultiselect"></titled-select>
-			</div>
-			<div class="col-sm-3 mt-1" style="width:375px;">
+
+		<!-- row 3, the boxes -->
+		<style>
+			.w {
+				min-width: 380px;
+				margin-top:10px;
+			}
+			@media (max-width: 1550px) and ( min-width: 750px) {
+				.v {
+					/*width: 70% !important;
+					margin: 0 10% 0 10%;*/
+					padding: 0 230px 0 230px;
+					box-sizing: border-box;
+				}
+			}
+		</style>
+
+		<div style="display:flex; min-height:8%; width:100%; padding-top:30px; justify-content: space-evenly; flex-wrap: wrap;" class="v">
+				<titled-select id="selectCountry" class="w" style="" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect="true" textformultiselect="countriesSelected" displayKeys="true" translate="textformultiselect"></titled-select>
 				<!-- unit will always be single-select -->
-				<titled-select id="selectUnit"></titled-select>
-			</div>
+				<titled-select id="selectUnit" class="w" style="" fractions="99"></titled-select>
+				<titled-select id="selectIndex" class="w" style="" multiselect="true" textformultiselect="indexSelected" displayKeys="true" translate="textformultiselect"></titled-select>
+				<titled-select id="selectCoicop" class="w" style="" multiselect="true" textformultiselect="coicopSelected" displayKeys="true" displayKeyInHeadbox translate="textformultiselect"></titled-select>
 		</div>
-
-		<!-- row 4: another 2 selectboxes (index, coicop) -->
-		<div class="row justify-content-center" style="min-height:8%;">
-			<div class="col-sm-3 mt-1" style="width:375px;">
-				<titled-select id="selectIndex" multiselect="true" textformultiselect="indexSelected" displayKeys="true" translate="textformultiselect"></titled-select>
-			</div>
-			<div class="col-sm-3 mt-1" style="width:375px;">
-				<titled-select id="selectCoicop" multiselect="true" textformultiselect="coicopSelected" displayKeys="true" displayKeyInHeadbox translate="textformultiselect"></titled-select>
-			</div>
-		</div>
-
-		<!-- row 5: chart and legend -->
+		
+		<!-- row 4: chart and legend -->
 		<!-- note: adapts to screensize - see chart.css -->
-		<div id="chartcontainer" class="row align-items-center">
-			<div id="chart" class="col-11"></div>
-			<div id="legend" class="col-sm-1 text-center justify-content-center"></div>
+		<div id="chartcontainer" style="display: flex;">
+			<div id="chart" style="width: 92%;"></div>
+			<div id="legend" style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex-wrap: wrap;"></div>
 		</div>
 
 		<!-- row 6: time slider / range -->
-		<div id="range" class="row align-items-center" style="min-height: 30px;">
-			<div class="col" style="height:100%; padding: 0 5% 0 5%">
-				<range-slider id="timeRange" thumbWidthInPixel="80" style="visibility: hidden;"></range-slider>
-			</div>
+		<div id="range" style="min-height: 40px; padding: 30px 5% 0 5%">
+			<range-slider id="timeRange" thumbWidthInPixel="80" style="visibility: hidden;"></range-slider>
 		</div>
 
 		<!-- row 7: notes -->
-		<div class="row" style="text-align: center; max-height: 25%;">
+		<div style="text-align: center; max-height: 25%;">
 			<div class="footnoteTextMargin" translate>footnoteText3</div>
 		</div>
 
 		<!-- row 8 footer -->
-		<div class="row" style="text-align: center; max-height: 2.0rem;">
-			<div class="col">
+		<div style="text-align: center; max-height: 2.0rem;">
+			<div>
 				<div class="footnoteTextMargin" translate style="display: inline-block;">
 					footnoteText1
 				</div>
@@ -125,30 +126,27 @@ Author: robert.gebhardt@ext.ec.europa.eu
 			</div>
 		</div>
 
-		<hr>
-
 		<!-- row 9 legal links -->
-		<div class="row" style="text-align: center; max-height: 2.0rem;">
+		<div style="text-align: right; margin-right: 117px; max-height: 2.0rem;">
 			<p>
-				<a href="https://ec.europa.eu/info/cookies_en?lang=en&amp;lang=en"><span>Cookies</span></a>
+				<a class="footnoteTextBlue" href="https://ec.europa.eu/info/cookies_en?lang=en&amp;lang=en"><span>Cookies</span></a>
 				|
-				<a href="https://ec.europa.eu/info/privacy-policy_en?lang=en&amp;lang=en"><span>Privacy policy</span></a>
+				<a class="footnoteTextBlue" href="https://ec.europa.eu/info/privacy-policy_en?lang=en&amp;lang=en"><span>Privacy policy</span></a>
 				|
-				<a href="https://ec.europa.eu/info/legal-notice_en?lang=en&amp;lang=en"><span>Legal notice</span></a>
+				<a class="footnoteTextBlue" href="https://ec.europa.eu/info/legal-notice_en?lang=en&amp;lang=en"><span>Legal notice</span></a>
 				|
-				<a href="sitemap.html?lang=en"><span>Sitemap</span></a>
+				<a class="footnoteTextBlue" href="sitemap.html?lang=en"><span>Sitemap</span></a>
 			</p>
 		</div>
 
-	</div>
 
 	<!-- Non-Grid Elements -->
 
-	<div id="loadingIndicator" class="justify-content-center align-items-center fa-3x" style="position: fixed; left: 50%; top: 50%; z-index: 30;">
-		<i class="fas fa-spinner fa-spin"></i>
+	<div id="loadingIndicator"style="position: fixed; left: 50%; top: 50%; z-index: 30;">
+		<i class="fas fa-spinner fa-spin fa-3x"></i>
 	</div>
 
-	<div id="errorMessage" class="alert alert-danger text-center" style="position: fixed; top: 50%; width: 100%; font-size: 20px; display: none;">
+	<div id="errorMessage" style="position: fixed; top: 50%; width: 100%; font-size: 20px; display: none;">
 		Ups, something went wrong!<br>
 		Try again later or contact our
 		<a href="https://ec.europa.eu/eurostat/web/main/help/support">user support</a>

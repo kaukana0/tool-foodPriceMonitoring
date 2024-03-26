@@ -31,10 +31,10 @@ export function updateLabels(boxId) {
 
 	const [a,b,c,d] = getSelectboxDOMElements()
 
-	a.setAttribute("labelright", "Selectable")
-	b.setAttribute("labelright", "Selectable")
-	c.setAttribute("labelright", "Selectable")
-	d.setAttribute("labelright", "Selectable")
+	a.setAttribute("labelright", "selectable")
+	b.setAttribute("labelright", "selectable")
+	c.setAttribute("labelright", "selectable")
+	d.setAttribute("labelright", "selectable")
 
 	a.setAttribute("labelleft", "Country")
 	b.setAttribute("labelleft", "Unit")

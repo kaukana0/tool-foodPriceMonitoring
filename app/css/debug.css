@@ -11,3 +11,7 @@ div.row:nth-child(odd) {
 div.row:nth-child(even) {
     background-color: antiquewhite;
 }
+
+* {
+    outline: 1px solid red;
+}

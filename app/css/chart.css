@@ -38,9 +38,18 @@ see also iframeResize.mjs
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1235px) {
   #chartcontainer {
-    max-height:55%;
+    max-height:35%;
+  }
+  #chart {
+    height: 100%;
+  }
+}
+
+@media (min-width: 1550px) {
+  #chartcontainer {
+    max-height:45%;
   }
   #chart {
     height: 100%;

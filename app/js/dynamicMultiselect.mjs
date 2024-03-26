@@ -8,9 +8,9 @@ Short description of the "dynamic multiselect" behaviour:
 import * as Chart from "../components/chart/chart.mjs"
 import * as Extraction from "./extraction.mjs"
 import {switchAllToSingleSelect, switchAllToMultiSelect, updateLabels} from "./selectBoxes.mjs"
-import * as Toast from "./toast.mjs"
+//import * as Toast from "./toast.mjs"
 
-const toast = Toast.createToast("090677")		// delicious but unhealthy (?)
+//const toast = Toast.createToast("090677")		// delicious but unhealthy (?)
 
 // this says which of the boxes can potentially be multiselect
 export class ModeEnum {
@@ -87,7 +87,8 @@ function _update(data, mode, onFinished, range) {
 		suffixText: getTooltipSuffix(),
 		isRotated: false,
 		onFinished: onFinished,
-		alertMessage: toast
+		//alertMessage: toast
+		autoResize: true
 	})
 
 	Chart.setYLabel(document.getElementById("chart"), getYLabel())
