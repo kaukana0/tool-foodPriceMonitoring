@@ -58,3 +58,6 @@
 [submodule "app/components/eclLikeSocialMediaShare"]
 	path = app/components/eclLikeSocialMediaShare
 	url = https://github.com/kaukana0/eclLikeSocialMediaShare.git
+[submodule "app/components/ewc-dialog"]
+	path = app/components/ewc-dialog
+	url = https://citnet.tech.ec.europa.eu/CITnet/stash/scm/ewc/ewc-dialog.git

@@ -31,6 +31,7 @@ Author: robert.gebhardt@ext.ec.europa.eu
 	<link rel="stylesheet" href="css/logo.css">
 	<link rel="stylesheet" href="css/chart.css">
 	<link rel="stylesheet" href="css/range.css">
+	<link rel="stylesheet" href="css/adaptToEwcDialog.css">
 	<link rel="stylesheet" href="components/footerLines/footerLines.css">
 	<!--link rel="stylesheet" href="css/debug.css"-->
 
@@ -46,6 +47,7 @@ Author: robert.gebhardt@ext.ec.europa.eu
 	<script src="./components/symbolButton/button.mjs" type="module"></script>
 	<script src="./components/eclLikeModal/modal.mjs" type="module"></script>
 	<script src="./components/eclLikeSocialMediaShare/share.mjs" type="module"></script>
+	<script src="./components//ewc-dialog/src/main.mjs" type="module"></script>
 	<script src="./js/main.mjs" type="module"></script>
 
 	<script type="application/json">{"utility": "cck", "url": "https://my.ec.europa.eu/cookie-policy_{lang}"}</script>
@@ -99,9 +101,10 @@ Author: robert.gebhardt@ext.ec.europa.eu
 		
 		<!-- row 4: chart and legend -->
 		<!-- note: adapts to screensize - see chart.css -->
-		<div id="chartcontainer" style="display: flex;">
-			<div id="chart" style="width: 92%;"></div>
-			<div id="legend" style="display: flex; flex-direction: column; justify-content: center; align-items: center; flex-wrap: wrap;"></div>
+		<!-- note2: we need to help billboardjs' auto-resize mechanism a little bit here -->
+		<div id="chartcontainer" style="display:flex; width:100%; align-items: center; overflow:hidden;">
+			<div id="chart" style="width: calc(100% - 70px)"></div>
+			<div id="legend" style="min-width:70px;"></div>
 		</div>
 
 		<!-- row 6: time slider / range -->
@@ -127,7 +130,7 @@ Author: robert.gebhardt@ext.ec.europa.eu
 		</div>
 
 		<!-- row 9 legal links -->
-		<div style="text-align: right; margin-right: 117px; max-height: 2.0rem;">
+		<div id="legallinks">
 			<p>
 				<a class="footnoteTextBlue" href="https://ec.europa.eu/info/cookies_en?lang=en&amp;lang=en"><span>Cookies</span></a>
 				|
@@ -153,6 +156,8 @@ Author: robert.gebhardt@ext.ec.europa.eu
 	</div>
 
 	<ecl-like-modal id="globalModal"></ecl-like-modal>
+
+	<ewc-dialog assetBaseURL="./img"></ewc-dialog>
 
 </body>
 

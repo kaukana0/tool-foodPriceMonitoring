@@ -22,3 +22,9 @@ html, body {
 .boxTitle {
     font-weight: bold;
 }
+
+#legallinks {
+    text-align: right;
+    margin-right: 5%;
+    max-height: 2.0rem;
+}

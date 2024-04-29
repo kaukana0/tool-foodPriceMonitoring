@@ -1,33 +1,11 @@
-function toastHtml(id) {
-	return `
-<div class="toast-container position-fixed top-50 start-50 translate-middle" style="z-index: 50; background-color: #fff;">
-  <div id="${id}" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-    <div class="modal-header">
-      <p class="h1" style="color:black;">Information</p>
-      <button type="button" class="btn-close close" style="float:right;" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-      No data available for your selection.<br>
-      Please change your selection.
-    </div>
-  </div>
-</div>
-`}
+import * as Styling from "../components/ewc-dialog/src/externalStyling.mjs"
 
-function toastCSS(id) {
-  return `
-<style>
-.${id} {
-  background-color: #fff;
-}
-.toast-body{
-  font-size: var(--bs-body-font-size);
-}
-</style>
-`}
+export function createToast() {
+  Styling.applyEclClasses()
 
-export function createToast(uniquePrefix) {
-	document.body.insertAdjacentHTML("beforeend", toastHtml(uniquePrefix + "toast"))
-	document.head.insertAdjacentHTML("beforeend", toastCSS(uniquePrefix + "toast"))
-	return new bootstrap.Toast(document.getElementById(uniquePrefix + "toast"))
+  document.addEventListener("DOMContentLoaded", function(event) {
+    const el = document.getElementsByTagName("ewc-dialog")[0]
+    el.title = "Information"
+    el.bodyHtml = "No data available for your selection. Please change your selection."
+  })
 }

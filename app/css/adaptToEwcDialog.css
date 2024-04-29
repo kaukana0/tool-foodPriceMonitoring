@@ -1,0 +1,100 @@
+/*
+This app bases on ECL 3.7.0.
+But the ewc-dialog component bases on ECL 4.1.1.
+
+This file contains the 4.1.1 styles missing in 3.7.0 in order to adapt 
+this application to the ewc-dialog and ewc-dialog-feedback components.
+*/
+
+:root{
+  --c-p-140: #082b7a;
+  --c-d: #262b38;
+  --sh-4: 0 11px 15px rgba(9,49,142,.08),0 9px 46px rgba(9,49,142,.04),0 24px 38px rgba(9,49,142,.04),0 -4px 4px rgba(9,49,142,.04);
+  --f-p-m: normal normal 400 1rem/1.5rem arial,sans-serif;
+  --c-p-20: #cfdaf5;
+  --f-p-l:normal normal 400 1.125rem/1.75rem arial,sans-serif;
+  --s-m: 1rem;
+  --s-l: 1.5rem;
+}
+.ecl-modal{
+  background-color:color-mix(in srgb,var(--c-p-140) 40%,transparent);
+  border:none;
+  color:var(--c-d);
+  height:100%;
+  left:0;
+  margin:0;
+  max-height:100%;
+  max-width:100%;
+  padding:0;
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:50
+}
+.ecl-modal__container{
+  position:relative;
+  top:50%;
+  transform:translateY(-50%)
+}
+.ecl-modal__content{
+  background-color:#fff;
+  border-radius:4px;
+  box-shadow:var(--sh-4);
+  display:flex;
+  flex-direction:column;
+  font:var(--f-p-m);
+  left:50%;
+  margin:0;
+  max-height:min(100vh,530px);
+  overflow:hidden;
+  padding:0;
+  position:relative;
+  transform:translateX(-50%);
+  z-index:50
+}
+.ecl-modal__header{
+  align-items:flex-start;
+  border-bottom:1px solid var(--c-p-20);
+  display:flex;
+  font:var(--f-p-l);
+  padding:var(--s-m)
+}
+.ecl-modal__header-content{
+  flex-grow:1
+}
+.ecl-button__container{
+  align-items:center;
+  display:flex
+}
+.ecl-menu__button-caret .ecl-button__container{
+  align-self:center
+}
+.ecl-modal__body{
+  display:flex;
+  flex-direction:column;
+  overflow:hidden;
+  padding:var(--s-m)
+}
+.ecl-modal__footer{
+  border-top:1px solid var(--c-p-20);
+  padding:var(--s-m)
+}
+.ecl-modal__header+.ecl-modal__footer{
+  border-top:none
+}
+.ecl-modal__footer-content{
+  display:flex;
+  flex-direction:column
+}
+@media (min-width:768px){
+  .ecl-modal__header{
+      padding:var(--s-m) var(--s-l)
+  }
+  .ecl-modal__body{
+      padding:var(--s-l)
+  }
+  .ecl-modal:not(.ecl-modal--s) .ecl-modal__footer-content{
+      flex-direction:row;
+      justify-content:space-between
+  }
+}
