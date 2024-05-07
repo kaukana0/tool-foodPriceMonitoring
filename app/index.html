@@ -47,7 +47,8 @@ Author: robert.gebhardt@ext.ec.europa.eu
 	<script src="./components/symbolButton/button.mjs" type="module"></script>
 	<script src="./components/eclLikeModal/modal.mjs" type="module"></script>
 	<script src="./components/eclLikeSocialMediaShare/share.mjs" type="module"></script>
-	<script src="./components//ewc-dialog/src/main.mjs" type="module"></script>
+	<script src="./components/ewc-dialog/src/main.mjs" type="module"></script>
+	<script src="./components/ewc-footer-links/src/main.mjs" type="module"></script>
 	<script src="./js/main.mjs" type="module"></script>
 
 	<script type="application/json">{"utility": "cck", "url": "https://my.ec.europa.eu/cookie-policy_{lang}"}</script>
@@ -59,21 +60,18 @@ Author: robert.gebhardt@ext.ec.europa.eu
 <body>
 	
 		<!-- row 1 -->
-		<div style="display:flex; align-items:center; justify-content:flex-start; width:99%; height:72px;">
-			<img src="./components/eclLikeHeroBanner/img/estat-logo-horizontal.svg" style="width:163.11px; height:22px; margin-left:35px; cursor:pointer; justify-self:first;" tabindex="0" alt="Home - Eurostat" aria-label="Home - Eurostat" />
-			<div style="display:flex; gap:20px; flex-grow: 1; justify-content: flex-end;">
-				<symbol-button id="globalInfoButton" symbol="info" size="32"  aria-label="Information" style="min-height:32px; max-height:32px; min-width:32px; max-width:32px;"></symbol-button>
-				<symbol-button id="sharingButton" symbol="sharingBlue" size="32" aria-label="Share with others" style="min-height:32px; max-height:32px; min-width:32px; max-width:32px;"></symbol-button>
-				<ecl-like-social-share></ecl-like-social-share>
-			</div>
-
-		</div>
-
+		<header>
+			<ecl-like-hero-banner text="title.main" subtitle="title.sub" showlogo="true" gradientstyle="alt1" translate="text,subtitle"></ecl-like-hero-banner>
+		</header>
 
 		<!-- row 2 -->
-		<header>
-			<ecl-like-hero-banner text="title.main" subtitle="title.sub" translate="text,subtitle"></ecl-like-hero-banner>
-		</header>
+		<div id="row2">
+			<div style="display:flex; gap:20px; flex-grow: 1; justify-content: flex-end;">
+				<symbol-button id="globalInfoButton" symbol="info" size="32"  aria-label="Information" style="min-height:32px; max-height:32px; min-width:32px; max-width:32px;"></symbol-button>
+				<symbol-button id="sharingButton" symbol="sharing" size="32" aria-label="Share with others" style="min-height:32px; max-height:32px; min-width:32px; max-width:32px;"></symbol-button>
+				<ecl-like-social-share style="margin-top: 30px;"></ecl-like-social-share>
+			</div>
+		</div>
 
 		<!-- row 3, the boxes -->
 		<style>
@@ -92,24 +90,24 @@ Author: robert.gebhardt@ext.ec.europa.eu
 		</style>
 
 		<div style="display:flex; min-height:8%; width:100%; padding-top:30px; justify-content: space-evenly; flex-wrap: wrap;" class="v">
-				<titled-select id="selectCountry" class="w" style="" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect="true" textformultiselect="countriesSelected" displayKeys="true" translate="textformultiselect"></titled-select>
+				<titled-select id="selectCountry" class="w" imagePath="./components/dropdownBox/assets/countryFlagImages" multiselect="true" textformultiselect="countriesSelected" resetbutton="true" translate="textformultiselect"></titled-select>
 				<!-- unit will always be single-select -->
-				<titled-select id="selectUnit" class="w" style="" fractions="99"></titled-select>
-				<titled-select id="selectIndex" class="w" style="" multiselect="true" textformultiselect="indexSelected" displayKeys="true" translate="textformultiselect"></titled-select>
-				<titled-select id="selectCoicop" class="w" style="" multiselect="true" textformultiselect="coicopSelected" displayKeys="true" displayKeyInHeadbox translate="textformultiselect"></titled-select>
+				<titled-select id="selectUnit" class="w"></titled-select>
+				<titled-select id="selectIndex" class="w" multiselect="true" textformultiselect="indexSelected" displayKeys="true" fractions="7" resetbutton="true" translate="textformultiselect"></titled-select>
+				<titled-select id="selectCoicop" class="w" multiselect="true" textformultiselect="coicopSelected" displayKeys="true" fractions="4" resetbutton="true" displayKeyInHeadbox="true" translate="textformultiselect"></titled-select>
 		</div>
 		
 		<!-- row 4: chart and legend -->
 		<!-- note: adapts to screensize - see chart.css -->
 		<!-- note2: we need to help billboardjs' auto-resize mechanism a little bit here -->
 		<div id="chartcontainer" style="display:flex; width:100%; align-items: center; overflow:hidden;">
-			<div id="chart" style="width: calc(100% - 70px)"></div>
-			<div id="legend" style="min-width:70px;"></div>
+			<div id="chart" style="width: calc(100% - 110px)"></div>
+			<div id="legend" style="min-width:110px;"></div>
 		</div>
 
 		<!-- row 6: time slider / range -->
 		<div id="range" style="min-height: 40px; padding: 30px 5% 0 5%">
-			<range-slider id="timeRange" thumbWidthInPixel="80" style="visibility: hidden;"></range-slider>
+			<range-slider id="timeRange" thumbWidthInPixel="90" style="visibility: hidden;"></range-slider>
 		</div>
 
 		<!-- row 7: notes -->
@@ -129,19 +127,11 @@ Author: robert.gebhardt@ext.ec.europa.eu
 			</div>
 		</div>
 
-		<!-- row 9 legal links -->
-		<div id="legallinks">
-			<p>
-				<a class="footnoteTextBlue" href="https://ec.europa.eu/info/cookies_en?lang=en&amp;lang=en"><span>Cookies</span></a>
-				|
-				<a class="footnoteTextBlue" href="https://ec.europa.eu/info/privacy-policy_en?lang=en&amp;lang=en"><span>Privacy policy</span></a>
-				|
-				<a class="footnoteTextBlue" href="https://ec.europa.eu/info/legal-notice_en?lang=en&amp;lang=en"><span>Legal notice</span></a>
-				|
-				<a class="footnoteTextBlue" href="sitemap.html?lang=en"><span>Sitemap</span></a>
-			</p>
-		</div>
-
+		<!-- row 9 -->
+		<ewc-footer-links
+			email="Estat-user-support@ec.europa.eu"
+			subject="This is the eMail's subject">
+		</ewc-footer-links>
 
 	<!-- Non-Grid Elements -->
 

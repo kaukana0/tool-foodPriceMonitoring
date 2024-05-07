@@ -28,3 +28,12 @@ html, body {
     margin-right: 5%;
     max-height: 2.0rem;
 }
+
+#row2 {
+    display:flex; 
+    align-items:center; 
+    justify-content:flex-start; 
+    width:100%; 
+    height:50px; 
+    background: transparent linear-gradient(270deg, #0E47CB 0%, #082B7A 100%) 0% 0% no-repeat padding-box;
+}

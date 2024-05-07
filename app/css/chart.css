@@ -81,3 +81,7 @@ see also iframeResize.mjs
 	height: 26px;
 	width: 26px;
 }
+
+.bb-legend-item {
+  font-size: 1rem;
+}

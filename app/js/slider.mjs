@@ -19,8 +19,13 @@ export function init(data, left, max, onSelect) {
 }
 
 export function update(leftText, rightText) {
-	document.getElementById("timeRange").setAttribute("textl", leftText)
-	document.getElementById("timeRange").setAttribute("textr", rightText)
+	const text = {
+		"01":"JAN", "02":"FEB", "03":"MAR", "04":"APR", "05":"MAY", "06":"JUN",
+		"07":"JUL", "08":"AUG", "09":"SEP", "10":"OCT", "11":"NOV", "12":"DEZ"}
+	const l = text[leftText.substring(0,2)] + " "
+	const r = text[rightText.substring(0,2)] + " "
+	document.getElementById("timeRange").setAttribute("textl", l+leftText.slice(3))
+	document.getElementById("timeRange").setAttribute("textr", r+rightText.slice(3))
 }
 
 // to avoid overlapping of slider handles (resulting in inaccessible handle)
