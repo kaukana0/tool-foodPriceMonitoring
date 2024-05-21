@@ -88,6 +88,5 @@ export function getSelections() {
 	const i = Object.keys(document.getElementById("selectIndex").box.selected[0])[0]
 	const o = Object.keys(document.getElementById("selectCoicop").box.selected[0])[0]
 	const b = [c,units[u],i,o]
-	console.log(b)
 	return b
 }
