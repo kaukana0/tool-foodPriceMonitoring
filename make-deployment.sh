@@ -5,7 +5,7 @@ cd app/
 rsync -av ./ ../dist/ --exclude=.git --exclude=*.md --exclude=*.txt
 cd ../dist
 
-./components/metaTags/insertMetaTags.py https://ec.europa.eu/eurostat/cache/website/economy/food-price-monitoring/
+./components/metaTags/insertMetaTags.py https://ec.europa.eu/eurostat/cache/website/economy/food-price-monitoring
 
 # put short hash in html
 
