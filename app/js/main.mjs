@@ -22,6 +22,9 @@ import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.
 
 import * as cache from "./cache.mjs"
 
+import * as DialogStyling from "../components/ewc-dialog/src/externalStyling.mjs"
+
+
 
 // relevant only for development
 //import { get as getFakeData } from "../components/dataGenerator/fpmToolFakeData.mjs"
@@ -42,6 +45,8 @@ function run() {
 
 	if(cache.init()) { cache.clear() }
 	
+	DialogStyling.applyEclClasses()
+
 	setupGlobalInfoClick(l10n._("info"))
 	setupSharing({
 		text:l10n._("title.main"),
@@ -49,6 +54,7 @@ function run() {
 		mailSubject: l10n._("title.main"),
 		mailBody: l10n._("title.sub")
 	})
+	document.getElementsByTagName("ecl-like-social-share")[0].callback = embedModalCallback
 
 	const processingCfg = [
 		{
@@ -155,20 +161,29 @@ function updateUrl() {
 
 export function setupGlobalInfoClick(txt) {
   document.getElementById("globalInfoButton").addEventListener("action", () => {
-    document.getElementById("globalModal").setHeader("Information")
-    document.getElementById("globalModal").setText(txt)
-    document.getElementById("globalModal").show()
+		const el = document.getElementsByTagName("ewc-dialog")[0]
+    el.title = "Information"
+    el.bodyHtml = txt
+		el.visible = true
   })
 }
 
 export function setupSharing(cfg) {
   const btn = document.getElementById("sharingButton")
-  btn.addEventListener("action", () => { menu.toggleVisibility() })
+  const sharingMenu = document.getElementsByTagName("ecl-like-social-share")[0]
 
-  const menu = document.getElementsByTagName("ecl-like-social-share")[0]
-  menu.setAttribute("text", cfg.text)
-  menu.setAttribute("hashTags", cfg.hashTags)
-  menu.setAttribute("mailSubject", cfg.mailSubject)
-  menu.setAttribute("mailBody", cfg.mailBody)
+	btn.addEventListener("action", () => { sharingMenu.toggleVisibility() })
+
+  sharingMenu.setAttribute("text", cfg.text)
+  sharingMenu.setAttribute("hashTags", cfg.hashTags)
+  sharingMenu.setAttribute("mailSubject", cfg.mailSubject)
+  sharingMenu.setAttribute("mailBody", cfg.mailBody)
 }
 
+
+function embedModalCallback(url) {
+	const el = document.getElementsByTagName("ewc-dialog")[0]
+	el.title = "Embed visualisation"
+	el.textContent = `<iframe width="100%" height="800" src="${url}/index.html"></iframe>`
+	el.visible = true
+}

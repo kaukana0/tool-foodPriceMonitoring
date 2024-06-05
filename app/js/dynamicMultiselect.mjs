@@ -8,9 +8,6 @@ Short description of the "dynamic multiselect" behaviour:
 import * as Chart from "../components/chart/chart.mjs"
 import * as Extraction from "./extraction.mjs"
 import {switchAllToSingleSelect, switchAllToMultiSelect, updateLabels} from "./selectBoxes.mjs"
-import * as Toast from "./toast.mjs"
-
-Toast.createToast()
 
 // this says which of the boxes can potentially be multiselect
 export class ModeEnum {
@@ -101,7 +98,10 @@ function _update(data, mode, onFinished, range) {
 function alertMessage() {
 	return {
 		show: function() {
-			const el = document.getElementsByTagName("ewc-dialog")[0].visible = true
+			const el = document.getElementsByTagName("ewc-dialog")[0]
+			el.title = "Information"
+			el.textContent = "No data available for your selection. Please change your selection."
+			el.visible = true
 		},
 		hide: function() {
 			const el = document.getElementsByTagName("ewc-dialog")[0].visible = false
