@@ -32,11 +32,11 @@ export function update(leftText, rightText) {
 // make the smallest user selectable range dependent of draw area width.
 function getMingap(width) {
 	return [
-		[576, 12*5],
-		[768, 12*3],
+		[576, 13*5],
+		[768, 15*3],
 		[992, 12*2],
-		[1200, 6*3],
-		[1400, 12],
-		[Number.MAX_VALUE, 9]
+		[1200, 8*3],
+		[1400, 24],
+		[Number.MAX_VALUE, 16]
 	].filter(([w, _]) => {return width<w})[0][1]
 }
