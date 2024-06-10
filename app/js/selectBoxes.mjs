@@ -4,8 +4,8 @@ export function init(data, onSelected) {
 
 	// a bit hacky...
 	var groups = new Map()
-	groups.set("EA", {})
-	groups.set("SE", {})
+	groups.set("AT", {})
+	groups.set("IS", {})
 
 	const sc = document.getElementById("selectCountry").box
 	sc.data = [data.categories.countries, groups]

@@ -11,7 +11,7 @@ function analytics_onLoad() {
         customVariables: [
           ['asset-type', 'visualisation'],
           ['asset-title', 'food-price-monitor'],
-          ['release', '2022']
+          ['release', '2024']
         ]
     }
     try {
