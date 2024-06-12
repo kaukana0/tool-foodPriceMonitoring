@@ -24,6 +24,7 @@ import * as cache from "./cache.mjs"
 
 import * as DialogStyling from "../components/ewc-dialog/src/externalStyling.mjs"
 
+import {getURLFromOGTag} from "../components/util/util.mjs"
 
 
 // relevant only for development
@@ -51,8 +52,10 @@ function run() {
 	setupSharing({
 		text:l10n._("title.main"),
 		hashTags: l10n._("hashtags"),
-		mailSubject: l10n._("title.main"),
-		mailBody: l10n._("title.sub")
+		mailSubject: l10n._("title.main")+" 2024 by Eurostat",
+		mailBody: `Hello,
+ 
+Have a look at this data visualisation from Eurostat: ${getURLFromOGTag()}`
 	})
 	document.getElementsByTagName("ecl-like-social-share")[0].callback = embedModalCallback
 

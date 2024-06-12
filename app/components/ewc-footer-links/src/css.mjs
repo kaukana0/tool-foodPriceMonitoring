@@ -22,6 +22,9 @@ ewc-footer-links {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+}
+
+.ewc-footer-links__links a {
 	color: #0E47CB; 
 }
 
@@ -29,11 +32,11 @@ ewc-footer-links {
 	white-space: nowrap;
 }
 
-.ewc-footer-links__links:hover{
+.ewc-footer-links__links a:hover{
 	color:#082b7a;
 } 
 
-.ewc-footer-links__links:visited {
+.ewc-footer-links__links a:visited {
 	color: #510dcd;
 }
 .ewc-footer-links__email {
