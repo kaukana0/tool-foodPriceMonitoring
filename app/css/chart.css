@@ -5,7 +5,26 @@ decrease height on small width to give room to the legend below.
 mostly determined empirically :-/
 
 see also iframeResize.mjs
+*/
 
+
+/*
+Why do we have to tell the chart it's height manually via media queries?
+
+First, notice, that according to billboard docu:
+"If value is not specified, the width of the chart will be calculated by the size of the parent element it's appended to."
+
+It says nothing about height.
+
+It seems that, the chart is not the last element during DOM buildup.
+So it gets created - the height being that of .chartcontainer 
+at that moment - but during further DOM buildup the 
+available vertical space changes.
+
+Billboard probably sticks with the initial height.
+
+That's why it has to be told it's height somehow 
+after DOM creation finished completely.
 */
 
 
@@ -65,7 +84,7 @@ see also iframeResize.mjs
 
 @media (min-width: 1550px) {
   #chartcontainer {
-    max-height:45%;
+    max-height:50%;
   }
   #chart {
     height: 100%;
