@@ -52,10 +52,10 @@ function run() {
 	setupSharing({
 		text:l10n._("title.main"),
 		hashTags: l10n._("hashtags"),
-		mailSubject: l10n._("title.main")+" 2024 by Eurostat",
-		mailBody: `Hello,
- 
-Have a look at this data visualisation from Eurostat: ${getURLFromOGTag()}`
+		mailSubject: "Explore the " + l10n._("title.main"),
+		mailBody: `Explore the ${l10n._("title.main")} and its selection of indicators:
+
+${getURLFromOGTag()}`
 	})
 	document.getElementsByTagName("ecl-like-social-share")[0].callback = embedModalCallback
 
@@ -187,6 +187,6 @@ export function setupSharing(cfg) {
 function embedModalCallback(url) {
 	const el = document.getElementsByTagName("ewc-dialog")[0]
 	el.title = "Embed visualisation"
-	el.textContent = `<iframe width="100%" height="800" src="${url}/index.html"></iframe>`
+	el.textContent = `<iframe width="100%" height="800" src="${url}index.html"></iframe>`
 	el.visible = true
 }

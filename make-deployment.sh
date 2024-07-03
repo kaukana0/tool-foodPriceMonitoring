@@ -5,7 +5,8 @@ cd app/
 rsync -av ./ ../dist/ --exclude=.git --exclude=*.md --exclude=*.txt
 cd ../dist
 
-./components/metaTags/insertMetaTags.py https://ec.europa.eu/eurostat/cache/website/economy/food-price-monitoring
+# NOTE: DON'T FORGET A SLASH AT THE END !
+./components/metaTags/insertMetaTags.py https://ec.europa.eu/eurostat/cache/website/economy/food-price-monitoring/
 
 # put short hash in html
 
@@ -14,7 +15,7 @@ echo $REV
 
 sed -i "/CommitId/c\CommitId: $REV" index.html
 
-# TODO: remove console.debug lines
+# remove console.debug lines
 
 for f in $(find . -iname *.mjs -type f); do
   sed -i "/console.debug/d" $f
