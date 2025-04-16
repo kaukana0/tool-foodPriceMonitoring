@@ -90,10 +90,10 @@ ${getURLFromOGTag()}`
 		{
 			// see footer in index.html for the data-source web-frontend (from which this URL is retrieved)
 			input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&freq=M&unit=I15&unit=PCH_M12&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop=CP011&coicop=CP0111&coicop=CP01113&coicop=CP0112&coicop=CP01121&coicop=CP01122&coicop=CP01123&coicop=CP01124&coicop=CP0113&coicop=CP0114&coicop=CP01141&coicop=CP01144&coicop=CP01145&coicop=CP01147&coicop=CP0115&coicop=CP01151&coicop=CP01153&coicop=CP01154&coicop=CP0116&coicop=CP0117&coicop=CP01174&coicop=CP01181&coicop=CP0121&coicop=CP01223&coicop=CP02121&coicop=CP0213&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&sinceTimePeriod=2020-01",
-			cache: {
-				store: (data) => cache.store(data, "2020data"),
-				restore: () => cache.restore("2020data")
-			},
+			//cache: {
+			//	store: (data) => cache.store(data, "2020data"),
+			//	restore: () => cache.restore("2020data")
+			//},
 			processors: [retrieveSourceData, defineIndexColors, defineCountryOrder, defineCountryColors, extractCountries, renameCountries, extractIndicators, extractTimeMonthly]
 		}
 	]
@@ -104,11 +104,16 @@ ${getURLFromOGTag()}`
 			if(data	&& Object.keys(data).length > 0 && Object.getPrototypeOf(data) === Object.prototype) {
 				try {
 					const max = data.categories.time.length
-					const left = 15*12		// 	jan/2020 (data starts 01/2005)
+					const left = getURLParameterValue("startIdx") ? getURLParameterValue("startIdx") : 15*12;		// 	jan/2020 (data starts 01/2005)
 					slider.init(data, left, max, onSliderSelected.bind(this, data))
-					selectBoxes.init(data, onBoxSelected.bind(this, data))
-					document.getElementById("timeRange").style.visibility="visible";
-					selectBoxes.select(getURLParameterValue("country"), getURLParameterValue("unit"), getURLParameterValue("index"), getURLParameterValue("coicop"))
+
+					selectBoxes.init(data, onBoxSelected.bind(this, data))	// initially doesn't call onBoxSelected
+
+					document.getElementById("timeRange").style.visibility="visible"
+					
+					const [mode,country,unit,index,coicop] = getInitialSelectionFromUrl()
+					selectBoxes.select(country,unit,index,coicop)
+					onBoxSelected(data,mode)		// initial onBoxSelected
 				} catch(e) {
 					displayFailure(e)
 				}
@@ -154,6 +159,19 @@ function _allowInput(isAllowed) {
 	document.getElementById("selectIndex").box.locked = !isAllowed
 	document.getElementById("selectCoicop").box.locked = !isAllowed
 	document.getElementById("timeRange").setLocked(!isAllowed)
+}
+
+function getInitialSelectionFromUrl() {
+	const a = getURLParameterValue("country") ? getURLParameterValue("country").split(",") : []
+	const b = getURLParameterValue("unit") ? [getURLParameterValue("unit")] : []
+	const c = getURLParameterValue("indx") ? getURLParameterValue("indx").split(",") : []
+	const d = getURLParameterValue("coicop") ? getURLParameterValue("coicop").split(",") : []
+	let mode = dm.ModeEnum.Monism
+	if(a.length>1) {mode=dm.ModeEnum.Country}
+	// unit is omitted on purpose becaus it's singleselect
+	if(c.length>1) {mode=dm.ModeEnum.Index}
+	if(d.length>1) {mode=dm.ModeEnum.Coicop}
+	return[mode,a,b,c,d]
 }
 
 function updateUrl() {

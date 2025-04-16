@@ -22,8 +22,6 @@ export function init(data, onSelected) {
 	so.data = [data.categories.coicop, null]
 	so.onSelect = (_0,_1,isDeselect) => isDeselect || so.selected.size < 7
 	so.onSelected = () => onSelected(ModeEnum.Coicop)
-
-	onSelected(ModeEnum.Monism)
 }
 
 // makes label for given box say "I'm multiselect" and all others "I'm single select"
@@ -73,12 +71,24 @@ export function switchAllToMultiSelect() {
 // unit: "index" or "percentage"
 // index: HICP, PPI, ACPI, or IPI
 // coicop: CP011 etc.
+// arrays expected
 export function select(country, unit, index, coicop) {
-	if(country) document.getElementById("selectCountry").box.selected = [country]
-	const units = {percentage:"PCH_M12", index:"I15"}
-	if(unit) { document.getElementById("selectUnit").box.selected = [units[unit]] }
-	if(index) { document.getElementById("selectIndex").box.selected = [index] }
-	if(coicop) { document.getElementById("selectCoicop").box.selected = [coicop] }
+	if(country.length>0) { 
+		//setTimeout(()=>document.getElementById("selectCountry").box.selected = country  , 0)
+		document.getElementById("selectCountry").box.selected = country
+	}
+	if(unit.length>0) {
+		//setTimeout(()=>document.getElementById("selectUnit").box.selected = unit  , 0)
+		document.getElementById("selectUnit").box.selected = unit
+	}
+	if(index.length>0) {
+		//setTimeout(()=>document.getElementById("selectIndex").box.selected = index , 0)
+		document.getElementById("selectIndex").box.selected = index
+	}
+	if(coicop.length>0) {
+		//setTimeout(()=>document.getElementById("selectCoicop").box.selected = coicop , 0)
+		document.getElementById("selectCoicop").box.selected = coicop 
+	}
 }
 
 export function getSelections() {

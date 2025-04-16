@@ -5,7 +5,7 @@ function analytics_onError() {
 function analytics_onLoad() {
 	let analyticsOptions = {
         instance: "ec.europa.eu",
-        siteID: 59,
+        siteID: 'a441974e-4574-4f0a-9ed2-f90fb8547bb7',
         mode: "manual",
 		siteSection:"Economy",
         customVariables: [
