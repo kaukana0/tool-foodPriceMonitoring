@@ -20,6 +20,8 @@ import { process as defineIndexColors } from "./pipelineProcessors/indexColors.m
 
 import { process as extractTimeMonthly } from "./pipelineProcessors/timeMonthly.mjs"
 
+import renameLabels from "./pipelineProcessors/renameCoicop18Labels.mjs"
+
 import * as cache from "./cache.mjs"
 
 import * as DialogStyling from "../components/ewc-dialog/src/externalStyling.mjs"
@@ -61,7 +63,25 @@ ${getURLFromOGTag()}`
 
 	const processingCfg = [
 		{
-			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&freq=M&unit=I15&unit=PCH_M12&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop=CP011&coicop=CP0111&coicop=CP01113&coicop=CP0112&coicop=CP01121&coicop=CP01122&coicop=CP01123&coicop=CP01124&coicop=CP0113&coicop=CP0114&coicop=CP01141&coicop=CP01144&coicop=CP01145&coicop=CP01147&coicop=CP0115&coicop=CP01151&coicop=CP01153&coicop=CP01154&coicop=CP0116&coicop=CP0117&coicop=CP01174&coicop=CP01181&coicop=CP0121&coicop=CP01223&coicop=CP02121&coicop=CP0213&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&startPeriod=2005-01&endPeriod=2009-12",
+			// input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_fpmt_m?format=JSON&lang=en&freq=M&unit=I25&unit=RCH_M&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop18=CP011&coicop18=CP01111&coicop18=CP011131&coicop18=CP011139&coicop18=CP01115&coicop18=CP01122&coicop18=CP011221&coicop18=CP011222&coicop18=CP011223&coicop18=CP011224&coicop18=CP011225&coicop18=CP011226&coicop18=CP0113&coicop18=CP0114&coicop18=CP01141&coicop18=CP01142&coicop18=CP01145&coicop18=CP01146&coicop18=CP01148&coicop18=CP0115&coicop18=CP01151&coicop18=CP011513&coicop18=CP01152&coicop18=CP0116&coicop18=CP01162&coicop18=CP01166&coicop18=CP01167&coicop18=CP01168&coicop18=CP0117&coicop18=CP011751&coicop18=CP01181&coicop18=CP01185&coicop18=CP01186&coicop18=CP01193&coicop18=CP01210&coicop18=CP01220&coicop18=CP01230&coicop18=CP01240&coicop18=CP02121&coicop18=CP02130&coicop18=CP0230&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&startPeriod=1995-01&endPeriod=2000-01",
+			input: "./persistedData/1995-01-1999-12.dat",
+			cache: {
+				store: (data) => cache.store(data, "1995data"),
+				restore: () => cache.restore("1995data")
+			},
+			processors: [retrieveSourceData]
+		},
+		{
+			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_fpmt_m?format=JSON&lang=en&freq=M&unit=I25&unit=RCH_M&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop18=CP011&coicop18=CP01111&coicop18=CP011131&coicop18=CP011139&coicop18=CP01115&coicop18=CP01122&coicop18=CP011221&coicop18=CP011222&coicop18=CP011223&coicop18=CP011224&coicop18=CP011225&coicop18=CP011226&coicop18=CP0113&coicop18=CP0114&coicop18=CP01141&coicop18=CP01142&coicop18=CP01145&coicop18=CP01146&coicop18=CP01148&coicop18=CP0115&coicop18=CP01151&coicop18=CP011513&coicop18=CP01152&coicop18=CP0116&coicop18=CP01162&coicop18=CP01166&coicop18=CP01167&coicop18=CP01168&coicop18=CP0117&coicop18=CP011751&coicop18=CP01181&coicop18=CP01185&coicop18=CP01186&coicop18=CP01193&coicop18=CP01210&coicop18=CP01220&coicop18=CP01230&coicop18=CP01240&coicop18=CP02121&coicop18=CP02130&coicop18=CP0230&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&startPeriod=2000-01&endPeriod=2005-01",
+			input: "./persistedData/2000-01-2004-12.dat",
+			cache: {
+				store: (data) => cache.store(data, "2000data"),
+				restore: () => cache.restore("2000data")
+			},
+			processors: [retrieveSourceData]
+		},
+		{
+			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_fpmt_m?format=JSON&lang=en&freq=M&unit=I25&unit=RCH_M&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop18=CP011&coicop18=CP01111&coicop18=CP011131&coicop18=CP011139&coicop18=CP01115&coicop18=CP01122&coicop18=CP011221&coicop18=CP011222&coicop18=CP011223&coicop18=CP011224&coicop18=CP011225&coicop18=CP011226&coicop18=CP0113&coicop18=CP0114&coicop18=CP01141&coicop18=CP01142&coicop18=CP01145&coicop18=CP01146&coicop18=CP01148&coicop18=CP0115&coicop18=CP01151&coicop18=CP011513&coicop18=CP01152&coicop18=CP0116&coicop18=CP01162&coicop18=CP01166&coicop18=CP01167&coicop18=CP01168&coicop18=CP0117&coicop18=CP011751&coicop18=CP01181&coicop18=CP01185&coicop18=CP01186&coicop18=CP01193&coicop18=CP01210&coicop18=CP01220&coicop18=CP01230&coicop18=CP01240&coicop18=CP02121&coicop18=CP02130&coicop18=CP0230&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&startPeriod=2005-01&endPeriod=2010-01",
 			input: "./persistedData/2005-01-2009-12.dat",
 			cache: {
 				store: (data) => cache.store(data, "2005data"),
@@ -70,7 +90,7 @@ ${getURLFromOGTag()}`
 			processors: [retrieveSourceData]
 		},
 		{
-			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&freq=M&unit=I15&unit=PCH_M12&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop=CP011&coicop=CP0111&coicop=CP01113&coicop=CP0112&coicop=CP01121&coicop=CP01122&coicop=CP01123&coicop=CP01124&coicop=CP0113&coicop=CP0114&coicop=CP01141&coicop=CP01144&coicop=CP01145&coicop=CP01147&coicop=CP0115&coicop=CP01151&coicop=CP01153&coicop=CP01154&coicop=CP0116&coicop=CP0117&coicop=CP01174&coicop=CP01181&coicop=CP0121&coicop=CP01223&coicop=CP02121&coicop=CP0213&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&startPeriod=2010-01&endPeriod=2014-12",
+			// input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_fpmt_m?format=JSON&lang=en&freq=M&unit=I25&unit=RCH_M&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop18=CP011&coicop18=CP01111&coicop18=CP011131&coicop18=CP011139&coicop18=CP01115&coicop18=CP01122&coicop18=CP011221&coicop18=CP011222&coicop18=CP011223&coicop18=CP011224&coicop18=CP011225&coicop18=CP011226&coicop18=CP0113&coicop18=CP0114&coicop18=CP01141&coicop18=CP01142&coicop18=CP01145&coicop18=CP01146&coicop18=CP01148&coicop18=CP0115&coicop18=CP01151&coicop18=CP011513&coicop18=CP01152&coicop18=CP0116&coicop18=CP01162&coicop18=CP01166&coicop18=CP01167&coicop18=CP01168&coicop18=CP0117&coicop18=CP011751&coicop18=CP01181&coicop18=CP01185&coicop18=CP01186&coicop18=CP01193&coicop18=CP01210&coicop18=CP01220&coicop18=CP01230&coicop18=CP01240&coicop18=CP02121&coicop18=CP02130&coicop18=CP0230&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&startPeriod=2010-01&endPeriod=2015-01",
 			input: "./persistedData/2010-01-2014-12.dat",
 			cache: {
 				store: (data) => cache.store(data, "2010data"),
@@ -79,7 +99,7 @@ ${getURLFromOGTag()}`
 			processors: [retrieveSourceData]
 		},
 		{
-			//input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&freq=M&unit=I15&unit=PCH_M12&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop=CP011&coicop=CP0111&coicop=CP01113&coicop=CP0112&coicop=CP01121&coicop=CP01122&coicop=CP01123&coicop=CP01124&coicop=CP0113&coicop=CP0114&coicop=CP01141&coicop=CP01144&coicop=CP01145&coicop=CP01147&coicop=CP0115&coicop=CP01151&coicop=CP01153&coicop=CP01154&coicop=CP0116&coicop=CP0117&coicop=CP01174&coicop=CP01181&coicop=CP0121&coicop=CP01223&coicop=CP02121&coicop=CP0213&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&startPeriod=2015-01&endPeriod=2019-12",
+			// input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_fpmt_m?format=JSON&lang=en&freq=M&unit=I25&unit=RCH_M&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop18=CP011&coicop18=CP01111&coicop18=CP011131&coicop18=CP011139&coicop18=CP01115&coicop18=CP01122&coicop18=CP011221&coicop18=CP011222&coicop18=CP011223&coicop18=CP011224&coicop18=CP011225&coicop18=CP011226&coicop18=CP0113&coicop18=CP0114&coicop18=CP01141&coicop18=CP01142&coicop18=CP01145&coicop18=CP01146&coicop18=CP01148&coicop18=CP0115&coicop18=CP01151&coicop18=CP011513&coicop18=CP01152&coicop18=CP0116&coicop18=CP01162&coicop18=CP01166&coicop18=CP01167&coicop18=CP01168&coicop18=CP0117&coicop18=CP011751&coicop18=CP01181&coicop18=CP01185&coicop18=CP01186&coicop18=CP01193&coicop18=CP01210&coicop18=CP01220&coicop18=CP01230&coicop18=CP01240&coicop18=CP02121&coicop18=CP02130&coicop18=CP0230&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&startPeriod=2015-01&endPeriod=2020-01",
 			input: "./persistedData/2015-01-2019-12.dat",
 			cache: {
 				store: (data) => cache.store(data, "2015data"),
@@ -88,13 +108,13 @@ ${getURLFromOGTag()}`
 			processors: [retrieveSourceData]
 		},
 		{
-			// see footer in index.html for the data-source web-frontend (from which this URL is retrieved)
-			input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/PRC_FSC_IDX?format=JSON&lang=en&freq=M&unit=I15&unit=PCH_M12&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop=CP011&coicop=CP0111&coicop=CP01113&coicop=CP0112&coicop=CP01121&coicop=CP01122&coicop=CP01123&coicop=CP01124&coicop=CP0113&coicop=CP0114&coicop=CP01141&coicop=CP01144&coicop=CP01145&coicop=CP01147&coicop=CP0115&coicop=CP01151&coicop=CP01153&coicop=CP01154&coicop=CP0116&coicop=CP0117&coicop=CP01174&coicop=CP01181&coicop=CP0121&coicop=CP01223&coicop=CP02121&coicop=CP0213&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&sinceTimePeriod=2020-01",
+			// see footer in index.html for the data-source (from which this URL is retrieved)
+			input: "https://ec.europa.eu/eurostat/api/dissemination/statistics/1.0/data/prc_fpmt_m?format=JSON&lang=en&freq=M&unit=I25&unit=RCH_M&indx=PPI&indx=HICP&indx=ACPI&indx=IPI&coicop18=CP011&coicop18=CP01111&coicop18=CP011131&coicop18=CP011139&coicop18=CP01115&coicop18=CP01122&coicop18=CP011221&coicop18=CP011222&coicop18=CP011223&coicop18=CP011224&coicop18=CP011225&coicop18=CP011226&coicop18=CP0113&coicop18=CP0114&coicop18=CP01141&coicop18=CP01142&coicop18=CP01145&coicop18=CP01146&coicop18=CP01148&coicop18=CP0115&coicop18=CP01151&coicop18=CP011513&coicop18=CP01152&coicop18=CP0116&coicop18=CP01162&coicop18=CP01166&coicop18=CP01167&coicop18=CP01168&coicop18=CP0117&coicop18=CP011751&coicop18=CP01181&coicop18=CP01185&coicop18=CP01186&coicop18=CP01193&coicop18=CP01210&coicop18=CP01220&coicop18=CP01230&coicop18=CP01240&coicop18=CP02121&coicop18=CP02130&coicop18=CP0230&geo=EU27_2020&geo=EA19&geo=BE&geo=BG&geo=CZ&geo=DK&geo=DE&geo=EE&geo=IE&geo=EL&geo=ES&geo=FR&geo=HR&geo=IT&geo=CY&geo=LV&geo=LT&geo=LU&geo=HU&geo=MT&geo=NL&geo=AT&geo=PL&geo=PT&geo=RO&geo=SI&geo=SK&geo=FI&geo=SE&geo=IS&geo=NO&geo=CH&sinceTimePeriod=2020-01",
 			//cache: {
 			//	store: (data) => cache.store(data, "2020data"),
 			//	restore: () => cache.restore("2020data")
 			//},
-			processors: [retrieveSourceData, defineIndexColors, defineCountryOrder, defineCountryColors, extractCountries, renameCountries, extractIndicators, extractTimeMonthly]
+			processors: [retrieveSourceData, defineIndexColors, defineCountryOrder, defineCountryColors, extractCountries, renameCountries, extractIndicators, extractTimeMonthly, renameLabels]
 		}
 	]
 
@@ -104,13 +124,13 @@ ${getURLFromOGTag()}`
 			if(data	&& Object.keys(data).length > 0 && Object.getPrototypeOf(data) === Object.prototype) {
 				try {
 					const max = data.categories.time.length
-					const left = getURLParameterValue("startIdx") ? getURLParameterValue("startIdx") : 15*12;		// 	jan/2020 (data starts 01/2005)
+					const left = getURLParameterValue("startIdx") ? getURLParameterValue("startIdx") : 1;		// 	(data starts 01/1995)
 					slider.init(data, left, max, onSliderSelected.bind(this, data))
 
 					selectBoxes.init(data, onBoxSelected.bind(this, data))	// initially doesn't call onBoxSelected
 
 					document.getElementById("timeRange").style.visibility="visible"
-					
+
 					const [mode,country,unit,index,coicop] = getInitialSelectionFromUrl()
 					selectBoxes.select(country,unit,index,coicop)
 					onBoxSelected(data,mode)		// initial onBoxSelected
@@ -165,7 +185,7 @@ function getInitialSelectionFromUrl() {
 	const a = getURLParameterValue("country") ? getURLParameterValue("country").split(",") : []
 	const b = getURLParameterValue("unit") ? [getURLParameterValue("unit")] : []
 	const c = getURLParameterValue("indx") ? getURLParameterValue("indx").split(",") : []
-	const d = getURLParameterValue("coicop") ? getURLParameterValue("coicop").split(",") : []
+	const d = getURLParameterValue("coicop18") ? getURLParameterValue("coicop18").split(",") : []
 	let mode = dm.ModeEnum.Monism
 	if(a.length>1) {mode=dm.ModeEnum.Country}
 	// unit is omitted on purpose becaus it's singleselect
@@ -176,7 +196,7 @@ function getInitialSelectionFromUrl() {
 
 function updateUrl() {
 	const [c,u,i,o] = selectBoxes.getSelections()
-	const urlFrag = `?country=${c}&unit=${u}&index=${i}&coicop=${o}`
+	const urlFrag = `?country=${c}&unit=${u}&index=${i}&coicop18=${o}`
 	window.history.replaceState(null, document.title, window.location.origin+urlFrag)
 }
 

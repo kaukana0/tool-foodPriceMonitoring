@@ -15,12 +15,12 @@ function getDiceDims(mode, selectBoxes, selection) {
     mapModeToDim[ModeEnum.Country] = "geo"
     mapModeToDim[ModeEnum.Unit] = "unit"
     mapModeToDim[ModeEnum.Index] = "indx"
-    mapModeToDim[ModeEnum.Coicop] = "coicop"
+    mapModeToDim[ModeEnum.Coicop] = "coicop18"
     // first assume all are singleselect
     const diceDims = {
         unit: selectBoxes[ModeEnum.Unit].box.selected.entries().next().value[0],
         indx: selectBoxes[ModeEnum.Index].box.selected.entries().next().value[0],
-        coicop: selectBoxes[ModeEnum.Coicop].box.selected.entries().next().value[0],
+        coicop18: selectBoxes[ModeEnum.Coicop].box.selected.entries().next().value[0],
         geo: selectBoxes[ModeEnum.Country].box.selected.entries().next().value[0]
     }
     // but actually one COULD be multiselect - according to a mode - so overwrite accordingly
@@ -91,7 +91,7 @@ function extractWithSpeedOptimizedAlgo(data, diceDims, range) {
 	const valence = MultiDim.calcOrdinalValence(data.size)
 	const aiu = data.dimension.unit.category.index[diceDims["unit"]]
 	const aii = data.dimension.indx.category.index[diceDims["indx"]]
-	const aic = data.dimension.coicop.category.index[diceDims["coicop"]]
+	const aic = data.dimension.coicop18.category.index[diceDims["coicop18"]]
 	const aig = data.dimension.geo.category.index[diceDims["geo"]]
 
 	for(let it=range.startIdx; it<range.endIdx; it++) {

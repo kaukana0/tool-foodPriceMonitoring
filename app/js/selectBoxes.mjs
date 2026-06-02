@@ -19,7 +19,7 @@ export function init(data, onSelected) {
 	document.getElementById("selectIndex").box.onSelected = () => onSelected(ModeEnum.Index)
 
 	const so = document.getElementById("selectCoicop").box
-	so.data = [data.categories.coicop, null]
+	so.data = [data.categories.coicop18, null]
 	so.onSelect = (_0,_1,isDeselect) => isDeselect || so.selected.size < 7
 	so.onSelected = () => onSelected(ModeEnum.Coicop)
 }

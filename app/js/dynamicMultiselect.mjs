@@ -68,7 +68,7 @@ function _update(data, mode, onFinished, range) {
 	//Mode.Unit omitted on purpose. it can't be multiselect.
 	//modeToSeriesLabels[Mode.Unit] = data.categories.unit
 	modeToSeriesLabels[Mode.Index] = data.categories.index
-	modeToSeriesLabels[Mode.Coicop] = data.categories.coicop
+	modeToSeriesLabels[Mode.Coicop] = data.categories.coicop18
 	
 	const cols = Extraction.get(data, Mode.current, range)
 	cols.unshift(data.categories.time.slice(range.startIdx, range.endIdx))	// put categories (time) as first array
