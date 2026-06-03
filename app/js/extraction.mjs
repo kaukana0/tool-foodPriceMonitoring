@@ -85,17 +85,22 @@ function extractWithJsonStat(data, diceDims) {
 	return subset.value
 }
 
+
 // Note: data.value might be an array or an object (see https://json-stat.org/format/#value).
+/*
+order in old dataset:   "id": [ "freq", "unit", "indx", "coicop", "geo", "time"],
+new order:              "id": [ "freq", "coicop18", "indx", "unit", "geo", "time"],
+*/
 function extractWithSpeedOptimizedAlgo(data, diceDims, range) {
 	let retVal = []
 	const valence = MultiDim.calcOrdinalValence(data.size)
-	const aiu = data.dimension.unit.category.index[diceDims["unit"]]
-	const aii = data.dimension.indx.category.index[diceDims["indx"]]
 	const aic = data.dimension.coicop18.category.index[diceDims["coicop18"]]
+	const aii = data.dimension.indx.category.index[diceDims["indx"]]
+	const aiu = data.dimension.unit.category.index[diceDims["unit"]]
 	const aig = data.dimension.geo.category.index[diceDims["geo"]]
 
 	for(let it=range.startIdx; it<range.endIdx; it++) {
-		const i = MultiDim.getIndex(valence, [0,aiu,aii,aic,aig,it])
+		const i = MultiDim.getIndex(valence, [0,aic,aii,aiu,aig,it])
 		if(typeof data.value[i] === 'undefined') {
 			retVal.push(null)
 		} else {

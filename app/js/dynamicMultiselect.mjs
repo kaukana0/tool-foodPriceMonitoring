@@ -144,7 +144,8 @@ function getTooltipSuffix() {
 	let retVal = getYLabel()
 	if(retVal.startsWith("Index")) {
 		retVal = ""
-	} else if(retVal.startsWith("Percentage")) {
+	} else if(retVal.startsWith("Annual")) {
+		// according to "Unit of measure" in https://ec.europa.eu/eurostat/cache/metadata/en/prc_fsc_idx_esms.htm
 		retVal = "%"
 	}
 	return retVal
