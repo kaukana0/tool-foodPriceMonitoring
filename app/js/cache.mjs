@@ -1,6 +1,6 @@
 import * as zip from "../redist/lz-string.mjs"
 
-const updateId = "lastUpdate"
+const updateId = "lastUpdate-26"
 
 // returns true if at least one day has elapsed since data was last stored. false otherwise.
 export function init() {
